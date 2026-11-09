@@ -358,6 +358,56 @@
   text-decoration: none;
   font-weight: 700;
 }
-.comparison-catalog { padding:clamp(5rem,8vw,8rem) clamp(24px,6vw,104px); border-bottom:1px solid #bec9e12a; }
-.comparison-catalog h2 { margin:1rem 0; font-size:clamp(2.4rem,4vw,4rem); letter-spacing:-.05em; }.comparison-catalog > p:not(.tao3k-route-kicker) { color:#b2bdce; line-height:1.6; }.comparison-catalog > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.7rem; margin-top:2rem; }.comparison-catalog a { display:grid; gap:.5rem; min-height:8rem; padding:1.2rem; border:1px solid #bdc9e231; border-radius:.65rem; color:#ecf0f8; text-decoration:none; }.comparison-catalog a:hover { border-color:#c1d1ff; }.comparison-catalog small { color:#aebfe8; font:600 .62rem/1.4 ui-monospace,monospace; text-transform:uppercase; }.comparison-catalog a span { color:#b5c5e4; font-size:.75rem; }
-@media(max-width:800px) { .comparison-catalog > div { grid-template-columns:repeat(2,minmax(0,1fr)); } } @media(max-width:480px) { .comparison-catalog > div { grid-template-columns:1fr; } }
+.comparison-catalog {
+  padding: clamp(5rem, 8vw, 8rem) clamp(24px, 6vw, 104px);
+  border-bottom: 1px solid #bec9e12a;
+}
+.comparison-catalog h2 {
+  margin: 1rem 0;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  letter-spacing: -0.05em;
+}
+.comparison-catalog > p:not(.tao3k-route-kicker) {
+  color: #b2bdce;
+  line-height: 1.6;
+}
+.comparison-catalog > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+.comparison-catalog a {
+  display: grid;
+  gap: 0.5rem;
+  min-height: 8rem;
+  padding: 1.2rem;
+  border: 1px solid #bdc9e231;
+  border-radius: 0.65rem;
+  color: #ecf0f8;
+  text-decoration: none;
+}
+.comparison-catalog a:hover {
+  border-color: #c1d1ff;
+}
+.comparison-catalog small {
+  color: #aebfe8;
+  font:
+    600 0.62rem/1.4 ui-monospace,
+    monospace;
+  text-transform: uppercase;
+}
+.comparison-catalog a span {
+  color: #b5c5e4;
+  font-size: 0.75rem;
+}
+@media (max-width: 800px) {
+  .comparison-catalog > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .comparison-catalog > div {
+    grid-template-columns: 1fr;
+  }
+}

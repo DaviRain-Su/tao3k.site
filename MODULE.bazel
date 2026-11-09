@@ -8,13 +8,13 @@ bazel_dep(name = "poo_flow", version = "0.1.0")
 
 git_override(
     module_name = "gerbil_bazel",
-    commit = "faa83024b7fa6f681bf3bd0da57376e05fb9a2f7",
+    commit = "e5296bf8c2c183c5e647d58fbb389570341a743d",
     remote = "https://github.com/tao3k/gerbil-bazel.git",
 )
 
 git_override(
     module_name = "poo_flow",
-    commit = "7f60e82b609ed2227ce3e71d17c5a1a351902e54",
+    commit = "112e9cbf57d8d80a40c89f7c89aa605b2f6453a9",
     remote = "https://github.com/tao3k/poo-flow.git",
 )
 
