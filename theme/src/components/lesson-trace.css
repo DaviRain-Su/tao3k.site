@@ -1,0 +1,37 @@
+.lesson-trace {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: #d2e1df;
+}
+.lesson-trace div {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1;
+}
+.lesson-trace small {
+  color: #8faeb4;
+  font:
+    600 0.55rem/1.2 ui-monospace,
+    monospace;
+  letter-spacing: 0.09em;
+}
+.lesson-trace span {
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+.lesson-trace b {
+  color: #86b6b1;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+@media (max-width: 480px) {
+  .lesson-trace {
+    gap: 0.4rem;
+  }
+  .lesson-trace span {
+    font-size: 0.68rem;
+  }
+}

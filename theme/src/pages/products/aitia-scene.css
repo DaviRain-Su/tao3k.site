@@ -1,0 +1,881 @@
+.aitia-lesson {
+  min-width: 0;
+}
+.aitia-lesson__stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: radial-gradient(ellipse at 50% 42%, #3251607a, #132330 68%);
+  border: 1px solid #a4c3c31f;
+}
+.aitia-lesson__labels {
+  position: absolute;
+  z-index: 2;
+  inset: 1rem 1.1rem auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.2rem;
+  color: #adc5c8;
+  font:
+    600 0.62rem/1.3 ui-monospace,
+    monospace;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+.aitia-lesson__labels span:nth-child(2) {
+  text-align: center;
+}
+.aitia-lesson__labels span:nth-child(3) {
+  text-align: right;
+}
+.aitia-lesson__scenery {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.aitia-lesson__path {
+  fill: none;
+  stroke: url(#aitia-track);
+  stroke-width: 1.4;
+}
+.aitia-lesson__path.is-return {
+  opacity: 0;
+  stroke: #a2c9d2;
+  stroke-dasharray: 5 8;
+  transition: opacity 0.8s;
+}
+.aitia-lesson__path.is-return.is-visible {
+  opacity: 0.75;
+}
+.aitia-lesson__feedback-path {
+  fill: none;
+  stroke: #d9abc7;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 8;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+.aitia-lesson__feedback-path.is-visible {
+  opacity: 0.8;
+  animation: aitia-lesson-dash 3s linear infinite;
+}
+.aitia-lesson__stage .react-flow {
+  background: transparent;
+}
+.aitia-lesson__stage .react-flow__node {
+  transition: transform 1.15s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+.aitia-lesson__stage .react-flow__attribution {
+  background: #132330;
+  font-size: 9px;
+}
+.aitia-lesson__stage .react-flow__attribution a {
+  color: #a5b9c2;
+}
+.aitia-object--service {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  filter: drop-shadow(0 8px 20px #76c1b82f);
+}
+.aitia-object--service svg {
+  width: 100%;
+  height: 100%;
+  fill: #1c3943;
+  stroke: #a6dacc;
+  stroke-width: 1.5;
+}
+.aitia-object--service circle {
+  fill: #dbf3e9;
+  stroke: none;
+}
+.aitia-object__scan {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  height: 2px;
+  background: #c0cdfd;
+  box-shadow: 0 0 12px #aabfff;
+  animation: aitia-scan 1.8s ease-in-out infinite alternate;
+}
+.aitia-object--gate {
+  width: 16px;
+  height: 74px;
+  position: relative;
+}
+.aitia-object__gate-arm {
+  position: absolute;
+  left: 7px;
+  bottom: 12px;
+  width: 3px;
+  height: 48px;
+  border-radius: 4px;
+  transform-origin: bottom center;
+  transform: rotate(68deg);
+  background: #dfc48f;
+  transition:
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 1s;
+  box-shadow: 0 0 10px #d9c08b66;
+}
+.aitia-object--gate.is-closed .aitia-object__gate-arm {
+  transform: rotate(0);
+  background: #e2ae9e;
+}
+.aitia-object__gate-base {
+  position: absolute;
+  left: 1px;
+  bottom: 7px;
+  width: 15px;
+  height: 6px;
+  border-radius: 4px;
+  background: #e4d4b4;
+}
+.aitia-object--job {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #d9c394;
+  box-shadow: 0 0 12px #e7d3a46b;
+  transition:
+    background 1s,
+    box-shadow 1s;
+}
+.aitia-object--job.is-admitted {
+  background: #9bd3cf;
+  box-shadow: 0 0 10px #9bd3cf77;
+}
+.aitia-object--job.is-held {
+  background: #ce9b91;
+  box-shadow: 0 0 8px #ce9b9155;
+}
+.aitia-object--job.is-accounted {
+  background: #c9dbed;
+  color: #26485a;
+  box-shadow: 0 0 10px #bbcef566;
+}
+.aitia-object--job span {
+  font: 700 10px/1 sans-serif;
+}
+.aitia-object--finding {
+  width: 40px;
+  height: 48px;
+  color: #ebc2d3;
+  animation: aitia-finding-enter 0.7s ease both;
+  filter: drop-shadow(0 4px 10px #d9a5c444);
+}
+.aitia-object--finding svg {
+  width: 100%;
+  fill: #4a3448;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.aitia-lesson__gate-note,
+.aitia-lesson__work-note,
+.aitia-lesson__finding-note {
+  position: absolute;
+  z-index: 3;
+  color: #d7b7aa;
+  font:
+    600 0.58rem/1.3 ui-monospace,
+    monospace;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  animation: aitia-finding-enter 0.7s ease both;
+}
+.aitia-lesson__gate-note {
+  left: 4%;
+  top: 57%;
+}
+.aitia-lesson__work-note {
+  right: 4%;
+  bottom: 10%;
+  color: #bbd0e2;
+}
+.aitia-lesson__finding-note {
+  right: 4%;
+  top: 25%;
+  color: #e4c0d3;
+}
+.aitia-lesson__caption {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.8rem 0.1rem 0;
+  color: #d5e6e5;
+  animation: aitia-finding-enter 0.55s ease both;
+}
+.aitia-lesson__caption > span {
+  font-size: 1.2rem;
+  color: #afdcd2;
+}
+.aitia-lesson__caption p {
+  margin: 0;
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+@keyframes aitia-finding-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes aitia-scan {
+  from {
+    top: 12px;
+  }
+  to {
+    top: 64px;
+  }
+}
+@keyframes aitia-lesson-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+.aitia-lesson[data-moving="false"] * {
+  animation-play-state: paused !important;
+}
+@media (max-width: 480px) {
+  .aitia-lesson__labels {
+    inset: 0.8rem 0.65rem auto;
+    font-size: 0.55rem;
+  }
+  .aitia-lesson__gate-note,
+  .aitia-lesson__work-note,
+  .aitia-lesson__finding-note {
+    font-size: 0.51rem;
+  }
+  .aitia-lesson__gate-note {
+    top: 58%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aitia-lesson * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+.aitia-object--media {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.aitia-object--media {
+  position: relative;
+  display: block;
+  width: 54px;
+  height: 44px;
+  overflow: visible;
+}
+.aitia-object--media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.aitia-object--media.is-service {
+  width: 132px;
+  height: 100px;
+}
+.aitia-object--media.is-incoming img {
+  filter: sepia(0.2) saturate(0.8);
+}
+.aitia-object--media.is-admitted img {
+  filter: sepia(0.1) hue-rotate(105deg) saturate(0.6);
+}
+.aitia-object--media.state-held img {
+  filter: sepia(0.45) saturate(0.8) brightness(0.85);
+}
+.aitia-object__accounted {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #153832;
+  background: #a9dfcf;
+  font: 700 11px/1 sans-serif;
+  font-style: normal;
+}
+/* The outline represents the service's scope; the entry visibly belongs to it. */
+.aitia-lesson__boundary {
+  position: absolute;
+  left: 24%;
+  right: 3%;
+  top: 25%;
+  bottom: 17%;
+  border: 1px solid #9abdbd50;
+  border-radius: 0.7rem;
+  background: #9bbcb60a;
+  pointer-events: none;
+}
+.aitia-lesson__boundary > span {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.45rem;
+  color: #9bb8b9;
+  font:
+    600 0.55rem/1.2 ui-monospace,
+    monospace;
+}
+.aitia-object--gate {
+  width: 32px;
+  height: 84px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+}
+.aitia-object__gate-label,
+.aitia-object__gate-state {
+  color: #bed6d2;
+  font:
+    600 8px/1 ui-monospace,
+    monospace;
+  white-space: nowrap;
+}
+.aitia-object__gate-door {
+  width: 19px;
+  height: 35px;
+  border: 1px solid #b2ded3;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #a8d8cc50 48%, transparent 48% 52%, #a8d8cc50 52%);
+  transition:
+    background 0.7s,
+    border-color 0.7s;
+}
+.aitia-object--gate.is-closed .aitia-object__gate-door {
+  border-color: #e7bb9e;
+  background: repeating-linear-gradient(135deg, #d8ae9c99 0 3px, #443c3c 3px 6px);
+}
+.aitia-object--gate.is-closed .aitia-object__gate-state {
+  color: #efc4ac;
+}
+.aitia-lesson__gate-note {
+  display: none;
+}
+@media (max-width: 480px) {
+  .aitia-lesson__boundary > span {
+    font-size: 0.48rem;
+  }
+}
+/* Each participant has its own boundary and label; the background is only a stage. */
+.aitia-object--media,
+.aitia-object--gate,
+.aitia-object--finding {
+  box-sizing: border-box;
+  border: 1px solid #8eaeb752;
+  border-radius: 0.65rem;
+  background: linear-gradient(145deg, #213541, #172833);
+  box-shadow: 0 6px 18px #0002;
+}
+.aitia-object--media {
+  width: 120px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr auto;
+  padding: 0.3rem;
+}
+.aitia-object--media img {
+  width: 100%;
+  height: 47px;
+  object-fit: contain;
+}
+.aitia-object--media.is-service {
+  width: 140px;
+  height: 100px;
+}
+.aitia-object--media.is-service img {
+  height: 65px;
+}
+.aitia-object__name {
+  color: #d7e7e4;
+  font:
+    600 0.61rem/1.2 ui-sans-serif,
+    system-ui,
+    sans-serif;
+  white-space: nowrap;
+}
+.aitia-object--gate {
+  width: 74px;
+  height: 84px;
+}
+.aitia-object--finding {
+  width: 84px;
+  height: 64px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.1rem;
+}
+.aitia-object--finding svg {
+  width: 35px;
+  height: 39px;
+}
+.aitia-object__accounted {
+  right: 3px;
+  top: 3px;
+  bottom: auto;
+}
+@media (max-width: 480px) {
+  .aitia-object--media {
+    width: 88px;
+    height: 68px;
+  }
+  .aitia-object--media img {
+    height: 38px;
+  }
+  .aitia-object--media.is-service {
+    width: 110px;
+    height: 90px;
+  }
+  .aitia-object--media.is-service img {
+    height: 56px;
+  }
+  .aitia-object--gate {
+    width: 48px;
+    height: 84px;
+  }
+  .aitia-object--finding {
+    width: 80px;
+    height: 64px;
+  }
+  .aitia-object__name {
+    font-size: 0.58rem;
+  }
+}
+/* Two semantic layers: current service behavior and a finding that can return. */
+.aitia-lesson__lanes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.aitia-lesson__lanes > div {
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  top: 0.5rem;
+  height: 185px;
+  border-radius: 0.7rem;
+  background: #8ab9b40b;
+}
+.aitia-lesson__lanes > div + div {
+  top: 200px;
+  height: 90px;
+  background: #b59ab50c;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.aitia-lesson__lanes > div.is-visible {
+  opacity: 1;
+}
+.aitia-lesson__lanes span {
+  position: absolute;
+  left: 0.65rem;
+  top: 0.45rem;
+  color: #99b6bb;
+  font:
+    600 0.57rem/1.2 ui-monospace,
+    monospace;
+  letter-spacing: 0.06em;
+}
+.aitia-lesson__lanes > div + div span {
+  color: #c5aec6;
+}
+.aitia-object-frame {
+  position: relative;
+}
+.aitia-object-frame > .lesson-port {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.aitia-object-frame .react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  min-width: 1px;
+  min-height: 1px;
+}
+.aitia-object-frame.is-current > .aitia-object--media,
+.aitia-object-frame.is-current > .aitia-object--gate,
+.aitia-object-frame.is-current > .aitia-object--finding {
+  border-color: #a6ded0b0;
+  box-shadow:
+    0 0 0 3px #a6ded015,
+    0 6px 18px #0003;
+}
+.lesson-relation {
+  fill: none;
+  stroke: #76969f;
+  stroke-width: 1.5;
+  opacity: 0.65;
+  transition:
+    stroke 0.55s,
+    opacity 0.55s;
+}
+.lesson-relation.is-active {
+  stroke: #a7dfd3;
+  stroke-width: 2;
+  opacity: 1;
+}
+.lesson-relation.is-blocked {
+  stroke: #dba99d;
+  stroke-dasharray: 4 5;
+  opacity: 0.8;
+}
+.lesson-relation.kind-feedback {
+  stroke: #d9adce;
+  stroke-dasharray: 5 5;
+  opacity: 0.9;
+}
+.lesson-relation__signal {
+  fill: #ddfff4;
+  filter: drop-shadow(0 0 4px #a4e5d5);
+}
+@media (max-width: 480px) {
+  .aitia-lesson__lanes > div {
+    height: 250px;
+  }
+  .aitia-lesson__lanes > div + div {
+    top: 265px;
+    height: 96px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aitia-lesson__lanes > div,
+  .lesson-relation {
+    transition: none;
+  }
+}
+@media (max-width: 480px) {
+  .aitia-lesson__lanes > div + div span {
+    left: auto;
+    right: 0.65rem;
+  }
+}
+/* Two distinct teaching levels: the service episode and the review it informs. */
+.aitia-lesson__lanes > div {
+  height: 188px;
+  border: 1px solid #82adba35;
+  background: #648a970d;
+}
+.aitia-lesson__lanes > div + div {
+  top: 205px;
+  height: 150px;
+  border-color: #bb9abb3d;
+  background: #a57da50b;
+  opacity: 0.42;
+}
+.aitia-lesson__lanes > div + div.is-visible {
+  opacity: 1;
+}
+.aitia-lesson__lanes span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #b8d0d2;
+  font-size: 0.62rem;
+}
+.aitia-lesson__lanes span b {
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 1px solid #86b3b45c;
+  border-radius: 0.3rem;
+  color: #b7d9d5;
+  font:
+    600 0.55rem/1 ui-monospace,
+    monospace;
+}
+.aitia-lesson__lanes > div + div span b {
+  border-color: #c4a3bd66;
+  color: #dbc1d8;
+}
+@media (max-width: 480px) {
+  .aitia-lesson__lanes > div {
+    height: 250px;
+  }
+  .aitia-lesson__lanes > div + div {
+    top: 265px;
+    height: 154px;
+  }
+}
+.aitia-object--review {
+  box-sizing: border-box;
+  width: 130px;
+  height: 64px;
+  padding: 0.45rem 0.6rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 0.5rem;
+  border: 1px solid #c6a8c67a;
+  border-radius: 0.65rem;
+  background: #392d3d;
+  color: #e7d4e6;
+}
+.aitia-object--review > span {
+  grid-row: 1 / 3;
+  font-size: 1.2rem;
+  color: #d8b6d2;
+}
+.aitia-object--review strong {
+  font-size: 0.63rem;
+  line-height: 1.2;
+}
+.aitia-object--review small {
+  color: #c6b2c4;
+  font-size: 0.55rem;
+  line-height: 1.2;
+}
+.aitia-object-frame.is-current > .aitia-object--review {
+  border-color: #e2bee0;
+  box-shadow: 0 0 0 3px #d8b0d014;
+}
+@media (max-width: 480px) {
+  .aitia-object--review {
+    width: 120px;
+  }
+}
+/* Participants in one lane share a common baseline and height. */
+.aitia-object--media:not(.is-service),
+.aitia-object--gate {
+  height: 100px;
+}
+.aitia-object--media:not(.is-service) img {
+  height: 60px;
+}
+@media (max-width: 480px) {
+  .aitia-object--media:not(.is-service),
+  .aitia-object--gate {
+    height: 90px;
+  }
+  .aitia-object--media:not(.is-service) img {
+    height: 56px;
+  }
+}
+.aitia-lesson__stage {
+  transition: height 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .aitia-lesson__stage {
+    transition: none;
+  }
+}
+.aitia-object__name {
+  font-size: 0.7rem;
+}
+.aitia-object__gate-label,
+.aitia-object__gate-state {
+  font-size: 0.6rem;
+}
+.aitia-object--review strong {
+  font-size: 0.7rem;
+}
+.aitia-object--review small {
+  font-size: 0.62rem;
+}
+.aitia-lesson__lanes span {
+  font-size: 0.68rem;
+}
+@media (max-width: 480px) {
+  .aitia-object__name {
+    font-size: 0.68rem;
+  }
+}
+.aitia-object__running {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #fff0d7;
+  background: #845e48;
+  font:
+    700 8px/1 ui-monospace,
+    monospace;
+  font-style: normal;
+}
+.aitia-object--model {
+  box-sizing: border-box;
+  width: 130px;
+  height: 64px;
+  padding: 0.45rem 0.6rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.1rem 0.3rem;
+  border: 1px solid #98b7db80;
+  border-radius: 0.65rem;
+  background: #243247;
+  color: #e0ebf4;
+}
+.aitia-object--model strong {
+  grid-column: 1 / -1;
+  font-size: 0.7rem;
+}
+.aitia-object--model span {
+  color: #bac9d9;
+  font-size: 0.62rem;
+}
+.aitia-object--model b {
+  color: #f3c995;
+  font:
+    700 0.62rem/1 ui-monospace,
+    monospace;
+}
+.aitia-object-frame.is-current > .aitia-object--model {
+  border-color: #b8d7f2;
+  box-shadow: 0 0 0 3px #a8d2ef17;
+}
+@media (max-width: 480px) {
+  .aitia-object--model {
+    width: 90px;
+    padding: 0.35rem;
+  }
+  .aitia-object--model strong {
+    font-size: 0.64rem;
+  }
+  .aitia-object--model span,
+  .aitia-object--model b {
+    font-size: 0.55rem;
+  }
+}
+@media (max-width: 480px) {
+  .aitia-object--review {
+    width: 90px;
+    padding: 0.35rem;
+    column-gap: 0.25rem;
+  }
+  .aitia-object--review strong {
+    font-size: 0.61rem;
+  }
+  .aitia-object--review small {
+    font-size: 0.55rem;
+  }
+}
+@media (max-width: 480px) {
+  .aitia-lesson__lanes > div + div span {
+    left: 0.65rem;
+    right: auto;
+  }
+}
+/* Use the diagram's width, including when a sidebar makes a desktop column narrow. */
+.aitia-lesson {
+  container-type: inline-size;
+}
+@container (width < 620px) {
+  .aitia-object--media {
+    width: 88px;
+    height: 90px;
+  }
+  .aitia-object--media img {
+    height: 56px;
+  }
+  .aitia-object--media.is-service {
+    width: 110px;
+    height: 90px;
+  }
+  .aitia-object--media.is-service img {
+    height: 56px;
+  }
+  .aitia-object--gate {
+    width: 48px;
+    height: 90px;
+  }
+  .aitia-object--finding {
+    width: 80px;
+    height: 64px;
+  }
+  .aitia-object--model,
+  .aitia-object--review {
+    width: 90px;
+    height: 64px;
+    padding: 0.35rem;
+  }
+  .aitia-object--review {
+    column-gap: 0.25rem;
+  }
+  .aitia-object--review strong {
+    font-size: 0.61rem;
+  }
+  .aitia-object--review small {
+    font-size: 0.55rem;
+  }
+  .aitia-object--model strong {
+    font-size: 0.64rem;
+  }
+  .aitia-object--model span,
+  .aitia-object--model b {
+    font-size: 0.55rem;
+  }
+  .aitia-object__name {
+    font-size: 0.68rem;
+  }
+  .aitia-lesson__lanes > div {
+    height: 250px;
+  }
+  .aitia-lesson__lanes > div + div {
+    top: 265px;
+    height: 154px;
+  }
+  .aitia-lesson__lanes > div + div span {
+    left: 0.65rem;
+    right: auto;
+  }
+}
+@container (width < 620px) {
+  .aitia-object--media {
+    width: 100px;
+  }
+  .aitia-object--gate {
+    width: 60px;
+  }
+  .aitia-object--model,
+  .aitia-object--review {
+    width: 110px;
+  }
+  .aitia-object--finding {
+    width: 90px;
+  }
+  .aitia-object--model strong,
+  .aitia-object--review strong,
+  .aitia-object__name {
+    font-size: 0.75rem;
+  }
+  .aitia-object--model span,
+  .aitia-object--model b,
+  .aitia-object--review small {
+    font-size: 0.625rem;
+  }
+  .aitia-lesson__lanes > div {
+    height: 310px;
+  }
+  .aitia-lesson__lanes > div + div {
+    top: 325px;
+    height: 154px;
+  }
+  .aitia-lesson__lanes[data-phase="4"] > div + div {
+    height: 274px;
+  }
+}

@@ -3,7 +3,6 @@ import {
   BackgroundVariant,
   Panel,
   ReactFlow,
-  PanOnScrollMode,
   ReactFlowProvider,
   useReactFlow,
   type NodeTypes,
@@ -56,6 +55,15 @@ function PrinciplesFlowCanvas({
   const [selectedId, setSelectedId] = useState<string>();
   const [pinnedNodeId, setPinnedNodeId] = useState<string>();
   const [running, setRunning] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [motionPulse, setMotionPulse] = useState(0);
+  const autoStarted = useRef(false);
+  const [overview, setOverview] = useState(true);
+  const [cameraMode, setCameraMode] = useState<"follow" | "fit">("follow");
+  const [compact, setCompact] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 620px)").matches,
+  );
+  const workflowRef = useRef<HTMLDivElement>(null);
   const [sourceOpen, setSourceOpen] = useState(false);
   const [sourceHtml, setSourceHtml] = useState<string>();
   const [error, setError] = useState<string>();
@@ -106,19 +114,71 @@ function PrinciplesFlowCanvas({
   }, [sourceOpen]);
 
   useEffect(() => {
-    if (!model) return;
-    const frame = requestAnimationFrame(() => void fitView(fitOptions));
+    const query = window.matchMedia("(max-width: 620px)");
+    const update = () => setCompact(query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!model || !overview) return;
+    // Let React Flow measure the newly switched node set before fitting it.
+    const timer = window.setTimeout(() => void fitView({ ...fitOptions, duration: 0 }), 120);
+    return () => window.clearTimeout(timer);
+  }, [fitView, model, overview, compact]);
+
+  useEffect(() => {
+    const element = workflowRef.current;
+    if (!model || !element) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (
+          entry.isIntersecting &&
+          !autoStarted.current &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          autoStarted.current = true;
+          setRunning(true);
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [model]);
+
+  useEffect(() => {
+    if (
+      !overview ||
+      !running ||
+      !inView ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setMotionPulse(0);
+      return;
+    }
+    let frame = 0;
+    let start = 0;
+    const animate = (now: number) => {
+      if (!start) start = now;
+      const progress = Math.min((now - start) / 850, 1);
+      setMotionPulse(Math.sin(progress * Math.PI));
+      if (progress < 1) frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, [fitView, model]);
+  }, [cursor.completedSteps, overview, running, inView]);
 
   useEffect(() => {
     if (!model || !focusedEvidenceId) return;
     const node = model.nodes.find(
       ({ id, data }) => id === focusedEvidenceId || data.semanticId === focusedEvidenceId,
     );
-    if (!node) return;
+    if (!node || node.id === selectedId) return;
     setSelectedId(node.id);
     setPinnedNodeId(node.id);
+    setOverview(false);
     const width = typeof node.style?.width === "number" ? node.style.width : 320;
     const height = typeof node.style?.height === "number" ? node.style.height : 176;
     const frame = requestAnimationFrame(
@@ -129,42 +189,43 @@ function PrinciplesFlowCanvas({
         }),
     );
     return () => cancelAnimationFrame(frame);
-  }, [focusedEvidenceId, model, setCenter]);
+  }, [focusedEvidenceId, model, selectedId, setCenter]);
 
   const step = useCallback(() => {
     const session = sessionRef.current;
     if (!session) return;
+    const current = session.cursor.position();
+    if (current.completedSteps >= current.stepCount) {
+      if (overview) setCursor(session.cursor.reset());
+      else setRunning(false);
+      return;
+    }
     const snapshot = session.cursor.step();
     setCursor(snapshot);
-    if (snapshot.completedSteps >= snapshot.stepCount) setRunning(false);
-  }, []);
+    if (!overview && snapshot.completedSteps >= snapshot.stepCount) setRunning(false);
+  }, [overview]);
 
   useEffect(() => {
-    if (!running) return;
-    const interval = window.setInterval(step, 680);
+    if (!running || !inView) return;
+    const interval = window.setInterval(step, 1800);
     return () => window.clearInterval(interval);
-  }, [running, step]);
-
-  const reset = useCallback(() => {
-    const session = sessionRef.current;
-    if (!session) return;
-    setRunning(false);
-    setPinnedNodeId(undefined);
-    setCursor(session.cursor.reset());
-    requestAnimationFrame(() => void fitView(fitOptions));
-  }, [fitView]);
+  }, [running, inView, step]);
 
   const toggleRun = useCallback(() => {
     const session = sessionRef.current;
     if (!session) return;
     setPinnedNodeId(undefined);
+    if (running) {
+      setRunning(false);
+      return;
+    }
     if (cursor.completedSteps >= session.cursor.stepCount) {
       setCursor(session.cursor.reset());
       setRunning(true);
       return;
     }
     setRunning((value) => !value);
-  }, [cursor.completedSteps]);
+  }, [cursor.completedSteps, running]);
 
   const nodes = useMemo(
     () =>
@@ -223,12 +284,133 @@ function PrinciplesFlowCanvas({
     [cursor.completedSteps, model, nodeOrder, running],
   );
 
+  // The overview is a labelled conceptual summary; the full view retains the
+  // actual Bundle topology and each node's cursor-derived state.
+  const overviewIds = ["knowledge", "governed-action", "act", "evidence-return"];
+  const groups = [
+    ["knowledge", "access", "understand", "compose"],
+    ["governed-action", "qualify"],
+    ["act"],
+    ["evidence-return", "learn"],
+  ];
+  const stepLabels: Record<string, string> = {
+    access: "Access",
+    understand: "Understand",
+    compose: "Compose",
+    qualify: "Qualify",
+    learn: "Learn",
+  };
+  const activeOrder = Math.min(cursor.completedSteps + 1, cursor.stepCount);
+  const activeGroup = activeOrder <= 6 ? 0 : activeOrder <= 8 ? 1 : activeOrder === 9 ? 2 : 3;
+  const overviewNodes = overviewIds.flatMap((id, index) => {
+    const node = nodes.find(({ data }) => data.semanticId === id);
+    if (!node) return [];
+    const members = nodes.filter(({ data }) => groups[index].includes(data.semanticId));
+    const status: PrinciplesFlowNode["data"]["status"] = members.some(
+      ({ data }) => data.status === "running",
+    )
+      ? "running"
+      : members.every(({ data }) => data.status === "complete")
+        ? "complete"
+        : members.some(({ data }) => data.status === "ready")
+          ? "ready"
+          : "waiting";
+    const overviewSteps = members
+      .filter(({ data }) => stepLabels[data.semanticId])
+      .map(({ data }) => ({ label: stepLabels[data.semanticId], status: data.status }));
+    return [
+      {
+        ...node,
+        data: {
+          ...node.data,
+          status,
+          overviewSteps,
+          overviewDirection: compact ? "grid" : "horizontal",
+          overviewTarget: compact
+            ? ["left", "left", "top", "right"][index]
+            : ["left", "left", "left", "right"][index],
+          overviewSource: compact
+            ? ["right", "bottom", "left", "bottom"][index]
+            : ["right", "right", "bottom", "left"][index],
+          overviewTitle: ["Knowledge", "Qualification", "Human action", "Evidence return"][index],
+        },
+        position: compact
+          ? {
+              x: [0, 175, 175, 0][index] + (index === activeGroup ? motionPulse * 8 : 0),
+              y: (index < 2 ? 0 : 130) + (index === activeGroup ? -motionPulse * 8 : 0),
+            }
+          : {
+              x: [0, 220, 440, 220][index] + (index === activeGroup ? motionPulse * 20 : 0),
+              y: (index === 3 ? 146 : 0) + (index === activeGroup ? -motionPulse * 16 : 0),
+            },
+        initialWidth: compact ? 158 : 192,
+        initialHeight: compact ? 100 : 104,
+        style: compact ? { width: 158, height: 100 } : { width: 192, height: 104 },
+      },
+    ];
+  });
+  const overviewEdges: PrinciplesFlowEdge[] = overviewNodes.slice(1).map((node, index) => {
+    const previous = overviewNodes[index];
+    const active = node.data.status === "running" || node.data.status === "ready";
+    return {
+      id: `overview-${previous.id}-${node.id}`,
+      source: previous.id,
+      target: node.id,
+      type: "smoothstep",
+      animated: running && active,
+      className: active
+        ? running
+          ? "is-active"
+          : "is-ready"
+        : node.data.status === "complete"
+          ? "is-complete"
+          : "is-waiting",
+      data: { order: index },
+    };
+  });
+
+  if (overviewNodes.length === overviewIds.length) {
+    const evidence = overviewNodes[overviewNodes.length - 1];
+    overviewEdges.push({
+      id: "overview-feedback",
+      source: evidence.id,
+      target: overviewNodes[0].id,
+      type: "smoothstep",
+      className: "is-return",
+      data: { order: overviewNodes.length },
+    });
+  }
+
   const runtimeNode =
     nodes.find(({ data }) => data.status === "running") ??
     nodes.find(({ data }) => data.status === "ready");
+  const cameraNode =
+    nodes.find(({ id }) => id === pinnedNodeId) ??
+    runtimeNode ??
+    nodes.find(({ data }) => data.order === cursor.completedSteps) ??
+    nodes[0];
+  const cameraNodeId = cameraNode?.id;
+  useEffect(() => {
+    if (overview || cameraMode !== "follow" || !model || !cameraNodeId) return;
+    const node = model.nodes.find(({ id }) => id === cameraNodeId);
+    if (!node) return;
+    const width = typeof node.style?.width === "number" ? node.style.width : 320;
+    const height = typeof node.style?.height === "number" ? node.style.height : 176;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const frame = requestAnimationFrame(
+      () =>
+        void setCenter(node.position.x + width / 2, node.position.y + height / 2, {
+          duration: reduced ? 0 : 600,
+          zoom: compact ? 0.86 : 0.94,
+        }),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [cameraNodeId, cameraMode, compact, model, overview, setCenter]);
+
   const inspectorNode =
     nodes.find(({ id }) => id === pinnedNodeId) ??
     runtimeNode ??
+    nodes.find(({ data }) => data.order === cursor.completedSteps) ??
     nodes.find(({ id }) => id === selectedId) ??
     nodes[0];
   const inboundNodes =
@@ -285,30 +467,94 @@ function PrinciplesFlowCanvas({
 
   return (
     <div className="tao3k-principles-flow__layout">
-      <div className="tao3k-principles-flow__workflow">
-        <div className="tao3k-principles-flow__canvas">
+      <div
+        className={`tao3k-principles-flow__workflow ${overview ? "is-overview-mode" : ""}`}
+        ref={workflowRef}
+      >
+        <div className="tao3k-principles-flow__viewbar">
+          <div>
+            <span>HUMAN CAPABILITY</span>
+            <small>{overview ? "Conceptual overview" : "Bundle topology"}</small>
+          </div>
+          <div className="tao3k-principles-flow__views" aria-label="Diagram controls">
+            {overview && (
+              <button
+                type="button"
+                onClick={toggleRun}
+                aria-label={running ? "Pause animation" : "Play animation"}
+              >
+                {running ? "Pause" : "Play"}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                setCameraMode("follow");
+                setOverview(!overview);
+              }}
+            >
+              {overview ? "Explore topology ↗" : "← Overview"}
+            </button>
+          </div>
+          {!overview && (
+            <div className="tao3k-principles-flow__views" aria-label="Topology framing">
+              <button
+                type="button"
+                aria-pressed={cameraMode === "follow"}
+                onClick={() => {
+                  setPinnedNodeId(undefined);
+                  setCameraMode("follow");
+                }}
+              >
+                Follow step
+              </button>
+              <button
+                type="button"
+                aria-pressed={cameraMode === "fit"}
+                onClick={() => {
+                  setCameraMode("fit");
+                  void fitView(fitOptions);
+                }}
+              >
+                Fit all
+              </button>
+            </div>
+          )}
+        </div>
+        <div className={`tao3k-principles-flow__canvas ${overview ? "is-overview" : ""}`}>
+          {overview && (
+            <div className="tao3k-capability-layers" aria-hidden="true">
+              <div>
+                <span className="tao3k-layer-desktop">01 · KNOWLEDGE TO ACTION</span>
+                <span className="tao3k-layer-mobile">01 · KNOWLEDGE &amp; QUALIFICATION</span>
+              </div>
+              <div>
+                <span className="tao3k-layer-desktop">02 · EVIDENCE RETURNS</span>
+                <span className="tao3k-layer-mobile">02 · ACTION &amp; EVIDENCE</span>
+              </div>
+            </div>
+          )}
           <ReactFlow
-            nodes={nodes}
-            edges={edges}
+            nodes={overview ? overviewNodes : nodes}
+            edges={overview ? overviewEdges : edges}
             nodeTypes={nodeTypes}
             onNodeClick={(_, node) => {
               setSelectedId(node.id);
               setPinnedNodeId(node.id);
+              setCameraMode("follow");
               onGraphFocusChange?.(node.data.semanticId);
             }}
-            nodesDraggable
-            nodeDragThreshold={3}
+            nodesDraggable={false}
             nodesConnectable={false}
             elementsSelectable
-            panOnDrag
-            panOnScroll
-            panOnScrollMode={PanOnScrollMode.Free}
-            panOnScrollSpeed={0.75}
-            onlyRenderVisibleElements
+            panOnDrag={false}
+            panOnScroll={false}
+            preventScrolling={false}
             elevateNodesOnSelect={false}
             zoomOnScroll={false}
-            zoomOnPinch
-            minZoom={0.38}
+            zoomOnPinch={false}
+            zoomOnDoubleClick={false}
+            minZoom={overview ? 0.38 : 0.1}
             maxZoom={1.5}
             fitView
             fitViewOptions={fitOptions}
@@ -345,38 +591,39 @@ function PrinciplesFlowCanvas({
             ) : null}
           </ReactFlow>
         </div>
-        <div className="tao3k-principles-flow__runtime-dock">
-          <div className="tao3k-principles-runtime">
-            <div>
-              <span>WASM CURSOR</span>
-              <strong>
-                {String(cursor.completedSteps).padStart(2, "0")} /{" "}
-                {String(stepCount).padStart(2, "0")}
-              </strong>
+        {!overview && (
+          <div className="tao3k-principles-flow__runtime-dock">
+            <div className="tao3k-principles-runtime">
+              <div>
+                <span>WASM CURSOR</span>
+                <strong>
+                  {String(cursor.completedSteps).padStart(2, "0")} /{" "}
+                  {String(stepCount).padStart(2, "0")}
+                </strong>
+              </div>
+              <button type="button" onClick={toggleRun}>
+                {running ? "Pause" : "Play"}
+              </button>
+              <button
+                type="button"
+                onClick={step}
+                disabled={running || cursor.completedSteps >= stepCount}
+              >
+                Step
+              </button>
+              {!overview && (
+                <button
+                  type="button"
+                  className="tao3k-principles-runtime__source"
+                  aria-expanded={sourceOpen}
+                  onClick={() => setSourceOpen((value) => !value)}
+                >
+                  {sourceOpen ? "Hide Scheme" : "Source code"}
+                </button>
+              )}
             </div>
-            <button type="button" onClick={toggleRun}>
-              {running ? "Pause" : cursor.completedSteps >= stepCount ? "Replay" : "Run"}
-            </button>
-            <button
-              type="button"
-              onClick={step}
-              disabled={running || cursor.completedSteps >= stepCount}
-            >
-              Step
-            </button>
-            <button type="button" onClick={reset}>
-              Reset
-            </button>
-            <button
-              type="button"
-              className="tao3k-principles-runtime__source"
-              aria-expanded={sourceOpen}
-              onClick={() => setSourceOpen((value) => !value)}
-            >
-              {sourceOpen ? "Hide Scheme" : "Source code"}
-            </button>
           </div>
-        </div>
+        )}
       </div>
 
       {inspectorNode ? (
@@ -387,36 +634,45 @@ function PrinciplesFlowCanvas({
           </header>
           <h3>{inspectorNode.data.title}</h3>
           <p>{inspectorNode.data.summary}</p>
-          <dl>
-            <div>
-              <dt>Human</dt>
-              <dd>{inspectorNode.data.human}</dd>
-            </div>
-            <div>
-              <dt>AI</dt>
-              <dd>{inspectorNode.data.ai}</dd>
-            </div>
-            <div>
-              <dt>Guard</dt>
-              <dd>{inspectorNode.data.guard}</dd>
-            </div>
-            <div>
-              <dt>State</dt>
-              <dd>{stateExplanation}</dd>
-            </div>
-            <div>
-              <dt>Topology</dt>
-              <dd>{transitionExplanation}</dd>
-            </div>
-            <div>
-              <dt>Pressure test</dt>
-              <dd>{inspectorNode.data.pressureDetail}</dd>
-            </div>
-          </dl>
+          <details className="tao3k-principles-inspector__details">
+            <summary>Details &amp; conditions</summary>
+            <dl>
+              <div>
+                <dt>Human</dt>
+                <dd>{inspectorNode.data.human}</dd>
+              </div>
+              <div>
+                <dt>AI</dt>
+                <dd>{inspectorNode.data.ai}</dd>
+              </div>
+              <div>
+                <dt>Guard</dt>
+                <dd>{inspectorNode.data.guard}</dd>
+              </div>
+              <div>
+                <dt>State</dt>
+                <dd>{stateExplanation}</dd>
+              </div>
+              <div>
+                <dt>Topology</dt>
+                <dd>{transitionExplanation}</dd>
+              </div>
+              <div>
+                <dt>Pressure test</dt>
+                <dd>{inspectorNode.data.pressureDetail}</dd>
+              </div>
+            </dl>
+          </details>
           <footer>
             <span>{inspectorNode.data.boundary}</span>
             {pinnedNodeId ? (
-              <button type="button" onClick={() => setPinnedNodeId(undefined)}>
+              <button
+                type="button"
+                onClick={() => {
+                  setPinnedNodeId(undefined);
+                  setCameraMode("follow");
+                }}
+              >
                 Follow run
               </button>
             ) : null}
@@ -438,9 +694,8 @@ export function PrinciplesFlow() {
           <h2 id="principles-flow-title">Information is abundant. Agency is not.</h2>
         </div>
         <p>
-          The graph is compiled from Scheme, validated as Bundle v1, executed by WASM, and explained
-          by Org. Drag the topology freely; Run never steals the viewport, while Reset returns the
-          complete composition to view.
+          Knowledge becomes action through human judgment. Follow the cycle, then explore the
+          underlying topology and its evidence.
         </p>
       </header>
       <div className="tao3k-principles-flow__surface">

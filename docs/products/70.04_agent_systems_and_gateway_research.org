@@ -1,0 +1,90 @@
+#+TITLE: Agent systems and gateway positioning research
+#+DATE: 2026-11-09
+#+AUTHOR: tao3k
+#+FILETAGS: :tao3k:products:research:agents:gateway:
+#+STATUS: Draft
+#+OWNER: tao3k.site
+#+AUDIENCE: Product, content, design, and site engineering teams
+#+CLAIM_MATURITY: research
+#+OPTIONS: toc:2
+
+* Scope
+
+Research the product problem and the concrete project boundary before adding
+site claims. A source description is not an independent performance or
+production-readiness evaluation. Revisions below are the default-branch heads
+observed on 2026-11-09, not test results produced by this website.
+
+* Agentic AI Lab and agent harnesses
+
+[[https://github.com/tao3k/agentic-ai-lab/blob/4da003496fa5ffb30111ed3dc7fa51ac68f3d030/README.org][Agentic AI Lab]] describes a Scheme control plane for composing policies,
+profiles, modules, workflows, sessions and loop descriptors into inspectable
+values. Gerbil POO and functional composition shape these values; validation
+and proof obligations describe particular strategy and policy properties.
+Heavy execution is handed to a separate runtime. The README still uses the
+historical POO Flow name for the control plane.
+
+The user-facing problem is that a reusable agent system must express not only
+what work is done, but which profile, policy, session and scope apply when it is
+handed off. The product narrative can describe an extensible, composable
+foundation for agent systems; calling it an operating-system direction does not
+establish that it is a complete deployable operating system.
+
+[[https://github.com/deepseek-ai/deepseek-harness/blob/fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159/docs/architecture.md][DeepSeek Harness]] uses Cordis plugins, profile/bundle composition, an agent
+loop, tool registry, model adapters, an append-only session event log, and
+multiple application profiles. It is a meaningful comparison for modularity,
+session, tools, policy and operating model. It is itself composable and has
+substantial execution and user-facing surfaces: do not characterize it as a
+simple prompt wrapper or infer overall superiority from a difference in scope.
+
+| Comparison | Agentic AI Lab | DeepSeek Harness |
+|------------+----------------+------------------|
+| Primary emphasis | Strategy and policy composition, validation, proof-facing contracts, runtime projection. | Plugin-composed agent harness, runtime services, sessions and application carriers. |
+| Composition | POO objects, modules, profiles, workflows and inherited policy values. | Cordis plugins, services, effects, profiles, bundles and ordered patches. |
+| Session/effects | Models session and policy boundaries; external runtime owns execution. | Owns a session event log, live agent loop, tool pipeline and application profiles. |
+| Assurance | Named Lean and model obligations within declared scopes, with independent runtime authorization. | Documented guarded execution and lifecycle semantics; no conclusion here about its proof coverage. |
+
+The useful website demonstration is a concrete strategy composed from several
+modules and checked before runtime handoff, with source-backed details, not a
+generic draggable workflow. A fair quantitative comparison requires matching
+tasks, features, revisions, environments, failures and evaluation criteria.
+
+* Weaver and the AI gateway landscape
+
+[[https://github.com/hardenedlinux/weaver/blob/db9a3eb79ceea18407c6ff28677f0a5a6158a0c5/README.org][Weaver]], under HardenedLinux, is a policy-governed AI agent gateway. Its
+architecture connects Scheme governance and Agentic AI Lab module reuse, Go
+routing and cloud integration, and Rust-owned Cedar decisions, budget/authority
+consumption, provider dispatch and streaming. It imports Cedar POO Spec's
+Gateway Zero Trust contract. This is a source-described architecture and
+relationship, not proof that every planned integration is fully delivered.
+
+The [[https://github.com/hardenedlinux/weaver/blob/db9a3eb79ceea18407c6ff28677f0a5a6158a0c5/docs/50-59-research-program/59-provider-rpc/59.00-index.org][implementation guide]] identifies an actual OpenAI-compatible Chat
+Completions HTTPS/SSE provider path and authenticated Go/Rust gRPC. The README
+explicitly places complete MCP/A2A/ACP adapters and Kubernetes reconciliation in
+remaining work. The guide also records unclosed integrated obligations and
+historical/regressed measurements. High throughput and scalability are design
+goals; no comparative performance claim follows without a matched benchmark.
+
+| Project | Source-described emphasis | Fair comparison |
+|---------+---------------------------+-----------------|
+| [[https://github.com/praxis-proxy/ai/blob/f96d0114a995765793b1fb33f86f94ecc298eb08/README.md][Praxis AI]] | Provider routing, API translation, AI filters, MCP/A2A and stateful API work on the Praxis proxy; feature flags and alpha maturity matter. | Compare actual request classes, provider codecs, streaming, policy, configuration and failure behavior at matched revisions. |
+| [[https://github.com/agentgateway/agentgateway/blob/03042f8f6edad3055628f19ba0fa4922996bc5d5/README.md][agentgateway]] | AI-native LLM, MCP and A2A connectivity; policy, observability and deployment. | Compare implemented protocol coverage, authorization/identity, budget controls, cloud deployment and operational evidence. |
+| Weaver | Policy-governed gateway with original-task authority, budget and stream-release boundaries. | Distinguish shipped provider path, in-progress integrations and target contracts; test against the same workloads before ranking speed or scale. |
+
+The site's gateway entry should lead with the problem of maintaining policy,
+original scope and budgets across routing, retries and streams. The named
+products are research comparators; they need not be inserted into a customer
+landing page before there is a carefully reviewed comparison.
+
+* Next evidence work
+
+- Select a concrete Agentic AI Lab module/profile example, trace its actual
+  inputs, validation and runtime handoff, and illustrate it without inventing
+  runtime behavior.
+- Trace Weaver's provider request, Cedar decision, budget and stream path to
+  current tests and identify delivery gates separately from design docs.
+- Agree a comparable gateway workload matrix: protocol, concurrency, payload,
+  streaming, authentication, storage, budgets, hardware, load generator and
+  latency/throughput/error reporting. Retain failed or incomplete runs.
+- Identify whether any other intended comparator was meant by the user's
+  “RayHead Parax”; the provided URL unambiguously identifies Praxis AI.

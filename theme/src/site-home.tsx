@@ -1,19 +1,15 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Background,
-  Handle,
-  Position,
-  ReactFlow,
-  useNodesState,
-  type Edge,
-  type Node,
-  type NodeProps,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
+import "@fontsource-variable/geist";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { EvidenceField } from "./EvidenceField";
+import nixosMark from "./pages/platform/assets/technology/nixos.svg";
 import { platformNavigation } from "./site-routes";
+import { comparisonTopics } from "./pages/comparison/comparison-catalog";
 import "./site-home.css";
 import "./site-mobile-fixes.css";
 import "./site-polish.css";
+import "./site-refinement.css";
+import "./immersive.css";
+import "./site-atmosphere.css";
 
 type NavigationItem = {
   readonly label: string;
@@ -160,6 +156,368 @@ function ThemeModeToggle() {
   );
 }
 
+type MenuGroup = {
+  label: string;
+  description: string;
+  links: readonly { href: string; name: string; detail: string }[];
+};
+
+const productGroups: readonly MenuGroup[] = [
+  {
+    label: "Context",
+    description: "Knowledge connected to the work.",
+    links: [
+      {
+        href: "/products/context-system",
+        name: "Context System",
+        detail: "Source-connected knowledge",
+      },
+      {
+        href: "/products/lambda-episteme",
+        name: "Lambda Episteme",
+        detail: "Vertical domain knowledge",
+      },
+    ],
+  },
+  {
+    label: "Code & engineering",
+    description: "Understand and shape engineering work.",
+    links: [
+      {
+        href: "/products/agent-semantic-protocols",
+        name: "Agent Semantic Protocols",
+        detail: "Source-aware code search",
+      },
+      {
+        href: "/products/lambda-aitia",
+        name: "Lambda Aitia",
+        detail: "Human + AI software lifecycle",
+      },
+      {
+        href: "/products/deterministic-engineering",
+        name: "Deterministic Engineering",
+        detail: "Engineering models and methods",
+      },
+      { href: "/products/lean-poo", name: "LeanPoo", detail: "Composition and proof reuse" },
+    ],
+  },
+  {
+    label: "Agent infrastructure",
+    description: "Compose and connect agent systems.",
+    links: [
+      {
+        href: "/products/agentic-ai-lab",
+        name: "Agentic AI Lab",
+        detail: "Composable agent control plane",
+      },
+      { href: "/products/weaver", name: "Weaver", detail: "Policy-governed gateway" },
+      {
+        href: "/products/xiuxian-workshop",
+        name: "Xiuxian Artisan Workshop",
+        detail: "Agent infrastructure workspace",
+      },
+    ],
+  },
+  {
+    label: "Reasoning & trust",
+    description: "Connect facts, rules and decisions.",
+    links: [
+      {
+        href: "/products/meta-relational-reasoning",
+        name: "MRR",
+        detail: "Relations, rules and admission",
+      },
+      { href: "/products/mrr-data", name: "MRR Data", detail: "Physical data plane" },
+      {
+        href: "/products/cedar-poo-spec",
+        name: "Cedar POO Spec",
+        detail: "Composable authorization",
+      },
+    ],
+  },
+];
+const solutionGroups: readonly MenuGroup[] = [
+  {
+    label: "Code & engineering",
+    description: "Make complex engineering work understandable.",
+    links: [
+      {
+        href: "/solutions/code-intelligence",
+        name: "Agentic code intelligence",
+        detail: "Find source, relationships and tests",
+      },
+      {
+        href: "/solutions/engineering-assurance",
+        name: "Deterministic engineering",
+        detail: "Design, verification and evolution",
+      },
+    ],
+  },
+  {
+    label: "Agent infrastructure",
+    description: "Build and connect governed systems.",
+    links: [
+      {
+        href: "/solutions/composable-agents",
+        name: "Composable agent systems",
+        detail: "Modules, policy and runtime",
+      },
+      {
+        href: "/solutions/ai-gateway",
+        name: "Governed AI gateway",
+        detail: "Connect providers and tools",
+      },
+    ],
+  },
+  {
+    label: "Trust & security",
+    description: "Protect systems, data and decisions.",
+    links: [
+      {
+        href: "/solutions/privacy",
+        name: "Privacy & data control",
+        detail: "Your data, your choice of model",
+      },
+      {
+        href: "/solutions/trust-authorization",
+        name: "Trust & authorization",
+        detail: "Decisions in context",
+      },
+      {
+        href: "/solutions/security-identity",
+        name: "Security",
+        detail: "Supply chain, authorization and isolation",
+      },
+      {
+        href: "/solutions/linux-hardening",
+        name: "Linux hardening",
+        detail: "Kernel and system defenses",
+      },
+    ],
+  },
+  {
+    label: "Industry solutions",
+    description: "Solve challenges in specific domains.",
+    links: [
+      { href: "/solutions/healthcare", name: "Healthcare", detail: "Identity and disclosure" },
+      {
+        href: "/solutions/financial-services",
+        name: "Financial services",
+        detail: "Payment and independent controls",
+      },
+      {
+        href: "/solutions/domain-knowledge",
+        name: "Domain knowledge & reasoning",
+        detail: "Context, rules and evidence",
+      },
+    ],
+  },
+];
+
+const comparisonGroups: readonly MenuGroup[] = [
+  "Platform",
+  "Context",
+  "Agent systems",
+  "Code & reasoning",
+  "Trust & proof",
+].map((category) => ({
+  label: category,
+  description: "Compare responsibilities and design choices.",
+  links: comparisonTopics
+    .filter((topic) => topic.category === category)
+    .map((topic) => ({ href: `/comparison/${topic.id}`, name: topic.name, detail: topic.focus })),
+}));
+
+function ProductsNavigationMenu({
+  solutions = false,
+  comparisons = false,
+  onNavigate,
+}: {
+  readonly solutions?: boolean;
+  readonly comparisons?: boolean;
+  readonly onNavigate?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const groups = comparisons ? comparisonGroups : solutions ? solutionGroups : productGroups;
+  const menuName = comparisons ? "Comparison" : solutions ? "Solutions" : "Products";
+  const selected = groups[activeIndex] ?? groups[0];
+  useEffect(() => {
+    if (!open) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof globalThis.Node && !rootRef.current?.contains(event.target))
+        setOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        rootRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open]);
+  return (
+    <div
+      className={`tao3k-products-menu${open ? " is-open" : ""}`}
+      ref={rootRef}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+      onPointerEnter={(event) => {
+        if (
+          event.pointerType !== "touch" &&
+          window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+        )
+          setOpen(true);
+      }}
+      onPointerLeave={(event) => {
+        if (
+          event.pointerType !== "touch" &&
+          window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+        )
+          setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        className="tao3k-products-menu__trigger"
+        aria-controls={
+          comparisons
+            ? "tao3k-comparison-navigation"
+            : solutions
+              ? "tao3k-solutions-navigation"
+              : "tao3k-products-navigation"
+        }
+        aria-expanded={open}
+        onClick={(event) =>
+          setOpen((value) =>
+            event.detail > 0 && window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+              ? true
+              : !value,
+          )
+        }
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setOpen(true);
+          }
+        }}
+      >
+        {menuName} <span aria-hidden="true">⌄</span>
+      </button>
+      <div
+        className="tao3k-products-menu__panel tao3k-matrix-menu"
+        id={
+          comparisons
+            ? "tao3k-comparison-navigation"
+            : solutions
+              ? "tao3k-solutions-navigation"
+              : "tao3k-products-navigation"
+        }
+        aria-hidden={!open}
+      >
+        <div className="tao3k-matrix-menu__categories">
+          <small>
+            {comparisons
+              ? "EXPLORE COMPARISONS"
+              : solutions
+                ? "EXPLORE SOLUTIONS"
+                : "EXPLORE PRODUCTS"}
+          </small>
+          <strong>
+            {comparisons
+              ? "Compare by product."
+              : solutions
+                ? "Start with the challenge."
+                : "Find your building blocks."}
+          </strong>
+          <div
+            aria-label={
+              comparisons
+                ? "Comparison categories"
+                : solutions
+                  ? "Solution categories"
+                  : "Product categories"
+            }
+          >
+            {groups.map((group, index) => (
+              <button
+                key={group.label}
+                type="button"
+                className={activeIndex === index ? "is-active" : undefined}
+                aria-pressed={activeIndex === index}
+                tabIndex={open ? 0 : -1}
+                onClick={() => setActiveIndex(index)}
+                onFocus={() => setActiveIndex(index)}
+                onPointerEnter={(event) => {
+                  if (
+                    event.pointerType !== "touch" &&
+                    window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+                  )
+                    setActiveIndex(index);
+                }}
+              >
+                <span>{group.label}</span>
+                <i aria-hidden="true">→</i>
+              </button>
+            ))}
+          </div>
+          <a
+            className="tao3k-matrix-menu__all"
+            href={comparisons ? "/comparison" : solutions ? "/solutions" : "/products"}
+            tabIndex={open ? 0 : -1}
+            onClick={() => {
+              setOpen(false);
+              onNavigate?.();
+            }}
+          >
+            View all {comparisons ? "comparisons" : solutions ? "solutions" : "products"}{" "}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <nav
+          className="tao3k-matrix-menu__content"
+          aria-label={
+            comparisons
+              ? "Comparison navigation"
+              : solutions
+                ? "Solutions navigation"
+                : "Product navigation"
+          }
+        >
+          <header>
+            <small>{selected.label.toUpperCase()}</small>
+            <p>{selected.description}</p>
+          </header>
+          <div className="tao3k-matrix-menu__grid">
+            {selected.links.map((link) => (
+              <a
+                href={link.href}
+                key={link.href}
+                tabIndex={open ? 0 : -1}
+                onClick={() => {
+                  setOpen(false);
+                  onNavigate?.();
+                }}
+              >
+                <strong>{link.name}</strong>
+                <span>{link.detail}</span>
+                <i aria-hidden="true">↗</i>
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
+    </div>
+  );
+}
+
 function PlatformNavigationMenu({ items }: { readonly items: readonly NavigationChild[] }) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -175,7 +533,7 @@ function PlatformNavigationMenu({ items }: { readonly items: readonly Navigation
       }
     };
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
+      if (event.key !== "Escape" || !open) return;
       setOpen(false);
       rootRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
     };
@@ -185,7 +543,7 @@ function PlatformNavigationMenu({ items }: { readonly items: readonly Navigation
       document.removeEventListener("pointerdown", closeOutside);
       document.removeEventListener("keydown", closeOnEscape);
     };
-  }, []);
+  }, [open]);
 
   return (
     <div
@@ -194,10 +552,18 @@ function PlatformNavigationMenu({ items }: { readonly items: readonly Navigation
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
       onPointerEnter={(event) => {
-        if (event.pointerType !== "touch") setOpen(true);
+        if (
+          event.pointerType !== "touch" &&
+          window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+        )
+          setOpen(true);
       }}
       onPointerLeave={(event) => {
-        if (event.pointerType !== "touch") setOpen(false);
+        if (
+          event.pointerType !== "touch" &&
+          window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+        )
+          setOpen(false);
       }}
       ref={rootRef}
     >
@@ -205,7 +571,13 @@ function PlatformNavigationMenu({ items }: { readonly items: readonly Navigation
         aria-controls="tao3k-platform-navigation"
         aria-expanded={open}
         className="tao3k-platform-menu__trigger"
-        onClick={() => setOpen(true)}
+        onClick={(event) =>
+          setOpen((value) =>
+            event.detail > 0 && window.matchMedia("(min-width: 1101px) and (hover: hover)").matches
+              ? true
+              : !value,
+          )
+        }
         onKeyDown={(event) => {
           if (event.key === "ArrowDown") {
             event.preventDefault();
@@ -278,15 +650,91 @@ function PlatformNavigationMenu({ items }: { readonly items: readonly Navigation
 
 export function Tao3kSiteHeader({ shell }: { readonly shell?: unknown }) {
   const navigation = useMemo(() => projectNavigation(shell), [shell]);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  useEffect(() => {
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window)
+    )
+      return;
+    const seen = new WeakSet<HTMLElement>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "0px 0px -30px 0px" },
+    );
+    const scan = () => {
+      document
+        .querySelectorAll<HTMLElement>(
+          ".tao3k-home > section:not(:first-child), .tao3k-route-page section:not(:first-child)",
+        )
+        .forEach((section) => {
+          if (seen.has(section)) return;
+          seen.add(section);
+          if (section.getBoundingClientRect().top > window.innerHeight) {
+            section.classList.add("tao3k-reveal");
+            observer.observe(section);
+          }
+        });
+    };
+    scan();
+    const mutations = new MutationObserver(scan);
+    mutations.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      observer.disconnect();
+      mutations.disconnect();
+    };
+  }, []);
+
   return (
     <header className="tao3k-header">
       <BrandMark />
-      <nav className="tao3k-header__nav" aria-label="Primary navigation">
+      <nav
+        className={`tao3k-header__nav${menuOpen ? " is-open" : ""}`}
+        id="site-navigation"
+        aria-label="Primary navigation"
+      >
         {navigation.map((item) =>
-          item.children ? (
+          item.href === "/products" ? (
+            <ProductsNavigationMenu
+              onNavigate={() => setMenuOpen(false)}
+              key={`${item.href}:${item.label}`}
+            />
+          ) : item.href === "/comparison" ? (
+            <ProductsNavigationMenu
+              comparisons
+              onNavigate={() => setMenuOpen(false)}
+              key={`${item.href}:${item.label}`}
+            />
+          ) : item.href === "/solutions" ? (
+            <ProductsNavigationMenu
+              solutions
+              onNavigate={() => setMenuOpen(false)}
+              key={`${item.href}:${item.label}`}
+            />
+          ) : item.children ? (
             <PlatformNavigationMenu items={item.children} key={`${item.href}:${item.label}`} />
           ) : (
-            <a href={item.href} key={`${item.href}:${item.label}`}>
+            <a
+              href={item.href}
+              key={`${item.href}:${item.label}`}
+              onClick={() => setMenuOpen(false)}
+            >
               {item.label}
             </a>
           ),
@@ -297,234 +745,113 @@ export function Tao3kSiteHeader({ shell }: { readonly shell?: unknown }) {
         <a className="tao3k-header__utility" href="https://github.com/tao3k">
           Open source <span aria-hidden="true">↗</span>
         </a>
+        <a className="tao3k-header__cta" href="/platform">
+          Explore platform <span aria-hidden="true">↗</span>
+        </a>
+        <button
+          className="tao3k-menu-toggle"
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="site-navigation"
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span /> <span />
+        </button>
       </div>
     </header>
   );
 }
 
-const evidenceInputs = ["Knowledge", "Code", "Scientific models", "Human records"] as const;
-
 const systemBoundaries = [
   {
-    layer: "MODELS & CODING AGENTS",
-    purpose: "Generate, reason and help complete a task.",
+    layer: "PEOPLE FIRST",
+    purpose: "Make room for curiosity, creativity and human judgment.",
   },
   {
-    layer: "CLOUD & MODEL PLATFORMS",
-    purpose: "Host, scale and make intelligence available.",
+    layer: "OPEN BY DESIGN",
+    purpose: "Open source first, with a fully open product matrix as our goal.",
   },
   {
-    layer: "TAO3K",
-    purpose: "Preserve evidence, qualify action, recover work and return receipts.",
+    layer: "BUILT TO LAST",
+    purpose: "Keep people in control of their data and the systems they depend on.",
   },
 ] as const;
 
 function AdmissibilityStage() {
-  return (
-    <div className="tao3k-stage" aria-label="Evidence becomes admissible action">
-      <div className="tao3k-stage__halo tao3k-stage__halo--outer" />
-      <div className="tao3k-stage__halo tao3k-stage__halo--inner" />
-      <div className="tao3k-stage__inputs">
-        {evidenceInputs.map((input, index) => (
-          <div className={`tao3k-stage__input tao3k-stage__input--${index + 1}`} key={input}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            {input}
-          </div>
-        ))}
-      </div>
-      <div className="tao3k-stage__core">
-        <span className="tao3k-stage__core-orbit" aria-hidden="true" />
-        <small>QUALIFICATION CORE</small>
-        <strong>Evidence</strong>
-        <span>owns every transition</span>
-      </div>
-      <div className="tao3k-stage__output">
-        <span>ADMISSIBLE</span>
-        <strong>Action</strong>
-        <small>searchable · verifiable · evolvable</small>
-      </div>
-    </div>
-  );
+  return <EvidenceField />;
 }
 
-type LiveNodeData = {
-  readonly index: string;
-  readonly label: string;
-  readonly detail: string;
-  readonly state: "waiting" | "active" | "complete";
-};
-
-type LiveNode = Node<LiveNodeData, "live-evidence">;
-
-const LiveEvidenceNode = memo(function LiveEvidenceNode({ data }: NodeProps<LiveNode>) {
+function FoundationVisual({
+  kind,
+}: {
+  readonly kind: "context" | "privacy" | "security" | "infra";
+}) {
   return (
-    <div className={`tao3k-live-node is-${data.state}`}>
-      <Handle type="target" position={Position.Left} />
-      <span className="tao3k-live-node__index">{data.index}</span>
-      <div>
-        <small>{data.state}</small>
-        <strong>{data.label}</strong>
-        <p>{data.detail}</p>
-      </div>
-      <i aria-hidden="true" />
-      <Handle type="source" position={Position.Right} />
+    <div className={`foundation-visual foundation-visual--${kind}`} aria-hidden="true">
+      <div className="foundation-visual__halo" />
+      {kind === "context" ? (
+        <>
+          <div className="foundation-visual__symbol">
+            <svg viewBox="0 0 100 100">
+              <path d="M23 16h38l15 15v48H23z M61 16v16h15 M33 44h30 M33 53h24 M33 62h18" />
+              <circle cx="66" cy="67" r="14" />
+              <path d="M76 77l10 10" />
+            </svg>
+          </div>
+          <div className="foundation-visual__caption">
+            THE RIGHT CONTEXT <span>→</span> THE RIGHT QUESTION
+          </div>
+        </>
+      ) : kind === "privacy" ? (
+        <>
+          <div className="foundation-visual__symbol">
+            <svg viewBox="0 0 100 100">
+              <path d="M50 12 78 24v23c0 18-12 30-28 39C34 77 22 65 22 47V24z" />
+              <rect x="39" y="43" width="22" height="19" rx="3" />
+              <path d="M43 43v-7a7 7 0 0 1 14 0v7 M50 51v4" />
+            </svg>
+          </div>
+          <div className="foundation-visual__caption">
+            YOUR DATA <span>·</span> YOUR CONTROL
+          </div>
+        </>
+      ) : kind === "security" ? (
+        <>
+          <div className="foundation-visual__symbol">
+            <svg viewBox="0 0 100 100">
+              <path d="M50 12 78 24v23c0 18-12 30-28 39C34 77 22 65 22 47V24z M38 49l8 8 17-19" />
+              <path d="M15 79h70" />
+            </svg>
+          </div>
+          <div className="foundation-visual__labels">
+            <span>CEDAR</span>
+            <span>LINUX</span>
+            <span>MICROVM</span>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="foundation-visual__infra">
+            <div className="foundation-visual__code">
+              &lt;/&gt;<small>INFRA AS CODE</small>
+            </div>
+            <span className="foundation-visual__plus">+</span>
+            <img src={nixosMark} alt="" loading="lazy" />
+            <span className="foundation-visual__plus">=</span>
+            <div className="foundation-visual__cube">
+              <svg viewBox="0 0 80 80">
+                <path d="M40 10 66 24v31L40 70 14 55V24z M14 24l26 15 26-15 M40 39v31" />
+              </svg>
+              <small>IMMUTABLE</small>
+            </div>
+          </div>
+          <div className="foundation-visual__caption">
+            DECLARATIVE <span>·</span> REPRODUCIBLE
+          </div>
+        </>
+      )}
     </div>
-  );
-});
-
-const liveNodeTypes = { "live-evidence": LiveEvidenceNode };
-
-const liveStages = [
-  ["01", "Record", "provenance attached"],
-  ["02", "Retrieve", "owner resolved"],
-  ["03", "Qualify", "authority granted"],
-  ["04", "Act", "bounded runtime"],
-  ["05", "Receipt", "evidence returned"],
-] as const;
-
-const terminalLines = [
-  "$ tao3k qualify ./cases/research-to-operation.org",
-  "[record] source identity + authorship attached",
-  "[retrieve] 12 claims resolved to parser-owned evidence",
-  "[qualify] policy and proof envelope accepted",
-  "[act] bounded operation dispatched",
-  "[receipt] evidence://operation/7f3a returned",
-] as const;
-
-const initialLiveNodes: LiveNode[] = liveStages.map(([index, label, detail], stage) => ({
-  id: `live-${index}`,
-  type: "live-evidence",
-  position: { x: stage * 270, y: stage % 2 === 0 ? 30 : 180 },
-  data: { index, label, detail, state: stage === 0 ? "active" : "waiting" },
-}));
-
-function LiveEvidenceFlow() {
-  const [activeStage, setActiveStage] = useState(0);
-  const activeStageRef = useRef(0);
-  const [nodes, setNodes, onNodesChange] = useNodesState<LiveNode>(initialLiveNodes);
-  const [reducedMotion, setReducedMotion] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
-  const [running, setRunning] = useState(() => !reducedMotion);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const synchronize = (event: MediaQueryListEvent) => {
-      setReducedMotion(event.matches);
-      if (event.matches) setRunning(false);
-    };
-    reducedMotion.addEventListener("change", synchronize);
-    return () => reducedMotion.removeEventListener("change", synchronize);
-  }, []);
-
-  const setStage = useCallback(
-    (nextStage: number) => {
-      activeStageRef.current = nextStage;
-      setActiveStage(nextStage);
-      setNodes((current) =>
-        current.map((node, stage) => ({
-          ...node,
-          data: {
-            ...node.data,
-            state: stage < nextStage ? "complete" : stage === nextStage ? "active" : "waiting",
-          },
-        })),
-      );
-    },
-    [setNodes],
-  );
-
-  useEffect(() => {
-    if (!running) return;
-    const timer = window.setInterval(() => {
-      setStage((activeStageRef.current + 1) % liveStages.length);
-    }, 1450);
-    return () => window.clearInterval(timer);
-  }, [running, setStage]);
-
-  const edges = useMemo<Edge[]>(
-    () =>
-      liveStages.slice(0, -1).map((_, stage) => ({
-        id: `live-edge-${stage}`,
-        source: `live-${liveStages[stage][0]}`,
-        target: `live-${liveStages[stage + 1][0]}`,
-        type: "smoothstep",
-        className:
-          stage === activeStage - 1 || (activeStage === 0 && stage === liveStages.length - 2)
-            ? "is-active"
-            : stage < activeStage
-              ? "is-complete"
-              : "is-waiting",
-      })),
-    [activeStage],
-  );
-
-  return (
-    <section className="tao3k-live" aria-labelledby="live-evidence-title">
-      <div className="tao3k-live__heading">
-        <div>
-          <p className="tao3k-section-index">LIVE / EVIDENCE CIRCUIT</p>
-          <h2 id="live-evidence-title">Watch authority move—not disappear.</h2>
-        </div>
-        <div className="tao3k-live__controls">
-          <span>
-            <i className={running ? "is-running" : undefined} /> {running ? "RUNNING" : "PAUSED"}
-          </span>
-          <button
-            type="button"
-            onClick={() => setRunning((value) => !value)}
-            disabled={reducedMotion}
-            aria-pressed={running}
-          >
-            {running ? "Pause" : "Run"}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setStage(0);
-              if (!reducedMotion) setRunning(true);
-            }}
-          >
-            Replay
-          </button>
-        </div>
-      </div>
-      <div className="tao3k-live__surface">
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          nodeTypes={liveNodeTypes}
-          onNodesChange={onNodesChange}
-          fitView
-          fitViewOptions={{ padding: 0.14 }}
-          minZoom={0.45}
-          maxZoom={1.5}
-          panOnScroll
-          zoomOnScroll={false}
-          onlyRenderVisibleElements
-          proOptions={{ hideAttribution: true }}
-        >
-          <Background color="rgba(146, 241, 195, 0.16)" gap={28} size={1} />
-        </ReactFlow>
-      </div>
-      <div className="tao3k-live-terminal" aria-live="off">
-        <div className="tao3k-live-terminal__bar">
-          <span />
-          <span />
-          <span />
-          <strong>tao3k://qualification-session</strong>
-          <i>LIVE</i>
-        </div>
-        <pre>
-          {terminalLines.slice(0, Math.min(activeStage + 2, terminalLines.length)).join("\n")}
-        </pre>
-        <div className="tao3k-live-terminal__cursor" aria-hidden="true">
-          ▋
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -533,18 +860,16 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
     <main className="tao3k-home">
       <section className="tao3k-home-hero">
         <div className="tao3k-home-hero__copy">
-          <p className="tao3k-eyebrow">THE SYSTEM AROUND AI</p>
+          <p className="tao3k-eyebrow">
+            OPEN SOURCE FIRST <span> / </span> AI INFRASTRUCTURE
+          </p>
           <h1>
-            Build AI systems
-            <span>that can continue.</span>
+            The deterministic engine
+            <span>for AI infrastructure.</span>
           </h1>
           <p className="tao3k-home-hero__lede">
-            For vertical enterprises, product partners and serious users, tao3k provides the
-            evidence, authority, durable state and recovery system around AI.
-          </p>
-          <p className="tao3k-home-hero__human">
-            Use the best models. Keep your own system. tao3k does not replace models, clouds or
-            coding agents; it makes their work traceable, qualified, recoverable and reusable.
+            Open source first. Comprehensive solutions for reliable AI infrastructure and operating
+            systems.
           </p>
           <div className="tao3k-home-hero__actions">
             <a className="tao3k-button tao3k-button--primary" href="/platform">
@@ -558,13 +883,49 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
         <AdmissibilityStage />
       </section>
 
+      <section className="tao3k-system-atlas" aria-labelledby="atlas-title">
+        <header>
+          <p className="tao3k-section-index">ONE CONNECTED FOUNDATION</p>
+          <h2 id="atlas-title">From context to action.</h2>
+          <p>AI-native foundations, designed around your work and your data.</p>
+        </header>
+        <div className="tao3k-system-atlas__field">
+          <div className="tao3k-system-atlas__orbit" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <b />
+          </div>
+          <div className="tao3k-system-atlas__links">
+            <a href="/products/context-system">
+              <span>01</span>
+              <strong>Context</strong>
+              <small>Find what matters</small>
+              <i aria-hidden="true">↗</i>
+            </a>
+            <a href="/platform">
+              <span>02</span>
+              <strong>Infrastructure</strong>
+              <small>Declare, model, build</small>
+              <i aria-hidden="true">↗</i>
+            </a>
+            <a href="/roadmap">
+              <span>03</span>
+              <strong>Operating systems</strong>
+              <small>Performance that scales</small>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="tao3k-home-system-boundary" aria-labelledby="system-boundary-title">
         <header>
-          <p className="tao3k-section-index">THE DISTINCTION</p>
-          <h2 id="system-boundary-title">Not another model, cloud, or chat window.</h2>
+          <p className="tao3k-section-index">THE IDEA</p>
+          <h2 id="system-boundary-title">Build technology around people.</h2>
           <p>
-            Vertical products bring their domain expertise and interfaces. tao3k supplies the system
-            layer that lets intelligence survive beyond one session, provider or model cycle.
+            People bring imagination, judgment and lived experience. We build the open foundations
+            that help more people turn those strengths into lasting work.
           </p>
         </header>
         <ol>
@@ -577,65 +938,77 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
           ))}
         </ol>
         <aside>
-          <strong>Vertical systems are built on tao3k.</strong>
+          <strong>Open to build. Open to question.</strong>
           <p>
-            Clinical conversations, scientific evidence review, industrial intervention and personal
-            research are scenarios or partner products—not separate tao3k SaaS claims.
+            We aim to open our products and security foundations for the community to inspect, audit
+            and improve. People and AI can contribute together; people remain accountable for the
+            decisions that shape the ecosystem.
           </p>
+          <a href="https://github.com/tao3k">Explore the open-source community ↗</a>
         </aside>
       </section>
 
-      <LiveEvidenceFlow />
-
-      <section className="tao3k-home-thesis" aria-labelledby="home-thesis-title">
-        <p className="tao3k-section-index">01 / THE POSITION</p>
-        <div>
-          <h2 id="home-thesis-title">
-            AI should not cross a consequential boundary on confidence alone.
-          </h2>
+      <section className="tao3k-foundations" aria-labelledby="foundations-title">
+        <header className="tao3k-foundations__intro">
+          <p className="tao3k-section-index">BUILT FOR AI-NATIVE WORK</p>
+          <h2 id="foundations-title">Your knowledge. Your systems. Your future.</h2>
           <p>
-            Research, software and operations lose trust at their handoffs. tao3k makes those
-            handoffs explicit: claims carry provenance, decisions carry qualification, and execution
-            returns evidence.
+            From everyday context to the infrastructure beneath it, our work starts with the people
+            who use it.
           </p>
-        </div>
-        <div className="tao3k-home-thesis__seal" aria-label="Evidence loop">
-          <span>CLAIM</span>
-          <span>QUALIFY</span>
-          <span>ACT</span>
-          <span>RETURN</span>
-        </div>
-      </section>
-
-      <section className="tao3k-home-proof" aria-labelledby="home-proof-title">
-        <div className="tao3k-home-proof__heading">
-          <p className="tao3k-section-index">02 / THE COMMITMENT</p>
-          <h2 id="home-proof-title">A long-lived evidence ecosystem, not an opaque AI moment.</h2>
-        </div>
-        <div className="tao3k-home-proof__statements">
+        </header>
+        <div className="tao3k-foundations__list">
           <article>
-            <span>01</span>
-            <h3>Human agency remains sovereign.</h3>
-            <p>
-              People retain benefit, responsibility, contestability and authority where risk is
-              high.
-            </p>
+            <div className="tao3k-foundations__copy">
+              <div className="tao3k-foundations__number">
+                01 <span>CONTEXT</span>
+              </div>
+              <h3>The context that matters.</h3>
+              <p>Find the knowledge and evidence your work needs.</p>
+              <a href="/products/context-system">
+                Explore Context System <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <FoundationVisual kind="context" />
           </article>
           <article>
-            <span>02</span>
-            <h3>Open source is operating discipline.</h3>
-            <p>
-              Core reasoning surfaces stay inspectable so trust can be earned, challenged and
-              improved.
-            </p>
+            <div className="tao3k-foundations__copy">
+              <div className="tao3k-foundations__number">
+                02 <span>PRIVACY</span>
+              </div>
+              <h3>You control your data.</h3>
+              <p>Your sources stay yours, even as models change.</p>
+              <a href="/solutions/privacy">
+                Explore privacy <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <FoundationVisual kind="privacy" />
           </article>
           <article>
-            <span>03</span>
-            <h3>Every operation improves the record.</h3>
-            <p>
-              Qualified outcomes become higher-quality information for the next model, team and
-              decision.
-            </p>
+            <div className="tao3k-foundations__copy">
+              <div className="tao3k-foundations__number">
+                03 <span>SECURITY</span>
+              </div>
+              <h3>Security, built in layers.</h3>
+              <p>Connect governance, system protection and isolation.</p>
+              <a href="/solutions/security-identity">
+                Explore security <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <FoundationVisual kind="security" />
+          </article>
+          <article>
+            <div className="tao3k-foundations__copy">
+              <div className="tao3k-foundations__number">
+                04 <span>INFRASTRUCTURE</span>
+              </div>
+              <h3>Declare it. Reproduce it.</h3>
+              <p>Infrastructure as code on an immutable foundation.</p>
+              <a href="/platform">
+                Explore infrastructure <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <FoundationVisual kind="infra" />
           </article>
         </div>
       </section>
@@ -643,7 +1016,7 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
       <section className="tao3k-home-exit">
         <div>
           <p className="tao3k-section-index">EXPLORE THE SYSTEM</p>
-          <h2>See how evidence survives the path from research to real operations.</h2>
+          <h2>Explore what open, human-centered AI systems can make possible.</h2>
         </div>
         <a href="/solutions" aria-label="Explore solutions">
           <span>Research → Operations</span>

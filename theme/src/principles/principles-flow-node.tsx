@@ -27,7 +27,17 @@ export const PrinciplesFlowNodeView = memo(function PrinciplesFlowNodeView({
       data-selected={selected ? "true" : "false"}
       data-tone={data.tone}
     >
-      <Handle type="target" position={Position.Top} className="tao3k-principles-node__handle" />
+      <Handle
+        type="target"
+        position={
+          data.overviewTarget === "left"
+            ? Position.Left
+            : data.overviewTarget === "right"
+              ? Position.Right
+              : Position.Top
+        }
+        className="tao3k-principles-node__handle"
+      />
       <header>
         <span className="tao3k-principles-node__mark" aria-hidden="true">
           {nodeMark[data.kind]}
@@ -35,13 +45,32 @@ export const PrinciplesFlowNodeView = memo(function PrinciplesFlowNodeView({
         <strong>{data.kind}</strong>
         <small>{String(data.order).padStart(2, "0")}</small>
       </header>
-      <h3>{data.title}</h3>
+      <h3>{typeof data.overviewTitle === "string" ? data.overviewTitle : data.title}</h3>
       <p>{data.summary}</p>
+      {data.overviewSteps && (
+        <div className="tao3k-principles-node__steps">
+          {data.overviewSteps.map((step) => (
+            <span key={step.label} data-status={step.status}>
+              {step.label}
+            </span>
+          ))}
+        </div>
+      )}
       <footer>
         <span>{data.boundary}</span>
         <b aria-label="Node state">{statusLabel[data.status]}</b>
       </footer>
-      <Handle type="source" position={Position.Bottom} className="tao3k-principles-node__handle" />
+      <Handle
+        type="source"
+        position={
+          data.overviewSource === "right"
+            ? Position.Right
+            : data.overviewSource === "left"
+              ? Position.Left
+              : Position.Bottom
+        }
+        className="tao3k-principles-node__handle"
+      />
     </article>
   );
 });

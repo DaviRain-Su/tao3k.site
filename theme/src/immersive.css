@@ -1,0 +1,163 @@
+/* Night is one continuous visual environment across the federated site. */
+html[data-theme-variant="night"] .tao3k-home,
+html[data-theme-variant="night"] .tao3k-route-page {
+  --immersive-bg: #091712;
+  --immersive-raised: #10241c;
+  --immersive-text: #e7f3eb;
+  --immersive-muted: #a9beb2;
+  --immersive-line: rgba(182, 225, 197, 0.16);
+  color: var(--immersive-text);
+  background: var(--immersive-bg);
+}
+
+html[data-theme-variant="night"] .tao3k-home-proof,
+html[data-theme-variant="night"] .tao3k-home-exit {
+  color: var(--immersive-text);
+  background: #0d2018;
+}
+html[data-theme-variant="night"] .tao3k-home-proof__statements,
+html[data-theme-variant="night"] .tao3k-home-proof__statements article,
+html[data-theme-variant="night"] .tao3k-home-exit a {
+  border-color: var(--immersive-line);
+}
+html[data-theme-variant="night"] .tao3k-home-proof__statements p {
+  color: var(--immersive-muted);
+}
+html[data-theme-variant="night"] .tao3k-home-proof__statements span,
+html[data-theme-variant="night"] .tao3k-home-proof .tao3k-section-index,
+html[data-theme-variant="night"] .tao3k-home-exit .tao3k-section-index {
+  color: #94dcb3;
+}
+
+html[data-theme-variant="night"] .tao3k-products-page,
+html[data-theme-variant="night"] .tao3k-roadmap-page {
+  color: var(--immersive-text);
+  background: #0b1b15;
+}
+html[data-theme-variant="night"] .tao3k-products-hero,
+html[data-theme-variant="night"] .tao3k-roadmap-hero {
+  background: radial-gradient(ellipse at 82% 30%, rgba(70, 142, 101, 0.12), transparent 48%);
+}
+html[data-theme-variant="night"] .tao3k-products-hero h1,
+html[data-theme-variant="night"] .tao3k-roadmap-hero h1 {
+  color: var(--immersive-text);
+}
+html[data-theme-variant="night"] .tao3k-products-hero h1 em {
+  color: #a8dfbe;
+}
+html[data-theme-variant="night"] .tao3k-products-hero__copy,
+html[data-theme-variant="night"] .tao3k-products-audiences,
+html[data-theme-variant="night"] .tao3k-products-audiences article,
+html[data-theme-variant="night"] .tao3k-products-rule {
+  border-color: var(--immersive-line);
+}
+html[data-theme-variant="night"] .tao3k-products-hero__copy p,
+html[data-theme-variant="night"] .tao3k-products-audiences p,
+html[data-theme-variant="night"] .tao3k-product-unit p,
+html[data-theme-variant="night"] .tao3k-roadmap-hero > p,
+html[data-theme-variant="night"] .tao3k-roadmap-track__body p,
+html[data-theme-variant="night"] .tao3k-roadmap-track__signal p {
+  color: var(--immersive-muted);
+}
+html[data-theme-variant="night"] .tao3k-products-page .tao3k-route-kicker,
+html[data-theme-variant="night"] .tao3k-products-audiences span,
+html[data-theme-variant="night"] .tao3k-product-unit small,
+html[data-theme-variant="night"] .tao3k-roadmap-page .tao3k-route-kicker {
+  color: #8dd6ac;
+}
+html[data-theme-variant="night"] .tao3k-product-unit {
+  color: var(--immersive-text);
+  border-color: var(--immersive-line);
+  background: linear-gradient(145deg, rgba(116, 180, 145, 0.08), rgba(13, 33, 24, 0.8));
+}
+html[data-theme-variant="night"] .tao3k-product-axis {
+  background: var(--immersive-line);
+}
+html[data-theme-variant="night"] .tao3k-product-axis i {
+  border-color: #0b1b15;
+  background: #8dd6ac;
+}
+html[data-theme-variant="night"] .tao3k-roadmap-page {
+  --tao-line: rgba(182, 225, 197, 0.16);
+  --tao-page: #10241c;
+}
+
+html[data-theme-variant="night"] .tao3k-issue-ledger,
+html[data-theme-variant="night"] .tao3k-comparison-matrix,
+html[data-theme-variant="night"] .tao3k-comparison-verdict {
+  color: var(--immersive-text);
+  background: #102119;
+}
+html[data-theme-variant="night"] .tao3k-issue-response {
+  background: #14291f;
+}
+html[data-theme-variant="night"] .tao3k-comparison-page .tao3k-route-kicker,
+html[data-theme-variant="night"] .tao3k-issue-ledger__source strong,
+html[data-theme-variant="night"] .tao3k-issue-ledger__consequence a {
+  color: #91dcb0;
+}
+html[data-theme-variant="night"] .tao3k-issue-ledger > header > p:last-child,
+html[data-theme-variant="night"] .tao3k-comparison-matrix > header > p:last-child,
+html[data-theme-variant="night"] .tao3k-issue-ledger__body p,
+html[data-theme-variant="night"] .tao3k-issue-ledger__consequence p,
+html[data-theme-variant="night"] .tao3k-comparison-verdict > p {
+  color: var(--immersive-muted);
+}
+html[data-theme-variant="night"] .tao3k-issue-ledger ol,
+html[data-theme-variant="night"] .tao3k-issue-ledger li,
+html[data-theme-variant="night"] .tao3k-issue-ledger__consequence,
+html[data-theme-variant="night"] .tao3k-issue-ledger__source small {
+  border-color: var(--immersive-line);
+}
+html[data-theme-variant="night"] .tao3k-issue-ledger__source small {
+  color: #aec3b7;
+}
+html[data-theme-variant="night"] .tao3k-issue-ledger__consequence > span {
+  color: #c1aceb;
+}
+html[data-theme-variant="night"] .tao3k-comparison-table {
+  color: #dbece1;
+  background: #13281e;
+}
+html[data-theme-variant="night"] .tao3k-comparison-table th,
+html[data-theme-variant="night"] .tao3k-comparison-table td {
+  border-color: var(--immersive-line);
+}
+html[data-theme-variant="night"] .tao3k-comparison-table th {
+  color: #a7bfb0;
+}
+
+/* Headings and long-form text share the same typographic voice. */
+html[data-theme-variant="night"] .tao3k-home-proof h3,
+html[data-theme-variant="night"] .tao3k-products-page h2,
+html[data-theme-variant="night"] .tao3k-products-page h3,
+html[data-theme-variant="night"] .tao3k-products-page blockquote,
+html[data-theme-variant="night"] .tao3k-products-rule p,
+html[data-theme-variant="night"] .tao3k-issue-ledger h3,
+html[data-theme-variant="night"] .tao3k-comparison-verdict h2,
+html[data-theme-variant="night"] .tao3k-roadmap-track__signal > p,
+html[data-theme-variant="night"] .tao3k-roadmap-outcome blockquote {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+/* Keep editorial typography consistent across individually authored pages. */
+.tao3k-application-shell .tao3k-route-page :is(h1, h2, h3, blockquote),
+.tao3k-application-shell .tao3k-products-hero__copy strong {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-style: normal;
+}
+.tao3k-application-shell .tao3k-products-hero__copy strong {
+  font-weight: 550;
+  letter-spacing: -0.03em;
+}
+@media (min-width: 901px) {
+  .tao3k-platform-overview-hero {
+    align-items: center;
+  }
+}

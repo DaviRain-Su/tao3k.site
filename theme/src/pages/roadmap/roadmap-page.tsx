@@ -24,7 +24,7 @@ const roadmap = [
   {
     state: "STATE PENDING",
     title: "Qualification and Verification",
-    systems: "Lean · Julia · ScienceResearch · POO Flow",
+    systems: "Lean · Julia · ScienceResearch · Agentic AI Lab",
     purpose: "Qualify claims and authority without hiding judgment behind automation.",
     gap: "Formal checks must preserve human judgment and operational context.",
     signal: "Authority becomes machine-checkable without becoming opaque or absolute.",
@@ -34,7 +34,7 @@ const roadmap = [
   {
     state: "STATE PENDING",
     title: "Next-Generation Agent Core",
-    systems: "POO Flow composition · Marlin Agent Runtime",
+    systems: "Agentic AI Lab composition · Marlin Agent Runtime",
     purpose:
       "Join typed composition with governed execution while preserving evidence and authority.",
     gap: "Composition, compression, execution and receipts need one governed operational boundary.",

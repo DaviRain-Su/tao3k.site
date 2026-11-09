@@ -3,6 +3,7 @@ import { access, mkdir, readFile, symlink } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { readPinnedHostRevision, verifyHostRevision } from "./verify-host-revision.mjs";
+import { prepareHostShell } from "./prepare-host-shell.mjs";
 
 export const prepareLocalHost = async ({
   cacheRoot,
@@ -27,6 +28,7 @@ export const prepareLocalHost = async ({
   }
   await verifyHostRevision({ packagePath, hostRoot: root });
   await reuseLockIdenticalDependencies(source, root);
+  await prepareHostShell(resolve(root, "index.html"));
   return root;
 };
 

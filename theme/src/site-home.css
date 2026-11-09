@@ -1072,3 +1072,6 @@ a {
     width: 100%;
   }
 }
+.tao3k-home-system-boundary aside a { display:inline-block; margin-top:1rem; color:#bfcdf4; font-size:.85rem; text-decoration:none; }
+.tao3k-home-system-boundary aside a:hover { text-decoration:underline; }
+.tao3k-home-system-boundary > header { display:block; }

@@ -1,0 +1,79 @@
+#+TITLE: Source-based flow stories for product pages
+#+DATE: 2026-11-09
+#+AUTHOR: tao3k
+#+FILETAGS: :tao3k:design:products:animation:
+#+STATUS: Draft
+#+OWNER: tao3k.site
+#+AUDIENCE: Product, design, content, and site engineering teams
+#+CLAIM_MATURITY: research
+#+OPTIONS: toc:2
+
+* Purpose
+
+Explain a concrete mechanism through its relationships, changing states and
+feedback. A flow story is an illustration, not a real execution, benchmark or
+claim of integration. Prefer meaningful project scenarios and source references
+rather than reusing one generic animation with unrelated labels.
+
+* Composition
+
+=theme/src/components/flow-story.tsx= renders a declared story. The content
+owner supplies nodes, their roles and layout, directional paths, phases, active
+nodes and paths, related case notes, source and scope. =flow-stories.ts= contains
+separate Aitia and code-investigation examples. The current renderer is an
+fallback is an opinionated two-row SVG/HTML layout. A read-only React Flow
+renderer is available in =story-flow-scene.tsx= for relationship-led stories.
+The Aitia example uses a purpose-built animated lesson in =aitia-scene.tsx=:
+it illustrates a closing gate, admitted work, verification and a finding.
+Stories can supply their own scene renderer instead of distorting the domain to
+fit one layout. React Flow edges require declared source and target node IDs;
+dragging, panning, zooming and connection editing are disabled in that renderer.
+
+Stages advance automatically only while visible. Selecting a stage restarts the
+advance timer; reduced-motion preference keeps the current stage and permits
+manual selection. Mobile reflows into readable content; it does not shrink the
+entire desktop diagram. Illustrative moving markers represent relationships,
+not actual data packets or independently verified events.
+
+=theme/tests/check-flow-stories.mjs= checks that phase references point at
+existing unique nodes and edges. It does not establish visual quality, source
+accuracy, animation performance, geometry correctness or product behavior;
+review each story against source and in the actual host on desktop and mobile.
+
+* Sources
+
+The Aitia scenario is a simplification of [[https://github.com/tao3k/lambda-aitia/blob/f06d41825c14530f3bdb62393387c595ba58c52d/docs/rfcs/0004-sdlc-design-and-causal-trajectories.org][RFC 0004]]; bounded model findings and
+host correspondence remain distinct. The code investigation is based on [[https://github.com/tao3k/agent-semantic-protocols][ASP]]
+source-aware search; it does not imply a live invocation or completed proof.
+
+* Declarative scene experiment
+
+=lesson-scene.ts= describes stages, actors, poses and optional named image
+assets as data; =resolveLessonFrame= is a pure function of stage and viewport.
+Every stage declares an input, an action, a result and participating actors.
+=defineLessonScene= rejects incomplete statements and references to absent or
+not-yet-visible actors. A relation declares its endpoints, semantic direction,
+appearance, active/blocked states, anchors and optional responsive route; the
+resolver returns only relations available in the current stage. The pure
+=lesson-routing.ts= functions permit geometry checks independently of React.
+The Aitia and code-investigation choreographies are in
+=aitia-lesson.ts= and =code-lesson.ts=. React Flow renders the resolved objects
+and transitions between poses; the playback clock and case explanation remain
+owned by =flow-story.tsx=. The current examples combine generated raster assets
+with code-native geometry. Asset entries are presentation data, not evidence
+that depicted behavior occurred. A new topic still needs its own mechanism,
+visual vocabulary, responsive layout and source review.
+
+The Aitia case uses a service-operation lane and a separate evidence/review
+lane. Request-to-entry, entry-to-service, admitted-work, finding, review and
+feedback connections are illustrative; a closed entry is visually distinct.
+The fixed layout checks cover selected viewport widths and object bounds, and
+the feedback route is checked against other objects at those widths. These
+checks do not prove all viewport widths, animation frames or comprehension.
+
+Community research: [[https://github.com/motion-canvas/motion-canvas][Motion Canvas]] uses TypeScript generators and a preview
+editor for informative vector animation. [[https://github.com/remotion-dev/remotion][Remotion]] organizes React-based video
+around deterministic frames and sequences. Both suggest separating timing and
+scene content from drawing, but they have different playback and production
+goals from this interactive site. Neither was added as a dependency; the first
+experiment retains the existing React Flow host and tests the pure resolver.

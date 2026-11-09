@@ -1,0 +1,74 @@
+#+TITLE: Open-source product mapping and vertical evidence
+#+DATE: 2026-11-09
+#+AUTHOR: tao3k
+#+FILETAGS: :tao3k:products:research:open-source:site:
+#+STATUS: Draft
+#+OWNER: tao3k.site
+#+AUDIENCE: Product, content, design, and site engineering teams
+#+CLAIM_MATURITY: research
+#+OPTIONS: toc:2
+
+* Purpose and scope
+
+This is a source-linked working inventory for the existing Platform, Products and
+Solutions navigation. A repository is not automatically a separately packaged
+product, a deployment, or an end-to-end integration. Project documentation
+owns implementation and release status. The classifications below are a site
+presentation proposal, not a replacement for those owners' contracts.
+
+Recipes are project-owned material. Do not introduce a new top-level Recipe
+navigation category or assume that every project uses a shared recipe format.
+
+* Naming corrections
+
+| Existing site label | Current project | Evidence and boundary |
+|---------------------+-----------------+-----------------------|
+| POO Flow | [[https://github.com/tao3k/agentic-ai-lab][Agentic AI Lab]] | The old repository URL redirects to the current repository. Its README still uses POO Flow for the Scheme control plane; existing package names, imports and historical references are not renamed by this site edit. |
+| GQL Rust | [[https://github.com/tao3k/meta-relational-reasoning][Meta-Relational Reasoning (MRR)]] | The old repository URL redirects to MRR. GQL and Cypher are frontend adapters; MRR owns relational semantics and admission, not just graph-query syntax. |
+| Cedar POO Spec | [[https://github.com/hardenedlinux/cedar-poo-spec][hardenedlinux/cedar-poo-spec]] | The tao3k repository is a mirror; the HardenedLinux repository is the canonical development owner. |
+
+* Existing Products: owner-led reading
+
+| Website entry | Project-owned role | Evidence |
+|---------------+--------------------+----------|
+| Context System | Website-level product direction for shared, task-situated context; it is not a verified claim that all referenced integrations are released. | [[file:../../theme/src/pages/products/context-system-page.tsx][Current page]]; [[https://github.com/tao3k/agentic-ai-lab/tree/main/modules][Agentic AI Lab modules]] |
+| Xiuxian Artisan Workshop | Rust-first agent-infrastructure workspace for knowledge, workflows, context, memory and tool routing. | [[https://github.com/tao3k/xiuxian-artisan-workshop/blob/main/README.md][Workshop README]] |
+| Orgize | Rust Org-mode parser and source-backed elements, queries and contracts. | [[https://github.com/tao3k/orgize/blob/main/README.md][Orgize README]] |
+| Agent Semantic Protocols | Shared contracts, language harness interfaces, hooks and replay scenarios; the product-facing =asp= client is one surface. | [[https://github.com/tao3k/agent-semantic-protocols/blob/main/README.md][ASP README]] |
+| Agentic AI Lab | Scheme control plane for composable strategy, profiles, policies, sessions, workflows and runtime handoff. It does not itself make a host authorization or execute an effect. | [[https://github.com/tao3k/agentic-ai-lab/blob/main/README.org][Agentic AI Lab README]] |
+| Marlin Agent Core | Rust agent-runtime substrate and typed runtime contracts. Its README explicitly distinguishes the substrate from a terminal-user product shell. | [[https://github.com/tao3k/marlin-agent-core/blob/main/README.org][Marlin README]] |
+| MRR | Typed relations, facts, rules, provenance, generations and bounded semantic admission. Ascent computes candidates; MRR owns admission. | [[https://github.com/tao3k/meta-relational-reasoning/blob/main/README.md][MRR README]] |
+| MRR Data | Physical data plane for Arrow interchange, bounded execution, snapshots and storage; MRR retains semantic admission. | [[https://github.com/tao3k/mrr-data/blob/main/README.org][MRR Data README]] |
+| Ascent | Upstream Rust Datalog engine; not a tao3k-owned repository. | [[https://github.com/s-arash/ascent][Ascent]] |
+| LeanPoo | Lean 4 prototype composition and dependency-aware proof reuse. Proofs establish their stated model laws, not arbitrary application or Host behavior. | [[https://github.com/tao3k/lean-poo/blob/main/README.org][LeanPoo README]] |
+
+* Related projects to evaluate within existing navigation
+
+These are evidence-backed project roles, not a decision to add new navigator
+categories or to label every repository a distinct product.
+
+The Workshop contains Wendao, Qianji, Qianhuan and other packages. Their
+package owners and release boundaries should be checked before representing a
+unified shipped offering.
+
+- [[https://github.com/tao3k/gerbil-parser/blob/main/README.org][Gerbil Parser]]: programmable syntax engine and lossless parse artifacts, with support qualified per language and target.
+- [[https://github.com/tao3k/gerbil-ascent][Gerbil Ascent]]: Scheme-native relational reasoning research and implementation.
+- [[https://github.com/tao3k/lambda-aitia][Lambda Aitia]]: causal assurance project. Assess its own public documentation and evidence before asserting integration or readiness.
+- [[https://github.com/tao3k/gerbil-poo][Gerbil POO]]: prototype object orientation for Gerbil Scheme.
+
+* Solutions: security, healthcare and financial examples
+
+Cedar POO Spec combines LeanPoo composition with the Cedar Lean specification
+and checks exported cases with the official Rust authorizer. It owns reusable
+security and authorization controls as well as example scenarios; industry
+controls and platform integrations are separate. Examples include:
+
+- [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/CedarPooSpec/Vertical/Health/README.org][Healthcare]]: disclosure, emergency access and FHIR consumer-access controls.
+- [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/CedarPooSpec/Vertical/FinancialServices/README.org][Financial services]]: banking ownership, controller release, insurance and payment-signing controls.
+- [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/Examples/Scenarios/README.org][Security scenarios]]: tenant/device policy migration and source-bound wallet scenarios.
+
+These are reusable models, tests, exports and scenarios, not evidence that a
+hospital connector, real signer, production gateway or end-to-end deployment
+is available. The consuming Host authenticates facts, enforces decisions and
+owns real effects. The repository's [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/Productions/README.org][production profile documentation]] retains
+those boundaries.

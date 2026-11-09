@@ -2,11 +2,13 @@ import { access, copyFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { siteRouteIds } from "../site-routes.ts";
+import { prepareHostShell } from "./prepare-host-shell.mjs";
 
 const outputRoot = resolve(process.argv[2] ?? ".pages");
 const shellPath = resolve(outputRoot, "index.html");
 
 await access(shellPath);
+await prepareHostShell(shellPath);
 await Promise.all(
   siteRouteIds.map(async (routeId) => {
     const routeRoot = resolve(outputRoot, routeId);

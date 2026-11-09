@@ -1,0 +1,57 @@
+#+TITLE: Code intelligence, reasoning and assurance source map
+#+DATE: 2026-11-09
+#+AUTHOR: tao3k
+#+FILETAGS: :tao3k:products:research:reasoning:assurance:
+#+STATUS: Draft
+#+OWNER: tao3k.site
+#+AUDIENCE: Product, content, design, and site engineering teams
+#+CLAIM_MATURITY: research
+#+OPTIONS: toc:2
+
+* Product ownership
+
+This source review informs site positioning; the components and links below do
+not establish an end-to-end released solution. Sources checked 2026-11-09.
+
+| Project | Responsibility | Source / current boundary |
+|---------+----------------+---------------------------|
+| ASP | Shared search packets, language routing and agent-facing surfaces; language providers own native syntax and semantics. | [[https://github.com/tao3k/agent-semantic-protocols/blob/main/README.md][README]]; [[https://github.com/tao3k/agent-semantic-protocols/blob/main/docs/10-19-rfcs/10.11-semantic-tree-sitter-query-protocol.org][syntax-query RFC]]. Search is not proof of code correctness. |
+| MRR | Typed relations, rules, candidate derivation, lineage and semantic admission, including explicit unknown and incomplete results. | [[https://github.com/tao3k/meta-relational-reasoning/blob/main/README.md][README]]. Ascent computes candidates; MRR owns admission. |
+| MRR Data | Arrow interchange, bounded execution, snapshots and physical storage. | [[https://github.com/tao3k/mrr-data/blob/main/README.org][README]]. Physical results do not establish application handoff. |
+| Agentic AI Lab | Scheme/POO modules, policy and strategy composition, proof obligations and runtime projection. | [[https://github.com/tao3k/agentic-ai-lab/blob/main/README.org][README]]. Execution effects remain with the runtime. |
+| LeanPoo | Lean prototype composition and proof reuse under declared dependencies. | [[https://github.com/tao3k/lean-poo/blob/main/README.org][README]]. Proofs establish stated laws, not arbitrary host behavior. |
+| Lambda Aitia | Human + AI software lifecycle: requirements, design alternatives, implementation strategies, verification, delivery, operation, maintenance and retirement, connected by causal assurance. It also owns the software ADR module. | [[https://github.com/tao3k/lambda-aitia/blob/f06d41825c14530f3bdb62393387c595ba58c52d/docs/rfcs/0004-sdlc-design-and-causal-trajectories.org][RFC 0004 at PR #2 head]]; [[https://github.com/tao3k/lambda-aitia/blob/f06d41825c14530f3bdb62393387c595ba58c52d/docs/rfcs/0006-engineering-runtime-and-library-boundaries.org][RFC 0006]]. These describe the framework direction, including pending acceptance. |
+| Lambda Episteme | Domain meaning and knowledge through Module, Scenario, Profile, Case and Source. | [[https://github.com/tao3k/lambda-episteme/blob/main/README.org][README]]. Selecting content does not authorize execution. |
+| Deterministic Engineering | HardenedLinux's library of engineering questions, reusable models, method bindings and project-selected evidence. | [[https://github.com/hardenedlinux/deterministic-engineering/blob/main/README.org][README]]. The stated project-formation case is capture-blocked; Aitia review integration is a target. |
+
+* Presentation direction
+
+[[https://moderne.ai/][Moderne]] presents code search and large-scale code changes around concrete
+engineering outcomes. For tao3k, present a broader direction that can connect
+source-aware code discovery, domain knowledge, rule-based reasoning, formal
+methods and governed agent work. Show each project's individual role and mark
+cross-project combinations as a direction until their explicit integration gates
+are demonstrated. Avoid implying that every search result is formally verified
+or that an LLM can establish a proof without a named checking boundary.
+
+Illustrative user questions:
+
+- Which code owns this behavior, what calls it, and which tests cover it? ASP
+  language-provider search is a source-backed starting point.
+- Which facts and rules support a conclusion, and what remains unknown? MRR
+  separates typed derivation, lineage and admission.
+- Which claim became stale after a change? Lambda Aitia models revision-bound
+  justification and invalidation for software/SDLC.
+- Which domain conditions matter? Lambda Episteme contributes vertical
+  Profiles and Cases; an application explicitly selects them.
+
+* Outstanding qualification
+
+- Trace the specific ASP-to-MRR and Scheme/Agent/LLM handoffs to actual current
+  integrations and real application receipts before presenting a unified tool.
+- Identify the formal search or verification task, input identity, checked
+  model or theorem and result boundary for each example. Distinguish finite
+  model checking from general theorems and runtime behavior.
+- Preserve existing project ownership: Deterministic Engineering organizes
+  engineering definitions and methods; Aitia owns its independent causal
+  assurance policy. The README's capture-blocked status is not a product win.

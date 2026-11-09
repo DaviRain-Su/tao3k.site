@@ -1,3 +1,19 @@
+export const comparisonRouteIds = [
+  "comparison/infrastructure",
+  "comparison/context-system",
+  "comparison/lambda-episteme",
+  "comparison/agentic-ai-lab",
+  "comparison/xiuxian-workshop",
+  "comparison/weaver",
+  "comparison/agent-semantic-protocols",
+  "comparison/lambda-aitia",
+  "comparison/deterministic-engineering",
+  "comparison/meta-relational-reasoning",
+  "comparison/mrr-data",
+  "comparison/cedar-poo-spec",
+  "comparison/lean-poo",
+] as const;
+
 export const primarySiteRouteIds = [
   "platform",
   "products",
@@ -13,7 +29,38 @@ export const platformDeploymentRouteIds = [
   "platform/managed-cloud",
 ] as const;
 
-export const siteRouteIds = [...primarySiteRouteIds, ...platformDeploymentRouteIds] as const;
+export const detailSiteRouteIds = [
+  "products/agentic-ai-lab",
+  "products/weaver",
+  "products/cedar-poo-spec",
+  "products/xiuxian-workshop",
+  "products/meta-relational-reasoning",
+  "products/agent-semantic-protocols",
+  "products/mrr-data",
+  "products/lean-poo",
+  "products/lambda-aitia",
+  "products/lambda-episteme",
+  "products/deterministic-engineering",
+  "solutions/code-intelligence",
+  "solutions/engineering-assurance",
+  "solutions/domain-knowledge",
+  "solutions/composable-agents",
+  "solutions/ai-gateway",
+  "solutions/trust-authorization",
+  "solutions/healthcare",
+  "solutions/financial-services",
+  "solutions/security-identity",
+  "solutions/linux-hardening",
+  "solutions/privacy",
+] as const;
+
+export const siteRouteIds = [
+  ...primarySiteRouteIds,
+  ...platformDeploymentRouteIds,
+  "products/context-system",
+  ...detailSiteRouteIds,
+  ...comparisonRouteIds,
+] as const;
 
 export type SiteRouteId = (typeof siteRouteIds)[number];
 
@@ -44,6 +91,15 @@ export const siteRoutes: readonly SiteRouteDefinition[] = [
     title: "Independent engines with explicit ownership and one evidence contract.",
     summary:
       "Each project owns a clear systems boundary. Together they form a lifecycle that can be inspected, replaced and extended without collapsing into one opaque platform.",
+  },
+  {
+    id: "products/context-system",
+    path: "/products/context-system",
+    label: "Context System",
+    kicker: "Org-mode / shared knowledge",
+    title: "Context that stays connected to its sources.",
+    summary:
+      "An Org-centered system for situated, source-qualified knowledge across tasks and sessions.",
   },
   {
     id: "solutions",
@@ -108,6 +164,27 @@ export const siteRoutes: readonly SiteRouteDefinition[] = [
     summary:
       "tao3k manages service operation while tenant, region, model, artifact, policy and receipt identity remain visible and independently qualifiable.",
   },
+  ...comparisonRouteIds.map((id) => ({
+    id,
+    path: `/${id}` as const,
+    label: id.slice(11).replaceAll("-", " "),
+    kicker: "Product comparison",
+    title: "Product comparison",
+    summary: "Explore the product comparison.",
+  })),
+  ...detailSiteRouteIds.map((id) => ({
+    id,
+    path: `/${id}` as `/${typeof id}`,
+    label: id
+      .split("/")
+      .at(-1)!
+      .split("-")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(" "),
+    kicker: id.startsWith("products/") ? "Open-source product" : "Solution",
+    title: "Explore the system.",
+    summary: "Explore the project's purpose, approach and open-source foundations.",
+  })),
 ];
 
 const primarySiteRouteIdSet = new Set<SiteRouteId>(primarySiteRouteIds);

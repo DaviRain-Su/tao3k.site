@@ -1,0 +1,63 @@
+.product-comparison { background:#0d111c; color:#eef1f8; }
+.product-comparison > header,.product-comparison__intro,.product-comparison__matrix,.product-comparison__next { padding:clamp(5rem,8vw,8rem) clamp(24px,6vw,100px); border-bottom:1px solid #bdc9e529; }
+.product-comparison > header { background:radial-gradient(ellipse at 80% 45%,#46557d36,transparent 55%); }
+.product-comparison > header > p,.product-comparison section > small { color:#aebfe8; font:600 .68rem/1.4 ui-monospace,monospace; letter-spacing:.1em; }
+.product-comparison h1 { max-width:14ch; margin:1.5rem 0; font-size:clamp(3.4rem,6vw,6rem); line-height:1.02; letter-spacing:-.06em; }
+.product-comparison h2 { margin:1rem 0; font-size:clamp(2.1rem,4vw,3.8rem); letter-spacing:-.045em; }
+.product-comparison p,.product-comparison > header > span { max-width:68ch; color:#b7c2d2; line-height:1.7; }
+.product-comparison a { color:#cad8ff; text-decoration:none; }.product-comparison a:hover { text-decoration:underline; }.product-comparison > header > div { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem; }
+.product-comparison__chain { display:flex; align-items:center; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }.product-comparison__chain span { padding:.8rem 1rem; border:1px solid #a9bbdc52; border-radius:.5rem; color:#d5e2f7; }.product-comparison__chain i { color:#a7b5db; font-style:normal; }
+.product-comparison__scroll { overflow-x:auto; margin-top:2rem; }.product-comparison table { width:100%; min-width:720px; border-collapse:collapse; text-align:left; }.product-comparison th,.product-comparison td { padding:1rem; border-bottom:1px solid #bdc9e529; vertical-align:top; line-height:1.55; font-size:.85rem; }.product-comparison thead th { color:#aebfe8; font:600 .65rem/1.4 ui-monospace,monospace; text-transform:uppercase; }.product-comparison td { color:#b9c5d6; }.product-comparison tbody th a { display:block; min-width:7rem; margin-bottom:.3rem; }.product-comparison__note { margin-top:1.5rem; font-size:.8rem; }
+@media(max-width:700px) { .product-comparison h1 { font-size:clamp(2.9rem,12vw,4rem); } .product-comparison__scroll { margin-right:-24px; } }
+.product-comparison__scroll-hint { display:none; font-size:.75rem; }
+@media(max-width:700px) { .product-comparison__scroll-hint { display:block; } }
+.comparison-scenario__path { display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin-top:2rem; color:#d0dbf3; font-size:.85rem; }.comparison-scenario__path span { padding:.75rem 1rem; border:1px solid #aabce34b; border-radius:.45rem; }.comparison-scenario__path i { color:#9dafd5; font-style:normal; }
+.comparison-research > a { display:inline-block; margin-top:.7rem; font-size:.85rem; }.comparison-research__alternatives { margin-top:3rem; border-top:1px solid #bdc9e529; }.comparison-research__alternatives > h3 { margin:2rem 0 1rem; font-size:1.4rem; }.comparison-research__alternatives article { display:grid; grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr); gap:2rem; padding:2rem 0; border-top:1px solid #bdc9e529; }.comparison-research__alternatives small,.comparison-research__boundary small { color:#aebfe8; font:600 .65rem/1.4 ui-monospace,monospace; letter-spacing:.08em; }.comparison-research__alternatives h4 { margin:.6rem 0; font-size:1.3rem; }.comparison-research__alternatives a { font-size:.78rem; }.comparison-research__alternatives p { margin:0 0 .8rem; }.comparison-research__boundary { margin-top:2rem; padding:1.3rem; border-left:2px solid #aebfe8; background:#a9bcec0b; }.comparison-research__boundary p { margin:.5rem 0 0; font-size:.85rem; }
+@media(max-width:700px) { .comparison-research__alternatives article { grid-template-columns:1fr; gap:1rem; } }
+.comparison-research__matrix { margin-top:3rem; }
+.comparison-research__matrix h3 { font-size:1.4rem; letter-spacing:-.02em; }
+@media(max-width:700px) {
+  .comparison-research__matrix .product-comparison__scroll-hint { display:none; }
+  .comparison-research__matrix .product-comparison__scroll { margin-right:0; overflow:visible; }
+  .comparison-research__matrix table, .comparison-research__matrix tbody, .comparison-research__matrix tr { display:block; width:100%; min-width:0; }
+  .comparison-research__matrix thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  .comparison-research__matrix tr { padding:.8rem 0; border-bottom:1px solid #bdc9e529; }
+  .comparison-research__matrix th, .comparison-research__matrix td { display:block; padding:.45rem 0; border:0; }
+  .comparison-research__matrix td::before { content:attr(data-label); display:block; margin-bottom:.25rem; color:#aebfe8; font:600 .62rem/1.4 ui-monospace,monospace; text-transform:uppercase; }
+}
+/* A source-linked matrix puts the comparison itself ahead of the narrative. */
+.product-comparison .comparison-research { padding-top:clamp(3rem,5vw,5rem); }
+.matrix-heading { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:end; margin-bottom:2rem; }
+.matrix-heading h2 { margin-bottom:0; }
+.matrix-heading p { margin:0; max-width:50ch; }
+.matrix-table-wrap { overflow:hidden; border:1px solid #afc0e333; border-radius:1rem; background:#151c2a; }
+.product-comparison .comparison-matrix { width:100%; min-width:0; table-layout:fixed; }
+.product-comparison .comparison-matrix th,.product-comparison .comparison-matrix td { padding:1.3rem 1.5rem; border-bottom:1px solid #afc0e326; font-size:.92rem; line-height:1.5; }
+.product-comparison .comparison-matrix thead th { height:6.4rem; background:#192232; text-transform:none; color:#e8edf8; font-family:inherit; font-size:1rem; font-weight:600; line-height:1.3; }
+.product-comparison .comparison-matrix thead th:first-child { width:23%; color:#aab9d6; font:600 .65rem/1.4 ui-monospace,monospace; letter-spacing:.08em; }
+.product-comparison .comparison-matrix thead th:not(:first-child) { display:table-cell; vertical-align:middle; }
+.product-comparison .comparison-matrix thead th > span:not(.matrix-brand) { display:inline-flex; vertical-align:middle; flex-direction:column; gap:.35rem; }
+.comparison-matrix thead a { font:500 .7rem/1.3 ui-monospace,monospace; }
+.matrix-brand { display:inline-grid; place-items:center; width:2.5rem; height:2.5rem; margin-right:.75rem; vertical-align:middle; color:#dfd9fb; background:#756aac33; border:1px solid #b6a7ed66; border-radius:.7rem; font:700 .8rem/1 ui-sans-serif,sans-serif; }
+.matrix-brand--ours { color:#b9e9dd; background:#427d7440; border-color:#8dc8b87a; }
+.product-comparison .comparison-matrix tbody th { color:#e6edf7; font-weight:600; }
+.product-comparison .comparison-matrix tbody td:nth-child(2) { color:#d6e9e4; background:#8ac7b407; }
+.product-comparison .comparison-matrix tbody tr:last-child > * { border-bottom:0; }
+.comparison-research[data-visible="true"] .comparison-matrix tbody tr { animation:matrix-row-in .45s both; animation-delay:calc(var(--row-index) * 85ms); }
+@keyframes matrix-row-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.matrix-details { margin-top:1.2rem; border-bottom:1px solid #afc0e333; }
+.matrix-details summary { padding:1.2rem 0; cursor:pointer; color:#dce5f6; list-style:none; font-size:.9rem; }
+.matrix-details summary::-webkit-details-marker { display:none; }.matrix-details summary span { float:right; }
+.matrix-details__content { padding:1rem 0 2rem; }.matrix-details__content h3 { font-size:1.4rem; }.matrix-details__content > a { font-size:.85rem; }
+@media (max-width:700px) {
+  .matrix-heading { grid-template-columns:1fr; gap:1rem; }
+  .matrix-table-wrap { border-radius:.8rem; }
+  .product-comparison .comparison-matrix,.product-comparison .comparison-matrix tbody,.product-comparison .comparison-matrix tr { display:block; }
+  .product-comparison .comparison-matrix thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  .product-comparison .comparison-matrix tbody tr { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid #afc0e333; }
+  .product-comparison .comparison-matrix tbody tr:last-child { border-bottom:0; }
+  .product-comparison .comparison-matrix tbody th { grid-column:1/-1; padding:.85rem 1rem .3rem; border:0; font-size:.83rem; }
+  .product-comparison .comparison-matrix tbody td { min-width:0; padding:.65rem 1rem 1rem; border:0; font-size:.82rem; overflow-wrap:anywhere; }
+  .product-comparison .comparison-matrix tbody td::before { content:attr(data-label); display:block; margin-bottom:.4rem; color:#a9bad6; font:600 .61rem/1.35 ui-monospace,monospace; text-transform:uppercase; }
+}
+@media (prefers-reduced-motion:reduce) { .comparison-research[data-visible="true"] .comparison-matrix tbody tr { animation:none; } }

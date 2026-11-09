@@ -1,0 +1,55 @@
+#+TITLE: Reference study and product storytelling
+#+DATE: 2026-11-09
+#+AUTHOR: tao3k
+#+FILETAGS: :tao3k:products:design:research:
+#+STATUS: Draft
+#+OWNER: tao3k.site
+#+AUDIENCE: Product, content, design, and site engineering teams
+#+CLAIM_MATURITY: research
+#+OPTIONS: toc:2
+
+* What the reference sites do
+
+This is a reading of [[https://classie.ai/][Classie]] and [[https://moderne.ai/][Moderne]], not a claim that their products and
+ours have the same capabilities. Their sites can change; observations below
+were checked on 2026-11-09.
+
+| Question | Classie | Moderne | Decision for tao3k |
+|----------+---------+---------+--------------------|
+| How is the product described? | Names a job: discover and supervise AI use. Concrete examples follow the promise. | Names the specific job: deterministic code changes across an estate. An agent, a command and a change make it tangible. | Name a user problem and the product's role before listing implementation details. Context System comes first; Agentic AI Lab is a control plane, MRR a reasoning layer, Cedar POO Spec an authorization foundation. |
+| How is a problem solved? | Moves from unpredictable AI behavior to discovery, analysis and supervision. | Connects the risk of large changes to deterministic tools, feedback and review. | Describe an actual industry decision, the information and controls it requires, then the open foundation and its limits. Do not claim runtime coverage or integrations from a model alone. |
+| How is it presented? | Pairs concise questions with a visual product representation and paths into deeper use cases. | Uses a focused demonstration and separates product, solutions and technical foundations in navigation. | Give each section one idea, use a readable example or diagram, and link to evidence. Use original visual language; do not copy brand visuals, unsupported metrics or customer logos. |
+
+* What to change and why
+
+- Keep the existing top-level Navigator categories. Under Products, make Context
+  System and Cedar POO Spec discoverable, with other substantive product entries
+  reached from the products page. Cedar's canonical source is maintained in
+  HardenedLinux; the tao3k team also maintains it.
+- Under Solutions, provide a distinct trust, authorization and security entry.
+  Healthcare, financial services and security are contexts for the solution,
+  not three invented products. Keep direct links to each scenario.
+- Show only a curated set of product entry points on the overview; the complete
+  source inventory belongs in the research record and linked repositories.
+  Recipes remain project-owned content, not a new navigation category.
+- Tell each vertical story as =decision → problem → approach → concrete example=.
+  Illustrations must make that decision understandable instead of merely
+  decorating a generic workflow. Clearly identify synthetic examples.
+- Agent traceability is an important problem to investigate. Do not imply that
+  Cedar POO Spec alone provides end-to-end agent tracing, an observability
+  dashboard, or a deployed integration; establish ownership and evidence first.
+- Use generated visual assets selectively to support the concept and keep
+  interaction, labels and actual process details in accessible HTML. Review the
+  result at desktop and mobile widths; respect reduced motion.
+
+* Source-backed scenarios to develop
+
+| Context | Real question illustrated | Open example |
+|---------+---------------------------+--------------|
+| Healthcare | Is this the right patient, disclosure and current payer/delegation context? | [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/Examples/Health/PriorAuthorization/README.org][Prior authorization]] |
+| Finance | Can a different controller release this payment under the same snapshot, limits and risk controls? | [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/Examples/Enterprise/Payment/README.org][Payment release]] |
+| Security | Does an older broad grant bypass a newly introduced tenant and device restriction? | [[https://github.com/hardenedlinux/cedar-poo-spec/blob/main/Examples/Scenarios/README.org][Policy evolution]] |
+
+The examples establish modeled decisions; the application supplies trusted
+facts and enforces real effects. Product ownership and additional sources are
+tracked in [[file:70.02_open_source_product_mapping.org][the open-source product mapping]].

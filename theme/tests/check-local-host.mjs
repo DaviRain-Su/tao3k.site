@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { prepareLocalHost } from "../src/build/prepare-local-host.mjs";
+import { withStartupCanvas } from "../src/build/prepare-host-shell.mjs";
 
 const root = await mkdtemp(resolve(tmpdir(), "tao3k-local-host-"));
 const source = resolve(root, "source");
@@ -11,10 +12,11 @@ execFileSync("git", ["init", "--quiet", source]);
 execFileSync("git", ["-C", source, "config", "user.email", "test@tao3k.invalid"]);
 execFileSync("git", ["-C", source, "config", "user.name", "TAO3K test"]);
 await writeFile(resolve(source, "package.json"), '{"name":"org-zhixing-fixture"}\n');
+await writeFile(resolve(source, "index.html"), "<html><head></head><body></body></html>\n");
 await writeFile(resolve(source, "package-lock.json"), "fixture-lock\n");
 await mkdir(resolve(source, "node_modules/.bin"), { recursive: true });
 await writeFile(resolve(source, "node_modules/.bin/rsbuild"), "fixture\n");
-execFileSync("git", ["-C", source, "add", "package.json", "package-lock.json"]);
+execFileSync("git", ["-C", source, "add", "package.json", "package-lock.json", "index.html"]);
 execFileSync("git", ["-C", source, "commit", "--quiet", "-m", "fixture"]);
 const revision = execFileSync("git", ["-C", source, "rev-parse", "HEAD"], {
   encoding: "utf8",
@@ -30,6 +32,12 @@ assert.equal(
   revision,
 );
 assert.equal(await prepareLocalHost({ cacheRoot, packagePath, sourceRoot: source }), prepared);
+const preparedShell = await readFile(resolve(prepared, "index.html"), "utf8");
+assert.match(preparedShell, /data-tao3k-startup="night"/);
+assert.match(preparedShell, /html,body\{background:#0b0d16/);
+assert.ok(preparedShell.indexOf('data-tao3k-startup="night"') < preparedShell.indexOf("</head>"));
+assert.equal(withStartupCanvas(preparedShell), preparedShell);
+assert.throws(() => withStartupCanvas("<html></html>"), /TAO3K-SHELL-E001/);
 assert.equal(
   await prepareLocalHost({ cacheRoot, hostOverride: prepared, packagePath, sourceRoot: source }),
   prepared,

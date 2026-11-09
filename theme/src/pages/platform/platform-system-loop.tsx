@@ -52,7 +52,7 @@ const platformResponsibilities = [
     responsibility:
       "Compile explicit organization and checkpoints, enforce admitted work at runtime and return effect receipts.",
     outcome: "Governed runtime receipt",
-    evidence: ["POO Flow", "Marlin"],
+    evidence: ["Agentic AI Lab", "Marlin"],
   },
   {
     id: "deliver",

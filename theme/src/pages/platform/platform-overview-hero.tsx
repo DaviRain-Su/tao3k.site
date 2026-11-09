@@ -11,10 +11,9 @@ export function PlatformOverviewHero() {
     <section className="tao3k-platform-overview-hero">
       <div className="tao3k-platform-overview-hero__copy">
         <p className="tao3k-route-kicker">PLATFORM / QUALIFIED VERTICAL AI</p>
-        <h1>Build vertical AI systems that can be verified, reproduced and operated.</h1>
+        <h1>A dependable foundation for AI systems.</h1>
         <p className="tao3k-platform-overview-hero__lead">
-          tao3k connects domain evidence, semantic reasoning, scientific computation, governed AI
-          operations and reproducible delivery in one inspectable system.
+          Connect knowledge, reasoning and operation in one inspectable system.
         </p>
       </div>
 

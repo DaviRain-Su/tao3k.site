@@ -1,231 +1,286 @@
 import "./products-page.css";
-const products = [
+import { comparisonTopics } from "../comparison/comparison-catalog";
+
+const projects = [
   {
-    key: "ORG",
-    name: "Orgize",
-    role: "Evidence substrate",
-    detail: "Structured human records, contracts and durable provenance.",
-    href: "https://github.com/tao3k/orgize",
-    tone: "paper",
+    name: "Context System",
+    role: "Shared knowledge in context",
+    detail: "Bring source-connected knowledge into work across tasks and sessions.",
+    href: "/products/context-system",
+    kind: "DIRECTION",
   },
   {
-    key: "ASP",
+    name: "Agentic AI Lab",
+    role: "Strategy & policy",
+    detail: "Compose policies, profiles and workflows before runtime handoff.",
+    href: "/products/agentic-ai-lab",
+    kind: "CONTROL PLANE",
+  },
+  {
+    name: "Xiuxian Artisan Workshop",
+    role: "Agent infrastructure",
+    detail: "Knowledge, orchestration, context rendering and tools in a Rust-first workspace.",
+    href: "/products/xiuxian-workshop",
+    kind: "WORKSPACE",
+  },
+  {
+    name: "Meta-Relational Reasoning",
+    role: "Reasoning & admission",
+    detail: "Typed relations, rules and lineage with explicit admission boundaries.",
+    href: "/products/meta-relational-reasoning",
+    kind: "REASONING",
+  },
+  {
+    name: "Cedar POO Spec",
+    role: "Trust & authorization",
+    detail: "Composable policies and proofs for complex domain decisions.",
+    href: "/products/cedar-poo-spec",
+    kind: "OPEN FOUNDATION",
+  },
+  {
+    name: "Weaver",
+    role: "Governed AI gateway",
+    detail: "Route provider work across policy, budget and execution boundaries.",
+    href: "/products/weaver",
+    kind: "GATEWAY",
+  },
+  {
     name: "Agent Semantic Protocols",
-    role: "Semantic retrieval",
-    detail: "Parser-owned knowledge and code search for evidence-bearing agents.",
-    href: "https://github.com/tao3k/agent-semantic-protocols",
-    tone: "violet",
+    role: "Source-aware code search",
+    detail: "Structured language search for people and agents.",
+    href: "/products/agent-semantic-protocols",
+    kind: "CODE INTELLIGENCE",
   },
   {
-    key: "POO",
-    name: "POO Flow",
-    role: "Governed composition",
-    detail: "Scheme-native cases, profiles and composable operational workflows.",
-    href: "https://github.com/tao3k/poo-flow",
-    tone: "coral",
+    name: "MRR Data",
+    role: "Physical data plane",
+    detail: "Interchange, snapshots and bounded execution for MRR.",
+    href: "/products/mrr-data",
+    kind: "DATA",
   },
   {
-    key: "MRL",
-    name: "Marlin",
-    role: "Agent runtime",
-    detail: "The execution core for coding agents, PR agents and long-lived operations.",
-    href: "https://github.com/tao3k/marlin-agent-core",
-    tone: "green",
+    name: "LeanPoo",
+    role: "Composition & proof",
+    detail: "Prototype composition and dependency-aware proof reuse.",
+    href: "/products/lean-poo",
+    kind: "FORMAL FOUNDATIONS",
   },
   {
-    key: "GQL",
-    name: "GQL Rust",
-    role: "Reproducible graph query",
-    detail: "Precise, composable queries over graph-shaped knowledge, code and evidence.",
-    href: "https://github.com/tao3k/gql-rust",
-    tone: "blue",
+    name: "Lambda Aitia",
+    role: "Human + AI software lifecycle",
+    detail: "Connect design, verification, delivery and evolution.",
+    href: "/products/lambda-aitia",
+    kind: "ASSURANCE",
   },
   {
-    key: "ASC",
-    name: "Ascent",
-    role: "Relational deduction",
-    detail:
-      "Declared rules derive inspectable relations, constraints and uncertainty from evidence.",
-    href: "https://github.com/s-arash/ascent",
-    tone: "amber",
+    name: "Lambda Episteme",
+    role: "Vertical knowledge",
+    detail: "Domain scenarios, profiles, cases and sources.",
+    href: "/products/lambda-episteme",
+    kind: "DOMAIN",
   },
   {
-    key: "SCI",
-    name: "Scientific Qualification",
-    role: "Graph, computation + proof",
-    detail:
-      "Julia computation, graph algorithms and Lean obligations qualify what may enter action.",
-    href: "https://github.com/tao3k",
-    tone: "blue",
+    name: "Deterministic Engineering",
+    role: "Engineering knowledge",
+    detail: "Compose project questions, methods and evidence.",
+    href: "/products/deterministic-engineering",
+    kind: "ENGINEERING",
   },
 ] as const;
 
-const productionResponsibilities = [
+const story = [
   {
-    signal: "KNOW",
-    title: "Evidence and records",
-    engines: "Orgize · Wendao",
-    question: "What do we know, where did it come from, and who owns it?",
-    outcome: "Durable context with provenance, source identity and human meaning attached.",
+    number: "01",
+    label: "CONTEXT",
+    title: "Keep the knowledge behind the work.",
+    copy: "A useful answer needs more than a prompt. Context System connects the task to the records and understanding that give it meaning.",
+    link: "/products/context-system",
+    cta: "Explore Context System",
+    marks: ["Sources", "Context", "Work"],
   },
   {
-    signal: "ASK",
-    title: "Semantic query",
-    engines: "GQL Rust · Agent Semantic Protocols",
-    question: "Which facts, code paths and relationships answer this question?",
-    outcome: "Precise, composable retrieval over parser-owned and graph-shaped evidence.",
+    number: "02",
+    label: "COMPOSITION",
+    title: "Compose how agents work.",
+    copy: "Agentic AI Lab brings modules, profiles, workflows and policies together as inspectable values. Build a strategy, validate its boundaries, then hand it to an execution runtime.",
+    link: "/products/agentic-ai-lab",
+    cta: "Explore Agentic AI Lab",
+    marks: ["Modules", "Policy", "Runtime"],
   },
   {
-    signal: "REASON",
-    title: "Deduction and calibration",
-    engines: "Ascent · ontology · graph engines",
-    question: "What follows from the evidence—and what remains uncertain?",
-    outcome: "Asserted facts stay distinct from derived relations, constraints and uncertainty.",
-  },
-  {
-    signal: "QUALIFY",
-    title: "Scientific qualification",
-    engines: "Julia · Lean · contracts · Cedar · POO Flow",
-    question: "Is this claim or action admissible under the declared conditions?",
-    outcome: "Numerical evidence, proof obligations, policy and human authority become explicit.",
-  },
-  {
-    signal: "OPERATE",
-    title: "Durable operation",
-    engines: "POO Flow · Marlin",
-    question: "Can qualified work continue, recover and remain accountable?",
-    outcome: "Composable workflows meet a runtime with checkpoints, recovery and bounded effects.",
-  },
-  {
-    signal: "RETURN",
-    title: "Evidence return",
-    engines: "Org Zhixing · evidence graph",
-    question: "What happened, can it be checked, and what should the system learn?",
-    outcome: "Results return as searchable, attributable, verifiable and reproducible receipts.",
+    number: "03",
+    label: "REASONING",
+    title: "Know what follows, and why.",
+    copy: "MRR gives relations and derivations their context, lineage and admission boundaries. MRR Data supports the physical data plane.",
+    link: "/products/meta-relational-reasoning",
+    cta: "Explore MRR",
+    marks: ["Facts", "Rules", "Evidence"],
   },
 ] as const;
+
+function ConceptPath({
+  marks,
+  variant = "",
+}: {
+  readonly marks: readonly string[];
+  readonly variant?: string;
+}) {
+  return (
+    <div
+      className={`product-path ${variant}`}
+      aria-label={`Conceptual illustration: ${marks.join(", ")}`}
+    >
+      <div className="product-path__line" aria-hidden="true">
+        <i />
+      </div>
+      {marks.map((mark, i) => (
+        <div className="product-path__item" key={mark}>
+          <span>0{i + 1}</span>
+          <strong>{mark}</strong>
+          <b aria-hidden="true">✦</b>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function ProductsPage() {
   return (
-    <div className="tao3k-products-page">
-      <section className="tao3k-products-hero">
-        <p className="tao3k-route-kicker">REPRODUCIBLE INTELLIGENCE SYSTEMS</p>
-        <h1>
-          From a question
-          <br />
-          to an action
-          <br />
-          <em>you can defend.</em>
-        </h1>
-        <div className="tao3k-products-hero__copy">
-          <strong>The scientific systems layer for intelligent organisations.</strong>
+    <div className="product-world">
+      <section className="product-world__hero">
+        <div className="product-world__hero-copy">
+          <p className="product-world__eyebrow">OPEN SOURCE / PRODUCTS</p>
+          <h1>
+            Open foundations for <em>intelligent work.</em>
+          </h1>
           <p>
-            tao3k joins human records, semantic code and knowledge search, graph reasoning,
-            scientific computation, qualification, workflow and durable execution without hiding how
-            a conclusion became an authorised action.
+            From context and reasoning to governed action, discover the projects behind the tao3k
+            ecosystem.
           </p>
+          <a className="product-world__link" href="#product-registry-title">
+            Explore the projects <span aria-hidden="true">↘</span>
+          </a>
+        </div>
+        <div className="product-world__hero-art">
+          <div className="product-world__art-header">
+            <span>ONE CONNECTED ECOSYSTEM</span>
+            <span>OPEN BY DESIGN</span>
+          </div>
+          <ConceptPath marks={["Context", "Reason", "Act"]} variant="product-path--hero" />
+          <p>Different projects. Connected responsibilities.</p>
         </div>
       </section>
-
-      <section className="tao3k-products-audiences" aria-label="Product value by audience">
-        <article>
-          <span>FOR PEOPLE</span>
-          <h2>Understand before you delegate.</h2>
-          <p>
-            See the source, reasoning, limits and responsible authority behind consequential work.
-          </p>
-        </article>
-        <article>
-          <span>FOR ORGANISATIONS</span>
-          <h2>Adopt intelligence without adopting a black box.</h2>
-          <p>Introduce one governed boundary at a time while existing systems retain ownership.</p>
-        </article>
-        <article>
-          <span>FOR LONG-HORIZON BUILDERS</span>
-          <h2>Build assets that compound beyond a model cycle.</h2>
-          <p>
-            Evidence, policy, workflows and receipts become reusable organisational infrastructure.
-          </p>
-        </article>
+      <section
+        className="product-comparison-index"
+        aria-labelledby="product-comparison-index-title"
+      >
+        <div>
+          <p className="product-world__eyebrow">FIND YOUR COMPARISON</p>
+          <h2 id="product-comparison-index-title">Explore by product.</h2>
+          <p>See the scope, alternatives and current state of each comparison.</p>
+        </div>
+        <div>
+          <p className="product-comparison-index__hint">Scroll to explore all products ↕</p>
+          <section
+            className="product-comparison-index__scroll"
+            aria-label="Product comparison links"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th>Product / platform</th>
+                  <th>Area</th>
+                  <th>Comparison</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonTopics.map((topic) => (
+                  <tr key={topic.id}>
+                    <th>
+                      <a href={topic.product}>{topic.name}</a>
+                    </th>
+                    <td>{topic.category}</td>
+                    <td>
+                      <a href={`/comparison/${topic.id}`}>{"View comparison"} ↗</a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </div>
       </section>
-
-      <section className="tao3k-production-system" aria-labelledby="production-system-title">
-        <header>
-          <p className="tao3k-route-kicker">THE PRODUCTION RESPONSIBILITY CHAIN</p>
-          <h2 id="production-system-title">
-            The product is the system between model output and accountable work.
-          </h2>
-          <p>
-            Strong models make proposals. Production systems must still preserve meaning, test
-            conditions, grant authority, survive execution and return evidence.
-          </p>
-        </header>
-        <ol>
-          {productionResponsibilities.map((item, index) => (
-            <li key={item.signal}>
-              <span className="tao3k-production-system__index">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="tao3k-production-system__title">
-                <small>{item.signal}</small>
-                <h3>{item.title}</h3>
-                <span>{item.engines}</span>
-              </div>
-              <blockquote>{item.question}</blockquote>
-              <p>{item.outcome}</p>
-            </li>
-          ))}
-        </ol>
-        <aside>
-          <strong>Search improves recall.</strong>
-          <strong>Semantic calibration improves judgement.</strong>
-          <span>Neither one grants action authority.</span>
-        </aside>
+      <section className="product-world__intro" id="production-system-title">
+        <p className="product-world__eyebrow">THE IDEA</p>
+        <h2>Better intelligence starts with a better foundation.</h2>
+        <p>
+          Knowledge should keep its origins. Decisions should have context. Actions should remain
+          accountable to the people they affect.
+        </p>
       </section>
-
-      <section className="tao3k-product-registry" aria-labelledby="product-registry-title">
+      <div className="product-stories">
+        {story.map((item) => (
+          <section
+            className="product-story"
+            id={item.label === "COMPOSITION" ? "agentic-ai-lab" : undefined}
+            key={item.number}
+          >
+            <div className="product-story__copy">
+              <p className="product-world__eyebrow">
+                {item.number} / {item.label}
+              </p>
+              <h2>{item.title}</h2>
+              <p>{item.copy}</p>
+              <a className="product-world__link" href={item.link}>
+                {item.cta} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div className="product-story__visual">
+              <ConceptPath marks={item.marks} />
+              <span className="product-story__visual-note">ILLUSTRATIVE RELATIONSHIP</span>
+            </div>
+          </section>
+        ))}
+      </div>
+      <section className="product-index" aria-labelledby="product-registry-title">
         <header>
-          <p className="tao3k-route-kicker">INDEPENDENT OPEN-SOURCE ENGINES</p>
-          <h2 id="product-registry-title">
-            Clear owners. Replaceable boundaries. Shared evidence.
-          </h2>
-          <p>
-            Each project owns a narrow responsibility. The complete architecture is a direction;
-            repository availability alone is not a claim that every integration has shipped.
-          </p>
+          <p className="product-world__eyebrow">THE OPEN ECOSYSTEM</p>
+          <h2 id="product-registry-title">Explore the projects.</h2>
+          <p>Discover the main building blocks, then explore their source and related projects.</p>
         </header>
-        <div className="tao3k-product-constellation" aria-label="tao3k product ecosystem">
-          <div className="tao3k-product-axis" aria-hidden="true">
-            <span>EVIDENCE</span>
-            <i />
-            <span>ACTION</span>
-          </div>
-          {products.map((product, index) => (
-            <a
-              className={`tao3k-product-unit tao3k-product-unit--${product.tone}`}
-              href={product.href}
-              key={product.key}
-            >
-              <span className="tao3k-product-unit__index">0{index + 1}</span>
-              <span className="tao3k-product-unit__key">{product.key}</span>
+        <div className="product-index__rows">
+          {projects.map((project, index) => (
+            <a href={project.href} className="product-index__row" key={project.name}>
+              <span className="product-index__number">{String(index + 1).padStart(2, "0")}</span>
               <div>
-                <small>{product.role}</small>
-                <h2>{product.name}</h2>
-                <p>{product.detail}</p>
+                <small>{project.kind}</small>
+                <h3>{project.name}</h3>
               </div>
-              <strong aria-hidden="true">↗</strong>
+              <div className="product-index__detail">
+                <strong>{project.role}</strong>
+                <p>{project.detail}</p>
+              </div>
+              <span className="product-index__arrow" aria-hidden="true">
+                ↗
+              </span>
             </a>
           ))}
         </div>
-      </section>
-
-      <aside className="tao3k-products-rule">
-        <span>ECOSYSTEM RULE</span>
-        <p>
-          A product may accelerate a transition. It may not erase the evidence boundary that makes
-          that transition trustworthy.
+        <p className="product-index__note">
+          Explore the wider ecosystem on <a href="https://github.com/tao3k">GitHub ↗</a>.
         </p>
-      </aside>
+      </section>
+      <section className="product-world__next">
+        <p className="product-world__eyebrow">FROM FOUNDATION TO APPLICATION</p>
+        <h2>
+          Start with the problem.
+          <br />
+          <em>Build the right system.</em>
+        </h2>
+        <a className="product-world__link" href="/solutions">
+          Explore industry solutions <span aria-hidden="true">↗</span>
+        </a>
+      </section>
     </div>
   );
 }

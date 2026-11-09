@@ -57,6 +57,7 @@ export type PrinciplesFlowNodeData = Readonly<{
   guard: string;
   pressureDetail: string;
   status: PrinciplesFlowStatus;
+  overviewSteps?: readonly { label: string; status: PrinciplesFlowStatus }[];
 }> &
   Record<string, unknown>;
 
@@ -159,6 +160,8 @@ const layoutTopology = (
       return {
         ...node,
         position: { x: position.x - size.width / 2, y: position.y - size.height / 2 },
+        initialWidth: size.width,
+        initialHeight: size.height,
         style: size,
       };
     }),

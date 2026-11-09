@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: tao3k/org-zhixing-themes
-          ref: 576343ca1b8d007adbb5840c148f7c7fb0bcb796
+          ref: 32464173c42948d657118532afabbddf918eb8d6
           path: .org-zhixing-host
 
       - uses: actions/setup-node@v6

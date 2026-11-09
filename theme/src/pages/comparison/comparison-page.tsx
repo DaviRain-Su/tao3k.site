@@ -1,4 +1,5 @@
 import "./comparison-page.css";
+import { comparisonTopics } from "./comparison-catalog";
 const comparisonIncidents = [
   {
     date: "JUN 07 · 2026",
@@ -137,14 +138,14 @@ const tao3kIssueResponses = [
   {
     issue: "LOSSY COMPRESSION",
     invariant: "Compression is a projection of durable state—not the authority for state.",
-    owners: "POO Flow organisation · Marlin checkpoints · Org evidence",
+    owners: "Agentic AI Lab organisation · Marlin checkpoints · Org evidence",
     maturity: "MIXED · INTEGRATION ACTIVE",
   },
   {
     issue: "RUNAWAY OR STALLED WORK",
     invariant:
       "Every run exposes phase, progress, retry budget, stop condition and recoverable output.",
-    owners: "POO Flow conditions · Marlin runtime · Scenario Benchmarks",
+    owners: "Agentic AI Lab conditions · Marlin runtime · Scenario Benchmarks",
     maturity: "ACTIVE DEVELOPMENT",
   },
   {
@@ -158,7 +159,7 @@ const tao3kIssueResponses = [
     issue: "CONTEXT WITHOUT PROVENANCE",
     invariant:
       "Models consume evidence projections while source systems retain semantic ownership.",
-    owners: "Orgize · Wendao · ASP · GQL Rust · Ascent",
+    owners: "Orgize · Wendao · ASP · Meta-Relational Reasoning · Ascent",
     maturity: "INDEPENDENT ENGINES · CIRCUIT INTEGRATION ACTIVE",
   },
   {
@@ -189,6 +190,21 @@ export function ComparisonPage() {
             disappears. The useful comparison is which system responsibility was missing—and who can
             prove it was restored.
           </p>
+        </div>
+      </section>
+
+      <section className="comparison-catalog" aria-labelledby="comparison-catalog-title">
+        <p className="tao3k-route-kicker">EXPLORE BY PRODUCT</p>
+        <h2 id="comparison-catalog-title">Choose what to compare.</h2>
+        <p>Explore scenarios, source-backed responsibilities and evidence boundaries.</p>
+        <div>
+          {comparisonTopics.map((topic) => (
+            <a href={`/comparison/${topic.id}`} key={topic.id}>
+              <small>{topic.category}</small>
+              <strong>{topic.name}</strong>
+              <span>{"View comparison"} ↗</span>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -265,7 +281,10 @@ export function ComparisonPage() {
             extend every category; the question is which truth remains native and accountable.
           </p>
         </header>
-        <div className="tao3k-comparison-table-wrap" aria-label="Responsibility comparison">
+        <section
+          className="tao3k-comparison-table-wrap"
+          aria-label="Responsibility comparison, scroll horizontally"
+        >
           <table className="tao3k-comparison-table">
             <thead>
               <tr>
@@ -288,7 +307,7 @@ export function ComparisonPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </section>
       </section>
 
       <section className="tao3k-issue-response" aria-labelledby="issue-response-title">

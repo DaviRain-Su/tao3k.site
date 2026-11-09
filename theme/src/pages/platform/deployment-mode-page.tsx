@@ -1,4 +1,5 @@
 import "./deployment-mode-page.css";
+import { CloudWorkspace } from "./cloud-workspace";
 
 const platformDeploymentModes = {
   "platform/on-premises": {
@@ -54,10 +55,10 @@ const platformDeploymentModes = {
   "platform/managed-cloud": {
     label: "Managed Cloud",
     code: "MANAGED OPERATION / 03",
-    title: "Managed does not have to mean unknowable.",
+    title: "A cloud workspace built around you.",
     thesis:
-      "tao3k operates the service while preserving tenant, region, artifact, model, policy and decision identity as evidence the customer can inspect.",
-    boundary: "TAO3K-OPERATED / CUSTOMER-QUALIFIED",
+      "Our direction is a reproducible environment for development and deployment, with privacy, open security and user control at its foundation.",
+    boundary: "REPRODUCIBLE / USER-CONTROLLED",
     topology: [
       ["Tenant identity", "Explicit isolation"],
       ["Regional data plane", "Declared locality"],
@@ -97,7 +98,7 @@ const deploymentPlatformLayers = [
     layer: "REASON",
     title: "Relationships stay inspectable",
     detail: "Graph query, relational deduction and ontology expose how a conclusion was formed.",
-    systems: "GQL Rust · Ascent · ontology",
+    systems: "Meta-Relational Reasoning · Ascent · ontology",
   },
   {
     layer: "SCIENCE",
@@ -111,7 +112,7 @@ const deploymentPlatformLayers = [
     title: "Work survives a session",
     detail:
       "Composable cases meet a durable Agent Core with checkpoints, recovery and bounded effects.",
-    systems: "POO Flow · Marlin",
+    systems: "Agentic AI Lab · Marlin",
   },
   {
     layer: "DELIVER",
@@ -281,6 +282,8 @@ export function PlatformDeploymentPage({ modeId }: { readonly modeId: PlatformDe
         </aside>
       </section>
 
+      {modeId === "platform/managed-cloud" && <CloudWorkspace />}
+
       <section className="tao3k-deployment-mode__decision">
         <header>
           <p className="tao3k-route-kicker">WHEN THIS MODEL FITS</p>
@@ -324,7 +327,7 @@ export function PlatformDeploymentPage({ modeId }: { readonly modeId: PlatformDe
 
       <section className="tao3k-deployment-mode__stack" aria-labelledby="deployment-stack-title">
         <header>
-          <p className="tao3k-route-kicker">WHAT ACTUALLY SHIPS</p>
+          <p className="tao3k-route-kicker">PLATFORM LAYERS</p>
           <h2 id="deployment-stack-title">A complete evidence-to-operation system.</h2>
           <p>
             Deployment changes where authority lives. It does not remove the platform layers that

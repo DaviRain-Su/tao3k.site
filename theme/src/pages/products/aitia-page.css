@@ -1,0 +1,333 @@
+.aitia {
+  color: #f1f2f7;
+  background: #0d121d;
+  overflow: hidden;
+}
+.aitia * {
+  box-sizing: border-box;
+}
+.aitia-kicker {
+  margin: 0;
+  color: #a5b9d3;
+  font:
+    600 0.66rem/1.4 ui-monospace,
+    monospace;
+  letter-spacing: 0.15em;
+}
+.aitia-hero {
+  min-height: min(790px, calc(100svh - 64px));
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  align-items: center;
+  gap: clamp(3rem, 7vw, 8rem);
+  padding: clamp(5rem, 8vw, 8rem) clamp(24px, 6vw, 104px);
+  background: radial-gradient(ellipse at 75% 42%, #28374d 0%, #141e2d 45%, #0d121d 80%);
+}
+.aitia-name {
+  margin: 1.7rem 0 0;
+  color: #c1cadd;
+}
+.aitia h1 {
+  max-width: 13ch;
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(3.5rem, 5.8vw, 6.4rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  font-weight: 550;
+}
+.aitia-lead,
+.aitia-thesis > p:last-child,
+.aitia-design > div > p:not(.aitia-kicker),
+.aitia-assurance > div > p:not(.aitia-kicker),
+.aitia-status > p:not(.aitia-kicker) {
+  max-width: 34rem;
+  color: #bac6d4;
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+.aitia-link {
+  display: inline-flex;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 0.8rem 0;
+  margin-top: 1.3rem;
+  border-bottom: 1px solid #a6bcd2;
+  color: #eff4f9;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.aitia-atlas {
+  padding: 2rem;
+  border: 1px solid #c8d9ef2b;
+  border-radius: 1.25rem;
+  background: linear-gradient(150deg, #b0c6ed13, #101a2877);
+}
+.aitia-atlas__header,
+.aitia-atlas__labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #a7b7d1;
+  font:
+    600 0.6rem/1.4 ui-monospace,
+    monospace;
+  letter-spacing: 0.12em;
+}
+.aitia-atlas__ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 20rem);
+  aspect-ratio: 1;
+  margin: 2rem auto;
+}
+.aitia-atlas__ring > div {
+  z-index: 1;
+  text-align: center;
+}
+.aitia-atlas__ring small,
+.aitia-design__visual small {
+  color: #a7b7d1;
+  font:
+    600 0.58rem/1.4 ui-monospace,
+    monospace;
+  letter-spacing: 0.12em;
+}
+.aitia-atlas__ring strong {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+.aitia-atlas__ring i {
+  position: absolute;
+  inset: 9%;
+  border: 1px solid #b1c9e754;
+  border-radius: 50%;
+  transform: rotate(-25deg) scaleY(0.62);
+}
+.aitia-atlas__ring i:nth-of-type(2) {
+  transform: rotate(35deg) scaleY(0.62);
+  border-color: #a9dbd755;
+}
+.aitia-atlas__ring i:nth-of-type(3) {
+  inset: 21%;
+  transform: rotate(90deg) scaleY(0.8);
+  border-color: #cec3ea44;
+}
+.aitia-atlas > p {
+  margin: 1.5rem 0 0;
+  color: #aebdcd;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.aitia-thesis,
+.aitia-lifecycle,
+.aitia-design,
+.aitia-assurance,
+.aitia-ecosystem,
+.aitia-status {
+  padding: clamp(5rem, 8vw, 8rem) clamp(24px, 6vw, 104px);
+  border-top: 1px solid #c3d6ec20;
+}
+.aitia h2 {
+  margin: 1.1rem 0 1.5rem;
+  font-size: clamp(2.5rem, 4.5vw, 4.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  font-weight: 520;
+}
+.aitia h2 em {
+  color: #b7d7d7;
+  font-style: normal;
+}
+.aitia-thesis {
+  display: grid;
+  grid-template-columns: 0.25fr 1fr 0.65fr;
+  gap: clamp(2rem, 4vw, 5rem);
+  align-items: start;
+}
+.aitia-thesis h2 {
+  margin: 0;
+}
+.aitia-thesis > p:last-child {
+  margin: 0;
+}
+.aitia-lifecycle {
+  background: #121d2a;
+}
+.aitia-lifecycle header {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  align-items: end;
+}
+.aitia-lifecycle header > p {
+  max-width: 23rem;
+  color: #aebdca;
+  line-height: 1.7;
+}
+.aitia-lifecycle__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 2rem;
+  margin-top: 3rem;
+}
+.aitia-lifecycle__grid > div {
+  padding: 1.5rem 0;
+  border-top: 1px solid #b2ced136;
+}
+.aitia-lifecycle__grid small {
+  color: #a8c7d3;
+  font:
+    600 0.65rem ui-monospace,
+    monospace;
+}
+.aitia-lifecycle__grid strong {
+  display: block;
+  margin: 0.9rem 0 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 530;
+}
+.aitia-lifecycle__grid p {
+  color: #aab9c7;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.aitia-design,
+.aitia-assurance {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: center;
+}
+.aitia-design__visual {
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+  border: 1px solid #bed0e533;
+  border-radius: 1rem;
+  background: #15212d;
+}
+.aitia-design__visual > span {
+  color: #9bb5c5;
+  font:
+    600 0.65rem ui-monospace,
+    monospace;
+  letter-spacing: 0.1em;
+}
+.aitia-design__visual > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+.aitia-design__visual strong,
+.aitia-design__visual b {
+  padding: 1rem;
+  border: 1px solid #a8c8dc3b;
+  border-radius: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.aitia-design__visual b {
+  border-color: #a9d7ca77;
+}
+.aitia-assurance {
+  background: #111c25;
+}
+.aitia-assurance ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.aitia-assurance li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.3rem 1rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid #b4d4dc33;
+}
+.aitia-assurance li small {
+  color: #9fbac5;
+  font:
+    600 0.65rem ui-monospace,
+    monospace;
+}
+.aitia-assurance li strong {
+  font-weight: 550;
+}
+.aitia-assurance li span {
+  grid-column: 2;
+  color: #a7b9c5;
+  font-size: 0.85rem;
+}
+.aitia-ecosystem__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.aitia-ecosystem__grid a {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  min-height: 12rem;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #bed0e533;
+  border-radius: 0.8rem;
+}
+.aitia-ecosystem__grid a:hover {
+  border-color: #a9d7ca;
+}
+.aitia-ecosystem__grid small {
+  color: #9dbbc6;
+  font:
+    600 0.6rem ui-monospace,
+    monospace;
+  letter-spacing: 0.1em;
+}
+.aitia-ecosystem__grid strong {
+  font-size: 1.2rem;
+}
+.aitia-ecosystem__grid span {
+  color: #adbdc8;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.aitia-status {
+  background: #16212d;
+}
+.aitia-status > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+@media (max-width: 850px) {
+  .aitia-hero,
+  .aitia-thesis,
+  .aitia-design,
+  .aitia-assurance {
+    grid-template-columns: 1fr;
+  }
+  .aitia-thesis {
+    gap: 1.5rem;
+  }
+  .aitia-lifecycle header {
+    display: block;
+  }
+  .aitia-lifecycle__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .aitia-ecosystem__grid {
+    grid-template-columns: 1fr;
+  }
+  .aitia-ecosystem__grid a {
+    min-height: 0;
+  }
+  .aitia h1 {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
+}

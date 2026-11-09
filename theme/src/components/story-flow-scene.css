@@ -1,0 +1,296 @@
+.story-scene {
+  padding-top: 1.4rem;
+  min-width: 0;
+}
+.story-scene__heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #9bb4c2;
+  font:
+    600 0.62rem/1.4 ui-monospace,
+    monospace;
+  letter-spacing: 0.11em;
+}
+.story-scene__graph {
+  width: 100%;
+  position: relative;
+  background: radial-gradient(ellipse at 48% 48%, #28465a50, transparent 70%);
+}
+.story-scene__graph .react-flow {
+  background: transparent;
+}
+.story-scene__graph .react-flow__node {
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.story-scene__graph .react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+}
+.story-scene__graph .react-flow__attribution {
+  background: #101c29;
+  font-size: 9px;
+}
+.story-scene__graph .react-flow__attribution a {
+  color: #9eb0bd;
+}
+.story-scene__node {
+  min-height: 105px;
+  padding: 0.75rem;
+  border: 1px solid #6784935c;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #1b303c, #13212e);
+  box-shadow: 0 10px 25px #0002;
+  animation: story-scene-enter 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.story-scene__node-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.6rem;
+}
+.story-scene__glyph {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: #a9e2d7;
+  background: #85cabe1e;
+  border-radius: 0.5rem;
+  font-size: 1.15rem;
+}
+.story-scene__node small {
+  color: #a5c1c9;
+  font:
+    600 0.55rem/1.3 ui-monospace,
+    monospace;
+  letter-spacing: 0.07em;
+}
+.story-scene__node strong {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: #edf5f5;
+}
+.story-scene__node > span {
+  display: block;
+  color: #a9bec8;
+  font-size: 0.69rem;
+  line-height: 1.4;
+  margin-top: 0.35rem;
+}
+.story-scene__node.kind-origin {
+  border-color: #c7ad7866;
+  border-radius: 20px 10px 10px 20px;
+}
+.story-scene__node.kind-origin .story-scene__glyph {
+  color: #ecd09b;
+  background: #e3bd761a;
+}
+.story-scene__node.kind-check {
+  border-style: dashed;
+  border-color: #a3b8e77a;
+}
+.story-scene__node.kind-check .story-scene__glyph {
+  color: #b6c7f5;
+  background: #9cadf025;
+}
+.story-scene__node.kind-finding {
+  border-color: #d7a99a80;
+  border-radius: 10px 20px 20px 10px;
+}
+.story-scene__node.kind-finding .story-scene__glyph {
+  color: #f2bfad;
+  background: #e8a99422;
+}
+.story-scene__node.is-current {
+  border-color: #a8dfd2;
+  box-shadow:
+    0 0 0 3px #99ddcd18,
+    0 12px 28px #0004;
+}
+.story-scene__edge {
+  stroke: #7797a5;
+  stroke-width: 1.4;
+  stroke-dasharray: 4 5;
+  opacity: 0.55;
+}
+.story-scene__edge.is-current {
+  stroke: #a7ded1;
+  opacity: 1;
+  stroke-width: 2;
+}
+.story-scene__parcel rect {
+  fill: #bde8dd;
+  stroke: #effff9;
+}
+.story-scene__parcel text {
+  fill: #193d38;
+  font:
+    600 8px ui-monospace,
+    monospace;
+}
+.story-scene__ledger {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 4.8rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #be9ec647;
+  background: #a37ca50b;
+  opacity: 0;
+  transform: translateY(0.6rem);
+  transition:
+    opacity 0.9s,
+    transform 0.9s;
+}
+.story-scene__ledger.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.story-scene__ledger-icon {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  color: #e0bbd9;
+  border: 1px solid #d4adcd66;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+.story-scene__ledger div {
+  display: grid;
+  gap: 0.3rem;
+  flex: 1;
+}
+.story-scene__ledger small {
+  font:
+    600 0.58rem/1.3 ui-monospace,
+    monospace;
+  letter-spacing: 0.08em;
+  color: #c8aac6;
+}
+.story-scene__ledger strong {
+  font-size: 0.84rem;
+  color: #eee4ee;
+}
+.story-scene__ledger > span:last-child {
+  color: #d4b8cb;
+  font-size: 0.72rem;
+}
+@keyframes story-scene-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.7rem) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 580px) {
+  .story-scene__node {
+    min-height: 105px;
+  }
+  .story-scene__ledger {
+    padding: 0.7rem;
+  }
+  .story-scene__ledger > span:last-child {
+    font-size: 0.65rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-scene__node {
+    animation: none;
+  }
+  .story-scene__graph .react-flow__node,
+  .story-scene__ledger {
+    transition: none;
+  }
+}
+/* Legacy diagram arrows are not part of a React Flow node. */
+.flow-story[data-story="aitia-scenario"] .story-scene__node::after {
+  content: none !important;
+}
+.story-scene__glyph svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.story-scene__graph {
+  transition: height 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.story-scene__ledger.is-visible {
+  animation: story-scene-enter 0.8s ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-scene__graph {
+    transition: none;
+  }
+  .story-scene__ledger.is-visible {
+    animation: none;
+  }
+}
+.aitia-scene__regions {
+  position: absolute;
+  inset: 1rem 0 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  pointer-events: none;
+}
+.aitia-scene__regions > div {
+  position: relative;
+  border: 1px solid #7bb9ae2c;
+  background: #629f9c0c;
+  border-radius: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.aitia-scene__regions > div + div {
+  border-color: #9daada30;
+  background: #8099ca0d;
+}
+.aitia-scene__regions > div.is-visible {
+  opacity: 1;
+}
+.aitia-scene__regions span {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.75rem;
+  color: #8bb8b4;
+  font:
+    600 0.55rem/1 ui-monospace,
+    monospace;
+  letter-spacing: 0.12em;
+}
+.aitia-scene__regions > div + div span {
+  color: #a3b2d7;
+}
+@media (max-width: 580px) {
+  .aitia-scene__regions {
+    inset: 125px 0 0;
+    display: block;
+  }
+  .aitia-scene__regions > div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 125px;
+  }
+  .aitia-scene__regions > div + div {
+    top: 130px;
+    height: 245px;
+  }
+  .aitia-scene__regions span {
+    bottom: 0.2rem;
+    right: 0.5rem;
+    left: auto;
+    font-size: 0.48rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aitia-scene__regions > div {
+    transition: none;
+  }
+}

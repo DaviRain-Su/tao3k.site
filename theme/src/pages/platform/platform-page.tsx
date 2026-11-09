@@ -28,8 +28,8 @@ const deliveryDisciplines = [
     eyebrow: "SYSTEM INTENT",
     title: "Express the system without exposing infrastructure complexity.",
     detail:
-      "POO Flow composes modular intent, conditions, state and qualification boundaries. Omnibus expands admitted system profiles without copying an entire deployment stack.",
-    stages: ["POO Flow intent", "System IR", "Omnibus composition"],
+      "Agentic AI Lab composes modular intent, conditions, state and qualification boundaries. Omnibus expands admitted system profiles without copying an entire deployment stack.",
+    stages: ["Agentic AI Lab intent", "System IR", "Omnibus composition"],
     result: "Qualified system model",
   },
   {
@@ -104,9 +104,9 @@ export function PlatformPage() {
         <div className="tao3k-platform-deployment__boundary">
           <strong>AI accelerates configuration. The system makes it admissible.</strong>
           <p>
-            POO Flow, contracts, Omnibus, Nix derivations and target qualification constrain the
-            result. Kubernetes may be a runtime surface, but no target adapter becomes the source of
-            system truth.
+            Agentic AI Lab, contracts, Omnibus, Nix derivations and target qualification constrain
+            the result. Kubernetes may be a runtime surface, but no target adapter becomes the
+            source of system truth.
           </p>
         </div>
       </section>

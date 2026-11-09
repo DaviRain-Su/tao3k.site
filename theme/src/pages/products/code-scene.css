@@ -1,0 +1,326 @@
+.code-demo {
+  --demo-line: #668f98;
+  min-width: 0;
+  color: #d9e7eb;
+}
+.code-demo__question {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #a9c7d72b;
+  border-bottom: 0;
+  border-radius: 0.85rem 0.85rem 0 0;
+  background: #1b2b3b;
+}
+.code-demo__question span,
+.code-demo__heading > small,
+.code-demo__result-label {
+  font:
+    600 0.62rem/1.3 ui-monospace,
+    monospace;
+  letter-spacing: 0.08em;
+  color: #9db7bf;
+}
+.code-demo__question strong {
+  font-size: 0.83rem;
+  font-weight: 500;
+}
+.code-demo__work,
+.code-demo__evidence {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid #a9c7d72b;
+  background: #152a37;
+}
+.code-demo__work {
+  padding-bottom: 1.9rem;
+}
+.code-demo__evidence {
+  border-top: 0;
+  border-radius: 0 0 0.85rem 0.85rem;
+  background: #1d293b;
+}
+.code-demo__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.code-demo__heading > span {
+  display: grid;
+  place-items: center;
+  flex: 0 0 1.4rem;
+  height: 1.4rem;
+  border: 1px solid #7baab463;
+  border-radius: 0.3rem;
+  color: #b2d5d1;
+  font:
+    600 0.66rem ui-monospace,
+    monospace;
+}
+.code-demo__heading strong {
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+.code-demo__heading > small {
+  margin-left: auto;
+  color: #b2a5ca;
+}
+.code-demo__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.6rem);
+  margin-top: 1.15rem;
+}
+.code-demo__column {
+  position: relative;
+  min-width: 0;
+  display: flex;
+}
+.code-demo__object {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 7.5rem;
+  padding: 0.9rem 0.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  border: 1px solid #829fa94d;
+  border-radius: 0.65rem;
+  background: #1b303d;
+  transition:
+    border-color 0.3s,
+    background 0.3s,
+    box-shadow 0.3s;
+}
+.code-demo__object > strong {
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+.code-demo__object > small {
+  font-size: 0.7rem;
+  line-height: 1.25;
+  color: #a8bec7;
+}
+.code-demo__icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.2rem;
+  border: 1px solid #94b7c57a;
+  border-radius: 0.4rem;
+  color: #c1d9df;
+  font:
+    600 0.85rem ui-monospace,
+    monospace;
+}
+.code-demo__column.is-upcoming .code-demo__object {
+  opacity: 0.55;
+}
+.code-demo__column.is-upcoming .code-demo__object > small {
+  visibility: hidden;
+}
+.code-demo__column.is-current .code-demo__object {
+  border-color: #9eddd0;
+  background: #203e46;
+  box-shadow: 0 0 0 3px #9eddd019;
+  animation: code-demo-enter 0.4s ease-out both;
+}
+.code-demo__column.is-done .code-demo__object {
+  border-color: #77aa9d85;
+}
+.code-demo__lens {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.45rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0.15rem;
+  border-radius: 50%;
+  background: #244950;
+  fill: #244950;
+  stroke: #b8e7db;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.code-demo__done {
+  position: absolute;
+  top: -0.45rem;
+  right: -0.35rem;
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid #80b8a8;
+  border-radius: 0.3rem;
+  background: #183b37;
+  color: #b7ead7;
+  font-size: 0.7rem;
+}
+.code-demo__evidence .code-demo__heading > span {
+  color: #d3c3e3;
+  border-color: #aa91c57a;
+}
+.code-demo__result {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 4.5rem;
+  margin-top: 0.8rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #ad99c75c;
+  border-radius: 0.6rem;
+  background: #262e43;
+  animation: code-demo-enter 0.4s ease-out both;
+}
+.code-demo[data-moving="true"] .code-demo__result {
+  animation: code-demo-reveal 0.4s 0.65s ease-out both;
+}
+.code-demo__file-icon {
+  color: #c5b4dd;
+  font-size: 1.6rem;
+}
+.code-demo__result strong {
+  color: #e7def1;
+  font-size: 0.86rem;
+}
+.code-demo__result p {
+  margin: 0.15rem 0 0;
+  color: #bac9d0;
+  font-size: 0.76rem;
+}
+.code-demo__result-label {
+  margin-left: auto;
+  color: #aacfc2;
+}
+.code-demo__empty {
+  min-height: 4.5rem;
+  margin: 0.8rem 0 0;
+  padding: 1rem 0.3rem;
+  color: #a8bac2;
+  font-size: 0.8rem;
+}
+.code-demo__next {
+  margin-top: 0.75rem;
+  color: #b3a7c7;
+  font-size: 0.72rem;
+}
+.code-demo__next span {
+  color: #d1b8e4;
+}
+@keyframes code-demo-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes code-demo-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 480px) {
+  .code-demo__question {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .code-demo__work,
+  .code-demo__evidence {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+  .code-demo__steps {
+    gap: 0.65rem;
+  }
+  .code-demo__object {
+    min-height: 7rem;
+    padding-inline: 0.25rem;
+  }
+  .code-demo__object > strong {
+    font-size: 0.68rem;
+  }
+  .code-demo__object > small {
+    font-size: 0.61rem;
+  }
+  .code-demo__heading strong {
+    font-size: 0.8rem;
+  }
+  .code-demo__result-label {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-demo * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.code-demo__scene {
+  position: relative;
+}
+.code-demo__graph {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.code-demo__graph .react-flow {
+  background: transparent;
+}
+.code-demo__graph .react-flow__node {
+  opacity: 0;
+  pointer-events: none;
+}
+.code-demo__anchor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.code-demo__graph .react-flow__attribution {
+  background: #1d293b;
+  pointer-events: auto;
+}
+.code-demo__graph .react-flow__attribution a {
+  color: #a5bac5;
+  font-size: 9px;
+}
+.code-demo__edge {
+  fill: none;
+  stroke: #789e9e;
+  stroke-width: 1.3;
+  opacity: 0.75;
+}
+.code-demo__edge.is-active {
+  stroke: #a6ded0;
+  stroke-width: 1.7;
+  opacity: 1;
+}
+.code-demo__packet rect {
+  fill: #29504f;
+  stroke: #b4e4d9;
+  stroke-width: 0.8;
+}
+.code-demo__packet path {
+  fill: none;
+  stroke: #d9f5ee;
+  stroke-width: 0.8;
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-demo__packet {
+    display: none;
+  }
+}
