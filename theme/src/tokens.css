@@ -4,16 +4,16 @@
 :root,
 html[data-theme-variant="night"] {
   color-scheme: dark;
-  --canvas: #080b0a;
-  --surface: #111815;
-  --surface-raised: #1a2620;
-  --ink: #eef2ec;
-  --muted: #b7c4bb;
-  --line: rgb(238 242 236 / 18%);
-  --line-strong: rgb(238 242 236 / 38%);
-  --accent: #8be28b;
-  --on-accent: #082014;
-  --focus: #c8f5c6;
+  --canvas: #0b0d16;
+  --surface: #0c1019;
+  --surface-raised: #151a28;
+  --ink: #eff0f7;
+  --muted: #b1b7c9;
+  --line: rgb(200 207 236 / 18%);
+  --line-strong: rgb(200 207 236 / 38%);
+  --accent: #aebdff;
+  --on-accent: #151829;
+  --focus: #bcc8ff;
 }
 
 html[data-theme-variant="paper"] {

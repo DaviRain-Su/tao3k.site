@@ -145,12 +145,12 @@ const writeDeniedStorage = () => {
 
 const readDenied = await loadWithStorage(deniedStorage);
 assert.equal(readDenied.variant, "night");
-assert.equal(readDenied.background, "rgb(8, 11, 10)");
+assert.equal(readDenied.background, "rgb(11, 13, 22)");
 assertNightFromFirstPaint(readDenied.samples, "getItem throw");
 
 const writeDenied = await loadWithStorage(writeDeniedStorage);
 assert.equal(writeDenied.variant, "night");
-assert.equal(writeDenied.background, "rgb(8, 11, 10)");
+assert.equal(writeDenied.background, "rgb(11, 13, 22)");
 assertNightFromFirstPaint(writeDenied.samples, "setItem throw");
 
 const togglePage = await browser.newPage();

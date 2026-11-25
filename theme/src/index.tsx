@@ -109,7 +109,7 @@ const variants = [
     id: "night",
     label: "Night",
     tokens: {
-      color: { canvas: "#080b0a", surface: "#111815", text: "#eef2ec", accent: "#8be28b" },
+      color: { canvas: "#0b0d16", surface: "#0c1019", text: "#eff0f7", accent: "#aebdff" },
       typography: {
         body: "Inter, ui-sans-serif, system-ui, sans-serif",
         heading: "Inter, ui-sans-serif, system-ui, sans-serif",

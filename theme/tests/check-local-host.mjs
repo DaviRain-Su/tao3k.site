@@ -116,7 +116,7 @@ const paperRule = startupStyleSource.match(
   /html\[data-theme-variant="paper"\],html\[data-theme-variant="paper"\] body\{background:(#[0-9a-f]{6})/u,
 );
 assert.equal(paperRule?.[1], "#f3f1e8");
-assert.equal(paperRule?.[1] === "#080b0a", false);
+assert.equal(paperRule?.[1] === "#0b0d16", false);
 
 const root = await mkdtemp(resolve(tmpdir(), "tao3k-local-host-"));
 const source = resolve(root, "source");
@@ -150,10 +150,10 @@ assert.match(preparedShell, /data-tao3k-theme-bootstrap/);
 assert.match(preparedShell, /org-zhixing:theme-variant:tao3k-site/);
 assert.match(preparedShell, /tao3k-theme-variant/);
 assert.match(preparedShell, /dataset\.themeVariant=variant/);
-assert.match(preparedShell, /html,body\{background:#080b0a;color:#eef2ec\}/);
+assert.match(preparedShell, /html,body\{background:#0b0d16;color:#eff0f7\}/);
 assert.match(preparedShell, /html\[data-theme-variant="paper"\]/);
 assert.match(preparedShell, /background:#f3f1e8/);
-assert.doesNotMatch(preparedShell, /#0b0d16/);
+assert.doesNotMatch(preparedShell, /#080b0a/);
 assert.ok(preparedShell.indexOf("data-tao3k-theme-bootstrap") < preparedShell.indexOf("</head>"));
 assert.ok(
   preparedShell.indexOf("data-tao3k-theme-bootstrap") <
