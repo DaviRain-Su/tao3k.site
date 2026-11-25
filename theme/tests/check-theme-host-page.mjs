@@ -6,10 +6,11 @@
  *
  *   node theme/tests/check-theme-host-page.mjs --origin http://127.0.0.1:4181/tao3k.site/
  *
- * Storage reads that throw follow the host: ThemeRootLayout falls back to
- * the configured night variant. The first paint must already be night, so
- * the document does not flip after mount. The header toggle must call
- * applyThemeVariant even when the host's variant buttons are gone.
+ * The sampler starts as soon as documentElement exists and keeps a frame
+ * log through mount. A paper sample fails the run. getItem failures and
+ * setItem failures both stay on the host's night fallback. The header
+ * toggle must call applyThemeVariant even when the host's variant buttons
+ * are gone.
  */
 import assert from "node:assert/strict";
 import puppeteer from "puppeteer-core";
@@ -22,14 +23,88 @@ if (!origin) {
   process.exit(1);
 }
 
+const paperBackground = "rgb(243, 241, 232)";
+
+const installSampler = () => {
+  window.__themeSamples = [];
+  const record = () => {
+    const root = document.documentElement;
+    if (!root) return;
+    const body = document.body;
+    window.__themeSamples.push({
+      t: Math.round(performance.now()),
+      variant: root.dataset.themeVariant || "",
+      background: body ? getComputedStyle(body).backgroundColor : "",
+    });
+  };
+  const arm = () => {
+    const root = document.documentElement;
+    if (!root || root.dataset.themeSampleArmed === "true") return;
+    root.dataset.themeSampleArmed = "true";
+    record();
+    new MutationObserver(record).observe(root, {
+      attributes: true,
+      attributeFilter: ["data-theme-variant"],
+    });
+    const frames = { count: 0 };
+    const tick = () => {
+      record();
+      frames.count += 1;
+      if (frames.count < 40) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (document.documentElement) arm();
+  document.addEventListener("readystatechange", arm);
+  new MutationObserver(arm).observe(document, { childList: true, subtree: true });
+};
+
+const assertNightFromFirstPaint = (samples, label) => {
+  assert.ok(samples.length > 0, `${label} collected no theme samples`);
+  const painted = samples.filter((sample) => sample.variant || sample.background);
+  assert.ok(painted.length > 0, `${label} collected no painted samples`);
+  const paper = painted.filter(
+    (sample) => sample.variant === "paper" || sample.background === paperBackground,
+  );
+  assert.deepEqual(
+    paper,
+    [],
+    `${label} painted paper before the host settled: ${JSON.stringify(samples)}`,
+  );
+};
+
 const browser = await puppeteer.launch({
   executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
   headless: true,
   args: ["--no-sandbox", "--disable-gpu"],
 });
-const page = await browser.newPage();
-await page.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "light" }]);
-await page.evaluateOnNewDocument(() => {
+
+const loadWithStorage = async (storageFactorySource) => {
+  const page = await browser.newPage();
+  await page.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "light" }]);
+  await page.evaluateOnNewDocument(installSampler);
+  await page.evaluateOnNewDocument(storageFactorySource);
+  await page.goto(origin, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page
+    .waitForFunction(
+      () =>
+        document
+          .querySelector("[data-theme-runtime-state]")
+          ?.getAttribute("data-theme-runtime-state") === "mounted",
+      { timeout: 20000 },
+    )
+    .catch(() => {});
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  const result = await page.evaluate(() => ({
+    samples: window.__themeSamples,
+    variant: document.documentElement.dataset.themeVariant,
+    background: getComputedStyle(document.body).backgroundColor,
+  }));
+  await page.close();
+  return result;
+};
+
+const deniedStorage = () => {
   const deny = () => {
     throw new DOMException("denied", "SecurityError");
   };
@@ -40,7 +115,6 @@ await page.evaluateOnNewDocument(() => {
     clear: deny,
     key: deny,
     get length() {
-      deny();
       return 0;
     },
   };
@@ -48,39 +122,36 @@ await page.evaluateOnNewDocument(() => {
     configurable: true,
     get: () => storage,
   });
-  window.__themeSamples = [];
-  const record = () => {
-    window.__themeSamples.push({
-      variant: document.documentElement.dataset.themeVariant || "",
-      background: getComputedStyle(document.body).backgroundColor,
-    });
+};
+
+const writeDeniedStorage = () => {
+  const storage = {
+    getItem: () => null,
+    setItem: () => {
+      throw new DOMException("denied", "QuotaExceededError");
+    },
+    removeItem: () => {},
+    clear: () => {},
+    key: () => null,
+    get length() {
+      return 0;
+    },
   };
-  new MutationObserver(record).observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme-variant"],
+  Object.defineProperty(window, "localStorage", {
+    configurable: true,
+    get: () => storage,
   });
-  record();
-});
-await page.goto(origin, { waitUntil: "domcontentloaded", timeout: 30000 });
-await page
-  .waitForFunction(
-    () =>
-      document
-        .querySelector("[data-theme-runtime-state]")
-        ?.getAttribute("data-theme-runtime-state") === "mounted",
-    { timeout: 20000 },
-  )
-  .catch(() => {});
-await new Promise((resolve) => setTimeout(resolve, 800));
-const storageResult = await page.evaluate(() => ({
-  samples: window.__themeSamples,
-  variant: document.documentElement.dataset.themeVariant,
-  background: getComputedStyle(document.body).backgroundColor,
-}));
-const variants = storageResult.samples.map((sample) => sample.variant).filter(Boolean);
-assert.equal(storageResult.variant, "night");
-assert.equal(variants.includes("paper"), false, JSON.stringify(storageResult.samples));
-assert.equal(storageResult.background, "rgb(8, 11, 10)");
+};
+
+const readDenied = await loadWithStorage(deniedStorage);
+assert.equal(readDenied.variant, "night");
+assert.equal(readDenied.background, "rgb(8, 11, 10)");
+assertNightFromFirstPaint(readDenied.samples, "getItem throw");
+
+const writeDenied = await loadWithStorage(writeDeniedStorage);
+assert.equal(writeDenied.variant, "night");
+assert.equal(writeDenied.background, "rgb(8, 11, 10)");
+assertNightFromFirstPaint(writeDenied.samples, "setItem throw");
 
 const togglePage = await browser.newPage();
 await togglePage.goto(origin, { waitUntil: "networkidle0", timeout: 30000 });
@@ -99,4 +170,7 @@ const after = await togglePage.evaluate(() => ({
 assert.notEqual(after.variant, before);
 assert.equal(after.stored, after.variant);
 await browser.close();
-console.log("tao3k-theme-host-page status=ok storage=night toggle=applied");
+const firstPaint = (samples) => samples.find((sample) => sample.variant) ?? samples[0];
+console.log(
+  `tao3k-theme-host-page status=ok readDeniedSamples=${readDenied.samples.length} readFirst=${JSON.stringify(firstPaint(readDenied.samples))} writeDeniedSamples=${writeDenied.samples.length} writeFirst=${JSON.stringify(firstPaint(writeDenied.samples))} toggle=applied`,
+);

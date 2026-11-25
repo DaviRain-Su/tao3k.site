@@ -95,6 +95,23 @@ const throwingGetter = (() => {
 assert.equal(throwingGetter.dataset.themeVariant, "night");
 assert.equal(throwingGetter.style.colorScheme, "dark");
 
+const writeDenied = (() => {
+  const rootNode = { dataset: {}, style: {} };
+  vm.runInNewContext(themeBootstrapSource, {
+    localStorage: {
+      getItem: () => null,
+      setItem: () => {
+        throw new Error("denied");
+      },
+    },
+    window: { matchMedia: () => ({ matches: true }) },
+    document: { documentElement: rootNode },
+  });
+  return rootNode;
+})();
+assert.equal(writeDenied.dataset.themeVariant, "night");
+assert.equal(writeDenied.style.colorScheme, "dark");
+
 const paperRule = startupStyleSource.match(
   /html\[data-theme-variant="paper"\],html\[data-theme-variant="paper"\] body\{background:(#[0-9a-f]{6})/u,
 );

@@ -20,9 +20,10 @@ export function resolveThemeChoice(hostStored, legacyStored, systemLight) {
 
 /**
  * A storage read failure uses the host fallback. ThemeRootLayout does the
- * same: its catch returns the configured default, which is night, and then
- * overwrites the document. Matching that fallback is what keeps the first
- * paint from flipping. A working store still prefers the system light choice.
+ * same when getItem throws. A write is also required when the host key is
+ * missing or stale: if setItem throws, the host still reads no key and falls
+ * back to night. The first paint uses that fallback so it does not flip.
+ * A working store still prefers the system light choice.
  */
 export function readBootVariant(storage, systemLight, hostKey, legacyKey, hostFallback) {
   const fallback = hostFallback === "paper" ? "paper" : "night";
@@ -43,10 +44,11 @@ export function readBootVariant(storage, systemLight, hostKey, legacyKey, hostFa
   }
   if (failed) return fallback;
   const variant = resolveThemeChoice(hostStored, legacyStored, systemLight);
+  if (hostStored === variant) return variant;
   try {
-    if (hostStored !== variant) storage.setItem(hostKey, variant);
+    storage.setItem(hostKey, variant);
   } catch {
-    /* The read succeeded, so the host will apply this choice. */
+    return fallback;
   }
   return variant;
 }
