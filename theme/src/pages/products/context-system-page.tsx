@@ -1,4 +1,6 @@
 import { LiveEvidenceFlow } from "../../LiveEvidenceFlow";
+import { productById } from "./product-catalog";
+import { ProductFacts } from "./product-facts";
 import {
   ContextDataStory,
   ContextArchitectureStory,
@@ -9,6 +11,7 @@ import {
 import "./context-system-page.css";
 
 export function ContextSystemPage() {
+  const product = productById("context-system");
   return (
     <div className="tao3k-context">
       <section className="tao3k-context__hero">
@@ -41,6 +44,11 @@ export function ContextSystemPage() {
           <small>YOUR FILE · YOUR CONTEXT</small>
         </div>
       </section>
+      {product ? (
+        <section className="detail-facts" aria-label="Context System status">
+          <ProductFacts product={product} />
+        </section>
+      ) : null}
       <ContextArchitectureStory />
       <ContextDataStory />
       <ContextStructureStory />

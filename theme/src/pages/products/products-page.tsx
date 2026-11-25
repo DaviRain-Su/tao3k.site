@@ -1,92 +1,7 @@
 import "./products-page.css";
 import { comparisonTopics } from "../comparison/comparison-catalog";
-
-const projects = [
-  {
-    name: "Context System",
-    role: "Shared knowledge in context",
-    detail: "Bring source-connected knowledge into work across tasks and sessions.",
-    href: "/products/context-system",
-    kind: "DIRECTION",
-  },
-  {
-    name: "Agentic AI Lab",
-    role: "Strategy & policy",
-    detail: "Compose policies, profiles and workflows before runtime handoff.",
-    href: "/products/agentic-ai-lab",
-    kind: "CONTROL PLANE",
-  },
-  {
-    name: "Xiuxian Artisan Workshop",
-    role: "Agent infrastructure",
-    detail: "Knowledge, orchestration, context rendering and tools in a Rust-first workspace.",
-    href: "/products/xiuxian-workshop",
-    kind: "WORKSPACE",
-  },
-  {
-    name: "Meta-Relational Reasoning",
-    role: "Reasoning & admission",
-    detail: "Typed relations, rules and lineage with explicit admission boundaries.",
-    href: "/products/meta-relational-reasoning",
-    kind: "REASONING",
-  },
-  {
-    name: "Cedar POO Spec",
-    role: "Trust & authorization",
-    detail: "Composable policies and proofs for complex domain decisions.",
-    href: "/products/cedar-poo-spec",
-    kind: "OPEN FOUNDATION",
-  },
-  {
-    name: "Weaver",
-    role: "Governed AI gateway",
-    detail: "Route provider work across policy, budget and execution boundaries.",
-    href: "/products/weaver",
-    kind: "GATEWAY",
-  },
-  {
-    name: "Agent Semantic Protocols",
-    role: "Source-aware code search",
-    detail: "Structured language search for people and agents.",
-    href: "/products/agent-semantic-protocols",
-    kind: "CODE INTELLIGENCE",
-  },
-  {
-    name: "MRR Data",
-    role: "Physical data plane",
-    detail: "Interchange, snapshots and bounded execution for MRR.",
-    href: "/products/mrr-data",
-    kind: "DATA",
-  },
-  {
-    name: "LeanPoo",
-    role: "Composition & proof",
-    detail: "Prototype composition and dependency-aware proof reuse.",
-    href: "/products/lean-poo",
-    kind: "FORMAL FOUNDATIONS",
-  },
-  {
-    name: "Lambda Aitia",
-    role: "Human + AI software lifecycle",
-    detail: "Connect design, verification, delivery and evolution.",
-    href: "/products/lambda-aitia",
-    kind: "ASSURANCE",
-  },
-  {
-    name: "Lambda Episteme",
-    role: "Vertical knowledge",
-    detail: "Domain scenarios, profiles, cases and sources.",
-    href: "/products/lambda-episteme",
-    kind: "DOMAIN",
-  },
-  {
-    name: "Deterministic Engineering",
-    role: "Engineering knowledge",
-    detail: "Compose project questions, methods and evidence.",
-    href: "/products/deterministic-engineering",
-    kind: "ENGINEERING",
-  },
-] as const;
+import { productCatalog } from "./product-catalog";
+import { ProductFacts } from "./product-facts";
 
 const story = [
   {
@@ -155,7 +70,8 @@ export function ProductsPage() {
           </h1>
           <p>
             From context and reasoning to governed action, discover the projects behind the tao3k
-            ecosystem.
+            ecosystem. Maturity uses the roadmap's four evidence states. A public repository is not
+            an installable product, and a vision is not a release.
           </p>
           <a className="product-world__link" href="#product-registry-title">
             Explore the projects <span aria-hidden="true">↘</span>
@@ -246,24 +162,21 @@ export function ProductsPage() {
         <header>
           <p className="product-world__eyebrow">THE OPEN ECOSYSTEM</p>
           <h2 id="product-registry-title">Explore the projects.</h2>
-          <p>Discover the main building blocks, then explore their source and related projects.</p>
+          <p>
+            Each card names a role, one of the four roadmap states, where to read the source, and
+            what this site does not claim is finished.
+          </p>
         </header>
         <div className="product-index__rows">
-          {projects.map((project, index) => (
-            <a href={project.href} className="product-index__row" key={project.name}>
+          {productCatalog.map((product, index) => (
+            <article className="product-card" id={product.id} key={product.id}>
               <span className="product-index__number">{String(index + 1).padStart(2, "0")}</span>
               <div>
-                <small>{project.kind}</small>
-                <h3>{project.name}</h3>
+                <h3>{product.name}</h3>
+                <p>{product.role}</p>
               </div>
-              <div className="product-index__detail">
-                <strong>{project.role}</strong>
-                <p>{project.detail}</p>
-              </div>
-              <span className="product-index__arrow" aria-hidden="true">
-                ↗
-              </span>
-            </a>
+              <ProductFacts product={product} />
+            </article>
           ))}
         </div>
         <p className="product-index__note">

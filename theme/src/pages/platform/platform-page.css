@@ -31,8 +31,29 @@
 
 .tao3k-platform-deployment > .tao3k-delivery-demo,
 .tao3k-platform-deployment__disciplines,
-.tao3k-platform-deployment__boundary {
+.tao3k-platform-deployment__boundary,
+.tao3k-trust-table {
   grid-column: 1 / -1;
+}
+.tao3k-trust-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.tao3k-trust-table caption {
+  margin-bottom: 0.8rem;
+  text-align: left;
+  font:
+    650 0.68rem/1.4 ui-monospace,
+    monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tao3k-trust-table th,
+.tao3k-trust-table td {
+  padding: 0.85rem 0.8rem 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
 }
 
 .tao3k-platform-deployment__copy > p {

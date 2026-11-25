@@ -1,6 +1,8 @@
 import { FlowStory } from "../components/flow-story";
 import { CodeScene } from "./products/code-scene";
 import { codeStory } from "../components/flow-stories";
+import { productByDetailHref } from "./products/product-catalog";
+import { ProductFacts } from "./products/product-facts";
 import "./detail-pages.css";
 
 type Detail = {
@@ -404,6 +406,7 @@ function CodeSearchIllustration() {
 
 export function DetailPage({ id }: { readonly id: DetailRouteId }) {
   const page: Detail = details[id];
+  const product = id.startsWith("products/") ? productByDetailHref(`/${id}`) : undefined;
   return (
     <article className="detail-page">
       <section className="detail-hero">
@@ -437,6 +440,11 @@ export function DetailPage({ id }: { readonly id: DetailRouteId }) {
           renderScene={(phase, moving) => <CodeScene phase={phase} moving={moving} />}
         />
       )}
+      {product ? (
+        <section className="detail-facts" aria-label={`${product.name} status`}>
+          <ProductFacts product={product} />
+        </section>
+      ) : null}
       <section className="detail-story">
         <p className="detail-kicker">THE CHALLENGE</p>
         <h2>{page.challenge}</h2>

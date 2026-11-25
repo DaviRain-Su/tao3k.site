@@ -33,7 +33,7 @@ const footerGroups: readonly FooterGroup[] = [
         href: "https://github.com/tao3k/tao3k.site/issues/new",
         external: true,
       },
-      { label: "Field notes", href: "https://github.com/tao3k", external: true },
+      { label: "GitHub organization", href: "https://github.com/tao3k", external: true },
     ],
   },
   {
@@ -77,6 +77,14 @@ export function Tao3kSiteFooter() {
         </nav>
       </div>
 
+      <p className="tao3k-site-footer__start">
+        Start from <a href="/platform">Platform</a>, <a href="/products">Products</a>,{" "}
+        <a href="/roadmap">Roadmap</a>, or the{" "}
+        <a href="https://github.com/tao3k" rel="noreferrer" target="_blank">
+          GitHub organization
+        </a>
+        . This published site has no /api, /deployment, or /open-source route.
+      </p>
       <div className="tao3k-site-footer__utility">
         <a className="tao3k-site-footer__brand" href="/" aria-label="tao3k home">
           <TaoLogo compact />

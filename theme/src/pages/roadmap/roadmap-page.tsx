@@ -3,12 +3,14 @@ const roadmap = [
   {
     state: "STATE PENDING",
     title: "Evidence Foundations",
-    systems: "Org · Orgize · Org Zhixing · ASP · Wendao",
+    systems: "Orgize · ASP · Xiuxian workshop",
     purpose: "Make records, contracts, source identity and projections durable and portable.",
+    evidence:
+      "The learning-data record assigns Org-first records and the evidence-to-action architecture as an available foundation. Evidence passports and lifecycle receipts are under active construction. Measuring learning value, keeping negative results, and returning attribution across institutions are research frontiers. An open evidence economy is a long-term horizon. This front itself has no single assigned state.",
     gap: "Rights and quality signals must remain portable across every projection boundary.",
     signal:
       "Evidence survives theme, runtime and organizational handoffs without losing provenance.",
-    docs: "Registry destination pending",
+    docs: "Orgize and ASP repositories. Org Zhixing and Wendao are not separate product pages.",
     reviewed: "2026-07-21",
   },
   {
@@ -16,9 +18,11 @@ const roadmap = [
     title: "Graph and Scientific Intelligence",
     systems: "Evidence-Action Graph Engine · Julia · ScienceResearch",
     purpose: "Make knowledge, code and scientific relationships computable and inspectable.",
+    evidence:
+      "The roadmap describes inspectable computational meaning, not a larger embedding store. No front-level state is assigned. MRR is the public reasoning repository; Ascent remains an upstream project tao3k does not maintain.",
     gap: "Semantic relations and scientific claims still need shared qualification boundaries.",
     signal: "Knowledge, code and scientific models can be queried through one inspectable graph.",
-    docs: "Registry destination pending",
+    docs: "See MRR on the product map",
     reviewed: "2026-07-21",
   },
   {
@@ -26,53 +30,63 @@ const roadmap = [
     title: "Qualification and Verification",
     systems: "Lean · Julia · ScienceResearch · Agentic AI Lab",
     purpose: "Qualify claims and authority without hiding judgment behind automation.",
+    evidence:
+      "The direction is Lean obligations, contracts, and a separation between qualification, authorization, and verification. No front-level state is assigned. LeanPoo and Cedar POO Spec are public construction projects, not this front delivered.",
     gap: "Formal checks must preserve human judgment and operational context.",
     signal: "Authority becomes machine-checkable without becoming opaque or absolute.",
-    docs: "Registry destination pending",
+    docs: "See LeanPoo and Cedar POO Spec",
     reviewed: "2026-07-21",
   },
   {
-    state: "STATE PENDING",
+    state: "Long-term Horizon",
     title: "Next-Generation Agent Core",
-    systems: "Agentic AI Lab composition · Marlin Agent Runtime",
+    systems: "Agentic AI Lab · Marlin Agent Core",
     purpose:
       "Join typed composition with governed execution while preserving evidence and authority.",
+    evidence:
+      "The ecosystem roadmap names a governed next-generation agent core as a long-term horizon, not a delivery. Agentic AI Lab and Marlin Agent Core are public repositories in Active Construction. The lab does not execute. Marlin is a substrate, not a terminal-user product. Their cards do not promote this front.",
     gap: "Composition, compression, execution and receipts need one governed operational boundary.",
     signal: "A composed case executes through Marlin while preserving evidence and authority.",
-    docs: "Registry destination pending",
+    docs: "See Agentic AI Lab and Marlin Agent Core",
     reviewed: "2026-07-21",
   },
   {
-    state: "STATE PENDING",
+    state: "Long-term Horizon",
     title: "Research-to-Operations Continuity",
-    systems: "Project assignment pending",
+    systems: "Project owner unassigned",
     purpose: "Create a bidirectional path between research evidence and governed operation.",
+    evidence:
+      "The ecosystem roadmap lists research-to-operations continuity among long-term horizons. No responsible project is assigned, and operational evidence returning to research is not a delivered path.",
     gap: "Bidirectional promotion and feedback are not yet one continuous enterprise path.",
     signal:
       "A research result can enter governed operation and return outcome evidence to research.",
-    docs: "Registry destination pending",
+    docs: "No project documentation destination is assigned",
     reviewed: "2026-07-21",
   },
   {
-    state: "STATE PENDING",
+    state: "Long-term Horizon",
     title: "Technical Equity and Open Infrastructure",
-    systems: "Project assignment pending",
+    systems: "Project owner unassigned",
     purpose:
       "Broaden the ability to inspect, learn, contribute and deploy without surrendering agency.",
+    evidence:
+      "Technical equity and open public foundations are named as long-term horizons. No project owner is assigned, and access is not claimed as already solved.",
     gap: "Access, education and contribution paths must become coherent across the ecosystem.",
     signal:
       "New participants can inspect, learn, contribute and deploy without surrendering agency.",
-    docs: "Registry destination pending",
+    docs: "No project documentation destination is assigned",
     reviewed: "2026-07-21",
   },
   {
-    state: "STATE PENDING",
+    state: "Long-term Horizon",
     title: "Evidence-Action Ecosystem",
     systems: "Cross-ecosystem outcome",
     purpose: "Close the lifecycle so every action returns searchable and contestable evidence.",
+    evidence:
+      "A closed evidence-action lifecycle is named as a long-term horizon. It depends on the earlier fronts and is not scheduled delivery.",
     gap: "The preceding fronts must interoperate before the lifecycle can close at ecosystem scale.",
     signal: "Every action returns searchable, contestable and improvable evidence.",
-    docs: "Registry destination pending",
+    docs: "No project documentation destination is assigned",
     reviewed: "2026-07-21",
   },
 ] as const;
@@ -112,7 +126,9 @@ export function RoadmapPage() {
           </li>
         </ol>
         <p className="tao3k-roadmap-maturity__notice">
-          CURRENT PUBLIC RECEIPT · Front-level state assignments have not yet been published.
+          Product cards use these four names for repository evidence. That is not a promotion of a
+          roadmap front. Where the roadmap record assigns no front-level state, the front stays
+          STATE PENDING.
         </p>
       </section>
 
@@ -182,7 +198,7 @@ export function RoadmapPage() {
                 </div>
                 <div>
                   <dt>PUBLIC EVIDENCE</dt>
-                  <dd>Front-level state assignment has not yet been published.</dd>
+                  <dd>{item.evidence}</dd>
                 </div>
                 <div>
                   <dt>KNOWN GAP</dt>

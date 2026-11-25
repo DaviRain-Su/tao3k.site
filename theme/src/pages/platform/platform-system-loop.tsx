@@ -69,6 +69,45 @@ const platformResponsibilities = [
 
 type ResponsibilityId = (typeof platformResponsibilities)[number]["id"];
 
+const evidenceReference: Readonly<
+  Record<string, { readonly href: string; readonly note?: string }>
+> = {
+  Orgize: { href: "/products#orgize" },
+  ASP: { href: "/products#agent-semantic-protocols" },
+  "Agentic AI Lab": { href: "/products/agentic-ai-lab" },
+  Marlin: {
+    href: "/products#marlin-agent-core",
+    note: "Runtime substrate. Not a separate installable shell, and not its own product route.",
+  },
+  "WendaoGraphs.jl": {
+    href: "/products#xiuxian-workshop",
+    note: "Named inside Xiuxian Artisan Workshop. Not an independent product page.",
+  },
+  GQL: {
+    href: "/products#meta-relational-reasoning",
+    note: "A frontend of Meta-Relational Reasoning, not a separate product page.",
+  },
+  Ascent: {
+    href: "https://github.com/s-arash/ascent",
+    note: "Upstream project. Not a tao3k repository.",
+  },
+};
+
+function EvidenceName({ name }: { readonly name: string }) {
+  const reference = evidenceReference[name];
+  if (!reference) return name;
+  const external = reference.href.startsWith("http");
+  return (
+    <a
+      href={reference.href}
+      title={reference.note}
+      {...(external ? { rel: "noreferrer", target: "_blank" } : {})}
+    >
+      {name}
+    </a>
+  );
+}
+
 export function PlatformSystemLoop() {
   const [activeId, setActiveId] = useState<ResponsibilityId>("evidence");
   const active =
@@ -129,7 +168,7 @@ export function PlatformSystemLoop() {
                 {technologyIdByEvidence[item] ? (
                   <TechnologyMark compact id={technologyIdByEvidence[item]} />
                 ) : (
-                  item
+                  <EvidenceName name={item} />
                 )}
               </li>
             ))}

@@ -123,6 +123,50 @@ const deploymentPlatformLayers = [
   },
 ] as const;
 
+const layerLinks: Readonly<Record<string, { readonly href: string; readonly note?: string }>> = {
+  Orgize: { href: "/products#orgize" },
+  ASP: { href: "/products#agent-semantic-protocols" },
+  "Meta-Relational Reasoning": { href: "/products/meta-relational-reasoning" },
+  "Agentic AI Lab": { href: "/products/agentic-ai-lab" },
+  Marlin: {
+    href: "/products#marlin-agent-core",
+    note: "Runtime substrate. Not its own product route.",
+  },
+  "WendaoGraphs.jl": {
+    href: "/products#xiuxian-workshop",
+    note: "Named inside Xiuxian Artisan Workshop. Not an independent product page.",
+  },
+  Ascent: { href: "https://github.com/s-arash/ascent", note: "Upstream. Not a tao3k repository." },
+};
+
+function LayerSystems({ systems }: { readonly systems: string }) {
+  const parts = systems.split(" · ");
+  return (
+    <small>
+      {parts.map((part, index) => {
+        const link = layerLinks[part];
+        const external = link?.href.startsWith("http") ?? false;
+        return (
+          <span key={part}>
+            {index > 0 ? " · " : null}
+            {link ? (
+              <a
+                href={link.href}
+                title={link.note}
+                {...(external ? { rel: "noreferrer", target: "_blank" } : {})}
+              >
+                {part}
+              </a>
+            ) : (
+              part
+            )}
+          </span>
+        );
+      })}
+    </small>
+  );
+}
+
 const deploymentModeDetails = {
   "platform/on-premises": {
     decision:
@@ -331,7 +375,8 @@ export function PlatformDeploymentPage({ modeId }: { readonly modeId: PlatformDe
           <h2 id="deployment-stack-title">A complete evidence-to-operation system.</h2>
           <p>
             Deployment changes where authority lives. It does not remove the platform layers that
-            make knowledge, compute and operation reproducible.
+            make knowledge, compute and operation reproducible. Marlin is the runtime substrate, not
+            a desktop agent. WendaoGraphs.jl is not an independent product page.
           </p>
         </header>
         <div>
@@ -340,7 +385,7 @@ export function PlatformDeploymentPage({ modeId }: { readonly modeId: PlatformDe
               <span>{layer.layer}</span>
               <h3>{layer.title}</h3>
               <p>{layer.detail}</p>
-              <small>{layer.systems}</small>
+              <LayerSystems systems={layer.systems} />
             </article>
           ))}
         </div>
