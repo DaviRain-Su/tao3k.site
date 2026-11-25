@@ -1,27 +1,35 @@
-export const themeVariantStorageKey = "tao3k-theme-variant";
+import {
+  hostThemeVariantKey,
+  isThemeVariant,
+  legacyThemeVariantKey,
+  resolveThemeChoice,
+  type ThemeVariant,
+} from "./theme-variant.mjs";
 
-export type ThemeVariant = "night" | "paper";
+export const themeVariantStorageKey = hostThemeVariantKey;
 
-const isThemeVariant = (value: string | null | undefined): value is ThemeVariant =>
-  value === "night" || value === "paper";
+export type { ThemeVariant };
 
-export function readStoredThemeVariant(): ThemeVariant | null {
+const readKey = (key: string): string | null => {
   try {
-    const stored = localStorage.getItem(themeVariantStorageKey);
-    return isThemeVariant(stored) ? stored : null;
+    return localStorage.getItem(key);
   } catch {
     return null;
   }
+};
+
+export function readStoredThemeVariant(): ThemeVariant | null {
+  const stored = readKey(hostThemeVariantKey);
+  return isThemeVariant(stored) ? stored : null;
 }
 
-/** Stored choice wins. Otherwise keep an attribute already set, then follow the system. */
+/** Host storage wins. Otherwise a legacy choice, then the system preference. */
 export function resolveThemeVariant(): ThemeVariant {
-  const stored = readStoredThemeVariant();
-  if (stored) return stored;
-  const attribute = document.documentElement.dataset.themeVariant;
-  if (isThemeVariant(attribute)) return attribute;
-  if (window.matchMedia("(prefers-color-scheme: light)").matches) return "paper";
-  return "night";
+  return resolveThemeChoice(
+    readKey(hostThemeVariantKey),
+    readKey(legacyThemeVariantKey),
+    window.matchMedia("(prefers-color-scheme: light)").matches,
+  );
 }
 
 export function applyThemeVariant(variant: ThemeVariant, persist: boolean): void {
@@ -31,7 +39,7 @@ export function applyThemeVariant(variant: ThemeVariant, persist: boolean): void
   root.style.colorScheme = variant === "paper" ? "light" : "dark";
   if (!persist) return;
   try {
-    localStorage.setItem(themeVariantStorageKey, variant);
+    localStorage.setItem(hostThemeVariantKey, variant);
   } catch {
     /* Private mode and quota failures still leave the document attribute set. */
   }

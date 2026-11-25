@@ -1,6 +1,6 @@
 .privacy-page {
-  color: #e9edf8;
-  background: #0c101c;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .privacy-hero,
 .privacy-section,
@@ -203,13 +203,13 @@
   padding: 0.45rem 0.6rem;
   border: 1px solid #a8b9d447;
   border-radius: 0.35rem;
-  color: #bfcbdd;
+  color: var(--ink);
   background: transparent;
   font: inherit;
 }
 .privacy-scene__footer button[aria-pressed="true"] {
-  background: #becdf1;
-  color: #182131;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 .privacy-scene__footer button:focus-visible {
   outline: 2px solid #d1dfff;

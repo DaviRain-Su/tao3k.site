@@ -1,20 +1,19 @@
-/* A quiet ink-and-indigo environment; color marks meaning, not every surface. */
-html[data-theme-variant="night"] {
-  --tao-mint: #bcc8ff;
-  --tao-green: #aebdff;
-  --tao-night: #0b0d16;
-  --tao-accent: #afbcff;
-}
+/* Night and paper share the document tokens. This file keeps layout and motion. */
 html[data-theme-variant="night"] .tao3k-home,
 html[data-theme-variant="night"] .tao3k-route-page {
-  --immersive-bg: #0b0d16;
-  --immersive-raised: #151a28;
-  --immersive-text: #eff0f7;
-  --immersive-muted: #b1b7c9;
-  --immersive-line: rgba(200, 207, 236, 0.14);
+  --immersive-bg: var(--canvas);
+  --immersive-raised: var(--surface);
+  --immersive-text: var(--ink);
+  --immersive-muted: var(--muted);
+  --immersive-line: var(--line);
 }
 .tao3k-home-hero {
-  background: radial-gradient(ellipse at 76% 47%, #252944 0%, #141725 34%, #0b0d16 78%);
+  background: radial-gradient(
+    ellipse at 76% 47%,
+    color-mix(in srgb, var(--accent) 18%, var(--canvas)) 0%,
+    var(--canvas) 72%
+  );
+  color: var(--ink);
 }
 .tao3k-home-hero h1 {
   max-width: 740px;
@@ -22,36 +21,32 @@ html[data-theme-variant="night"] .tao3k-route-page {
   line-height: 1.04;
   letter-spacing: -0.055em;
 }
-.tao3k-home-hero h1 span {
-  color: #c6cdf9;
-}
+.tao3k-home-hero h1 span,
 .tao3k-home-hero .tao3k-eyebrow,
 .tao3k-home-hero .tao3k-eyebrow span {
-  color: #aebbe8;
+  color: var(--accent);
 }
-.tao3k-home-hero .tao3k-home-hero__lede {
-  color: #e0e3ef;
-}
+.tao3k-home-hero .tao3k-home-hero__lede,
 .tao3k-home-hero .tao3k-home-hero__human {
-  color: #aeb5c8;
+  color: var(--muted);
 }
 .tao3k-home-hero .tao3k-button--primary {
-  background: #d6dcff;
-  border-color: #d6dcff;
-  color: #151829;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 html[data-theme-variant="night"] .tao3k-home-system-boundary,
 html[data-theme-variant="night"] .tao3k-home-thesis,
 html[data-theme-variant="night"] .tao3k-home-proof,
 html[data-theme-variant="night"] .tao3k-home-exit {
-  background: #10131e;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-products-page,
 html[data-theme-variant="night"] .tao3k-roadmap-page,
 html[data-theme-variant="night"] .tao3k-issue-ledger,
 html[data-theme-variant="night"] .tao3k-comparison-matrix,
 html[data-theme-variant="night"] .tao3k-comparison-verdict {
-  background: #10131e;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-products-hero,
 html[data-theme-variant="night"] .tao3k-roadmap-hero {
@@ -60,10 +55,10 @@ html[data-theme-variant="night"] .tao3k-roadmap-hero {
 html[data-theme-variant="night"] .tao3k-issue-response,
 html[data-theme-variant="night"] .tao3k-comparison-table,
 html[data-theme-variant="night"] .tao3k-enterprise-pressure {
-  background: #171a29;
+  background: var(--surface);
 }
 html[data-theme-variant="night"] .tao3k-platform {
-  --platform-bg: #0b0d16;
+  --platform-bg: var(--canvas);
   --platform-panel: #151a28;
   --platform-line: rgba(200, 207, 236, 0.14);
   --platform-soft: #aab2c7;
@@ -72,20 +67,20 @@ html[data-theme-variant="night"] .tao3k-platform {
 html[data-theme-variant="night"] .tao3k-platform-system,
 html[data-theme-variant="night"] .tao3k-deployment-mode__stack,
 html[data-theme-variant="night"] .tao3k-production-system {
-  background: #111521;
+  background: var(--surface);
 }
 html[data-theme-variant="night"] .tao3k-deployment-mode {
   --deployment-accent: #bdc8ff;
   background:
     linear-gradient(90deg, #bfc9ff0a 1px, transparent 1px) 0 0 / 25vw 100%,
-    #0b0d16;
+    var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-deployment-mode__questions {
-  background: #191d2d;
+  background: var(--surface);
   color: #e5e8f5;
 }
 html[data-theme-variant="night"] .tao3k-deployment-mode__questions h2 {
-  color: #edf0fa;
+  color: var(--ink);
 }
 html[data-theme-variant="night"] .tao3k-deployment-mode__questions .tao3k-route-kicker {
   color: #b9c6ff;
@@ -101,23 +96,23 @@ html[data-theme-variant="night"] .tao3k-solutions-hero,
 html[data-theme-variant="night"] .tao3k-solution-system,
 html[data-theme-variant="night"] .tao3k-solution-index,
 html[data-theme-variant="night"] .tao3k-solution-case {
-  background: #111521;
+  background: var(--surface);
 }
 html[data-theme-variant="night"] .tao3k-solution-case:nth-of-type(even) {
-  background: #171a28;
+  background: var(--surface);
 }
 .tao3k-visual-bridge__art {
   filter: saturate(0.48) hue-rotate(36deg);
 }
 html[data-theme-variant="night"] .tao3k-context {
-  background: #0b0d16;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-context__hero {
-  background: radial-gradient(ellipse at 75% 50%, #292e4d 0%, #171b2c 35%, #0b0d16 75%);
+  background: radial-gradient(ellipse at 75% 50%, #292e4d 0%, #171b2c 35%, var(--canvas) 75%);
 }
 html[data-theme-variant="night"] .tao3k-context__principles,
 html[data-theme-variant="night"] .tao3k-context__note {
-  background: #111521;
+  background: var(--surface);
 }
 html[data-theme-variant="night"] .tao3k-context__hero h1 em,
 html[data-theme-variant="night"] .tao3k-context__hero a,
@@ -133,21 +128,21 @@ html[data-theme-variant="night"] .tao3k-context__orbit::after {
   border-color: #bdc9ff55;
 }
 html[data-theme-variant="night"] .tao3k-context__orbit span {
-  background: #1a2038;
+  background: var(--surface);
   border-color: #9baae6;
 }
 html[data-theme-variant="night"] .tao3k-header,
 html[data-theme-variant="night"] .theme-surface--tao3k-site > .tao3k-header {
-  background: #0c0e18ee;
+  background: color-mix(in srgb, var(--canvas) 93%, transparent);
   border-color: #c8cfec22;
 }
 html[data-theme-variant="night"] .tao3k-site-footer {
-  background: #0d101a;
+  background: var(--canvas);
   border-color: #c8cfec24;
 }
 html[data-theme-variant="night"] .tao3k-platform-menu__panel,
 html[data-theme-variant="night"] .tao3k-products-menu__panel {
-  background: #111521;
+  background: var(--surface);
   border-color: #c8cfec28;
 }
 html[data-theme-variant="night"] .tao3k-header__cta {
@@ -161,7 +156,7 @@ html[data-theme-variant="night"]
 }
 @media (max-width: 1100px) {
   html[data-theme-variant="night"] .theme-surface--tao3k-site .tao3k-header__nav {
-    background: #111521;
+    background: var(--surface);
   }
   html[data-theme-variant="night"] .tao3k-products-menu__panel {
     background: transparent;
@@ -178,8 +173,8 @@ html[data-theme-variant="night"]
   position: relative;
   padding: clamp(80px, 10vw, 150px) clamp(24px, 6vw, 100px);
   overflow: hidden;
-  color: #edf0fa;
-  background: #10131e;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .tao3k-system-atlas > header {
   position: relative;
@@ -192,7 +187,7 @@ html[data-theme-variant="night"]
   letter-spacing: -0.055em;
 }
 .tao3k-system-atlas header > p:last-child {
-  color: #aeb5c9;
+  color: var(--muted);
   font-size: 1.1rem;
 }
 .tao3k-system-atlas__field {
@@ -252,7 +247,7 @@ html[data-theme-variant="night"]
   padding: 24px;
   border: 1px solid #b7c5ef38;
   background: #161a2bcc;
-  color: #edf0fa;
+  color: var(--ink);
   text-decoration: none;
   backdrop-filter: blur(14px);
   transition:
@@ -337,7 +332,7 @@ html[data-theme-variant="night"]
   }
 }
 html[data-theme-variant="night"] .tao3k-comparison-page {
-  background: #10131e;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-comparison-hero {
   background: radial-gradient(ellipse at 80% 20%, #32365366, transparent 52%);
@@ -420,25 +415,30 @@ html[data-theme-variant="night"] .tao3k-site-footer__top b {
   line-height: 1.05;
 }
 .tao3k-home-hero h1 span {
-  color: #c7d1f6;
+  color: var(--accent);
 }
 .tao3k-home-hero .tao3k-home-hero__lede {
   max-width: 480px;
   line-height: 1.65;
+  color: var(--muted);
 }
 .tao3k-home-hero {
-  background: radial-gradient(ellipse at 80% 42%, #303450 0%, #191b2b 33%, #0c0e17 78%);
+  background: radial-gradient(
+    ellipse at 80% 42%,
+    color-mix(in srgb, var(--accent) 16%, var(--canvas)) 0%,
+    var(--canvas) 72%
+  );
 }
 .tao3k-home-hero .tao3k-button--primary,
 html[data-theme-variant="night"] .tao3k-header__cta {
-  background: #e1e5f8;
-  border-color: #e1e5f8;
-  color: #191c29;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 
 /* Three connected points make the system legible before any explanation. */
 .tao3k-system-atlas {
-  background: #11141e;
+  background: var(--canvas);
 }
 .tao3k-system-atlas__field {
   min-height: 365px;
@@ -569,8 +569,14 @@ html[data-theme-variant="night"] .tao3k-context__note p:not(.tao3k-route-kicker)
 
 /* Context's live example belongs to the same atmospheric system as its hero. */
 .tao3k-context .tao3k-live {
-  color: #e9edf8;
-  background: radial-gradient(ellipse at 78% 18%, #32395470, transparent 46%), #111521;
+  color: var(--ink);
+  background:
+    radial-gradient(
+      ellipse at 78% 18%,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      transparent 46%
+    ),
+    var(--surface);
 }
 .tao3k-context .tao3k-live__heading h2 {
   max-width: 720px;
@@ -580,15 +586,15 @@ html[data-theme-variant="night"] .tao3k-context__note p:not(.tao3k-route-kicker)
   font-weight: 560;
 }
 .tao3k-context .tao3k-live__controls {
-  border-color: #b7c4e23b;
-  background: #111522d9;
+  border-color: var(--line);
+  background: var(--surface);
 }
 .tao3k-context .tao3k-live__controls > span {
-  color: #b3bdd4;
+  color: var(--muted);
 }
 .tao3k-context .tao3k-live__controls button {
-  border-color: #c7d0ec38;
-  color: #e0e5f3;
+  border-color: var(--line);
+  color: var(--ink);
   font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 }
 .tao3k-context .tao3k-live__surface {
@@ -743,7 +749,7 @@ html[data-theme-variant="night"] .tao3k-home-thesis__seal::after {
     margin-top: 5px;
     border: 1px solid #95a5c9;
     border-radius: 50%;
-    background: #151a29;
+    background: var(--surface);
   }
   .tao3k-live-mobile li.is-complete .tao3k-live-mobile__marker {
     background: #8f9fc3;
@@ -789,8 +795,8 @@ html[data-theme-variant="night"] .tao3k-home-thesis__seal::after {
   grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(3rem, 8vw, 9rem);
   padding: clamp(5rem, 9vw, 9rem) clamp(24px, 4.4vw, 76px);
-  color: #e9ebf4;
-  background: #10131e;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .tao3k-foundations__intro h2 {
   max-width: 12ch;
@@ -801,7 +807,7 @@ html[data-theme-variant="night"] .tao3k-home-thesis__seal::after {
 }
 .tao3k-foundations__intro > p:last-child {
   max-width: 34ch;
-  color: #b5bdce;
+  color: var(--muted);
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -816,7 +822,7 @@ html[data-theme-variant="night"] .tao3k-home-thesis__seal::after {
   border-bottom: 1px solid #c8cfec2d;
 }
 .tao3k-foundations__number {
-  color: #aab7ed;
+  color: var(--accent);
   font:
     600 0.65rem/1.5 ui-monospace,
     monospace;
@@ -829,14 +835,14 @@ html[data-theme-variant="night"] .tao3k-home-thesis__seal::after {
 }
 .tao3k-foundations__list h3 {
   margin: 0 0 0.65rem;
-  color: #eff1fa;
+  color: var(--ink);
   font-size: clamp(1.2rem, 1.8vw, 1.6rem);
   letter-spacing: -0.025em;
 }
 .tao3k-foundations__list p {
   max-width: 58ch;
   margin: 0;
-  color: #b4bfd0;
+  color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.7;
 }
@@ -854,7 +860,7 @@ html[data-theme-variant="night"] .tao3k-home-thesis__seal::after {
   font-size: 0.7rem;
 }
 .tao3k-foundations__list a {
-  color: #c6d1ff;
+  color: var(--accent);
   font-size: 0.8rem;
   text-decoration: none;
 }

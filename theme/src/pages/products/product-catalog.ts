@@ -1,4 +1,10 @@
-/** Published product cards. Facts follow docs/products/70.02 and the pages that already describe a boundary. */
+/**
+ * Roles for projects listed in docs/products/70.02 follow that mapping.
+ * 70.02 assigns no four-state maturity. Cards stay STATE PENDING until a
+ * roadmap record assigns one of the four states with limits, an exit
+ * criterion, and a review date. Weaver, Lambda Episteme, and Deterministic
+ * Engineering are not in that mapping.
+ */
 
 export const evidenceStates = [
   "Available Foundation",
@@ -7,7 +13,7 @@ export const evidenceStates = [
   "Long-term Horizon",
 ] as const;
 
-export type EvidenceState = (typeof evidenceStates)[number];
+export type EvidenceState = (typeof evidenceStates)[number] | "STATE PENDING";
 
 export type ProductRecord = {
   readonly id: string;
@@ -31,7 +37,7 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Context System",
     role: "Shared, task-situated context.",
     responsibility: "Website direction for keeping source-connected knowledge with the work.",
-    maturity: "Research Frontier",
+    maturity: "STATE PENDING",
     maturityNote:
       "A site-level direction. It is not a claim that every referenced integration has been released.",
     access: "No independent publication. This page is the public description.",
@@ -45,9 +51,9 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Orgize",
     role: "Parse Org source into elements you can query.",
     responsibility: "Rust Org-mode parser for source-backed elements, queries, and contracts.",
-    maturity: "Available Foundation",
+    maturity: "STATE PENDING",
     maturityNote:
-      "The public repository and its README are the start. This site does not add install steps.",
+      "The open-source mapping describes a public Rust Org parser and does not assign a four-state maturity. Known limit: this site publishes no install steps and no exit criterion. Review date: not published.",
     access: "Public repository. Begin with the README.",
     repository: "https://github.com/tao3k/orgize",
     docsLabel: "Repository README",
@@ -62,7 +68,7 @@ export const productCatalog: readonly ProductRecord[] = [
     role: "A Rust workspace for agent knowledge and tools.",
     responsibility:
       "Workspace for knowledge, workflows, context, memory, and tool routing. Not one shipped suite.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "Wendao, Qianji, Qianhuan, and other packages inside the workspace are not separate product pages and are not one released offering.",
     access: "Public repository. Component status stays with the workspace.",
@@ -80,7 +86,7 @@ export const productCatalog: readonly ProductRecord[] = [
     role: "Compose strategy before anything runs.",
     responsibility:
       "Scheme control plane for profiles, policies, sessions, workflows, and runtime handoff.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "It describes and validates strategy. It does not authorize a host or execute an effect. POO Flow is the historical name of this control plane, not a second product.",
     access: "Public repository. Begin with README.org.",
@@ -97,7 +103,7 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Marlin Agent Core",
     role: "The runtime substrate underneath an agent shell.",
     responsibility: "Rust agent-runtime substrate and typed runtime contracts.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "The README distinguishes the substrate from a terminal-user product. There is no separate product page beyond this card.",
     access: "Public repository. Not a desktop or phone agent you install from this site.",
@@ -114,7 +120,7 @@ export const productCatalog: readonly ProductRecord[] = [
     role: "Admit what follows from typed relations.",
     responsibility:
       "Typed relations, facts, rules, provenance, generations, and semantic admission.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "Ascent computes candidates. MRR owns admission. The old GQL Rust address redirects here; GQL and Cypher are adapters, not a separate product page.",
     access: "Public repository. Begin with the README.",
@@ -131,7 +137,7 @@ export const productCatalog: readonly ProductRecord[] = [
     role: "Move reasoning data without redefining the fact.",
     responsibility:
       "Physical data plane for Arrow interchange, bounded execution, snapshots, and storage.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "Storage and execution are separate from semantic admission, which stays with MRR.",
     access: "Public repository. Begin with README.org.",
@@ -147,7 +153,7 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Agent Semantic Protocols",
     role: "Shared contracts for source-aware code search.",
     responsibility: "Contracts, language harness interfaces, hooks, and replay scenarios.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "The product-facing asp client is one surface. Provider coverage is not uniform, and search is not a proof of program correctness.",
     access: "Public repository. Begin with the README.",
@@ -163,7 +169,7 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "LeanPoo",
     role: "Reuse a proof only while its assumptions still hold.",
     responsibility: "Lean 4 prototype for composition and dependency-aware proof reuse.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "Proofs establish their stated model laws. They do not establish arbitrary application or host behavior.",
     access: "Public repository. Begin with README.org.",
@@ -179,7 +185,7 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Cedar POO Spec",
     role: "Compose authorization checks without becoming the enforcer.",
     responsibility: "Reusable authorization models, proofs, and example scenarios.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
       "The HardenedLinux repository is the canonical source. The tao3k repository is a mirror. Healthcare, finance, and security examples are models and tests, not a hospital connector, signer, or production gateway.",
     access:
@@ -197,9 +203,9 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Weaver",
     role: "Carry policy with an agent request.",
     responsibility: "Policy-governed gateway between agents and providers.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
-      "Under active development. The described provider path is OpenAI-compatible Chat Completions streaming. Broader protocol adapters are not claimed as finished.",
+      "Weaver is not in the open-source mapping, so no four-state maturity is assigned. The existing product page says the provider path under development is OpenAI-compatible Chat Completions streaming.",
     access: "Public repository. Not a generally available managed gateway.",
     repository: "https://github.com/hardenedlinux/weaver",
     docsLabel: "Repository",
@@ -213,7 +219,7 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Lambda Aitia",
     role: "A causal-assurance project for engineering decisions.",
     responsibility: "Research project connecting design, verification, delivery, and feedback.",
-    maturity: "Research Frontier",
+    maturity: "STATE PENDING",
     maturityNote:
       "Public documentation must be read before any integration or readiness claim. This site does not make that claim.",
     access: "Public repository. Not presented as an installable release.",
@@ -229,9 +235,9 @@ export const productCatalog: readonly ProductRecord[] = [
     name: "Lambda Episteme",
     role: "Domain modules a host may select.",
     responsibility: "Domain scenarios, profiles, cases, and sources.",
-    maturity: "Research Frontier",
+    maturity: "STATE PENDING",
     maturityNote:
-      "The open-source mapping does not assign a released integration. Selecting domain content does not authorize a decision or execute an action.",
+      "Lambda Episteme is not listed in the open-source product mapping. No maturity is assigned. Selecting domain content does not authorize a decision or execute an action.",
     access: "Public repository. Not an adoption promise.",
     repository: "https://github.com/tao3k/lambda-episteme",
     docsLabel: "Repository; integration is not asserted",
@@ -246,9 +252,9 @@ export const productCatalog: readonly ProductRecord[] = [
     role: "Reusable engineering questions, methods, and evidence.",
     responsibility:
       "HardenedLinux library for project questions, methods, and associated evidence.",
-    maturity: "Active Construction",
+    maturity: "STATE PENDING",
     maturityNote:
-      "The documented project-formation case remains capture-blocked. End-to-end Aitia review is a target, not a finished path.",
+      "Deterministic Engineering is not in the open-source mapping, so no four-state maturity is assigned. The existing product page says the project-formation case remains capture-blocked.",
     access: "Public repository. The capture-blocked case is not a runnable demo on this site.",
     repository: "https://github.com/hardenedlinux/deterministic-engineering",
     docsLabel: "Repository",

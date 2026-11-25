@@ -211,7 +211,7 @@ export function RoadmapPage() {
               <p>{item.signal}</p>
               <footer>
                 <span>{item.docs}</span>
-                <time dateTime={item.reviewed}>Reviewed {item.reviewed}</time>
+                <time dateTime={item.reviewed}>Source dated {item.reviewed}</time>
               </footer>
             </div>
           </article>

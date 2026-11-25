@@ -1,7 +1,7 @@
 .flow-story {
   padding: clamp(4rem, 7vw, 7rem) clamp(24px, 6vw, 104px);
-  color: #edf2f7;
-  background: #101a26;
+  color: var(--ink);
+  background: var(--canvas);
   border-top: 1px solid #c3d6ec20;
 }
 .flow-story * {

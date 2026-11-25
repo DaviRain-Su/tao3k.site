@@ -1,7 +1,7 @@
 /* Comparison: a dated failure ledger before any category matrix. */
 .tao3k-comparison-page {
-  color: #e9efec;
-  background: #101714;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .tao3k-comparison-hero {
   min-height: 800px;
@@ -18,7 +18,7 @@
   grid-column: 1 / -1;
 }
 .tao3k-comparison-hero h1 {
-  color: #eef4f0;
+  color: var(--ink);
   margin: 0;
   font-size: clamp(4rem, 7.4vw, 8rem);
   line-height: 0.88;

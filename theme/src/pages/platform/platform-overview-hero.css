@@ -28,7 +28,7 @@
 .tao3k-platform-overview-hero__lead {
   max-width: 850px;
   margin: clamp(36px, 5vh, 64px) 0 0;
-  color: #a8bdb5;
+  color: var(--muted);
   font-size: clamp(1.08rem, 1.35vw, 1.42rem);
   line-height: 1.62;
 }
@@ -39,7 +39,7 @@
 }
 
 .tao3k-platform-overview-hero aside > span {
-  color: #8df0c2;
+  color: var(--accent);
   font:
     700 0.65rem/1 "IBM Plex Mono",
     monospace;
@@ -59,7 +59,7 @@
 }
 
 .tao3k-platform-overview-hero dt {
-  color: #698079;
+  color: var(--muted);
   font:
     650 0.62rem/1.55 "IBM Plex Mono",
     monospace;
@@ -68,7 +68,7 @@
 
 .tao3k-platform-overview-hero dd {
   margin: 0;
-  color: #d7e5e0;
+  color: var(--ink);
   font-size: 0.94rem;
   line-height: 1.48;
 }

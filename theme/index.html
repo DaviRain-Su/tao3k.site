@@ -7,14 +7,20 @@
     <script data-tao3k-theme-bootstrap>
       (function () {
         try {
-          var key = "tao3k-theme-variant";
-          var stored = localStorage.getItem(key);
+          var hostKey = "org-zhixing:theme-variant:tao3k-site";
+          var legacyKey = "tao3k-theme-variant";
+          var hostStored = localStorage.getItem(hostKey);
+          var legacyStored = localStorage.getItem(legacyKey);
+          var systemLight = window.matchMedia("(prefers-color-scheme: light)").matches;
           var variant =
-            stored === "paper" || stored === "night"
-              ? stored
-              : window.matchMedia("(prefers-color-scheme: light)").matches
-                ? "paper"
-                : "night";
+            hostStored === "night" || hostStored === "paper"
+              ? hostStored
+              : legacyStored === "night" || legacyStored === "paper"
+                ? legacyStored
+                : systemLight
+                  ? "paper"
+                  : "night";
+          if (hostStored !== variant) localStorage.setItem(hostKey, variant);
           var root = document.documentElement;
           root.dataset.theme = "tao3k-site";
           root.dataset.themeVariant = variant;

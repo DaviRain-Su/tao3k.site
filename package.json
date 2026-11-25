@@ -42,7 +42,7 @@
     "theme:prepare": "npm run theme:contract:sync",
     "theme:build": "npm run theme:prepare && rsbuild build --config theme/rsbuild.config.ts && npm run theme:check",
     "theme:check": "node theme/tests/check-manifest.mjs && node theme/tests/check-local-config.mjs && node --experimental-strip-types theme/tests/check-hero-gpu.mjs && node --experimental-strip-types theme/tests/check-flow-stories.mjs && node --experimental-strip-types theme/tests/check-comparison-research.mjs && npm run theme:host:check && npm run theme:routes:check",
-    "theme:host:check": "node theme/tests/check-host-revision.mjs && node theme/tests/check-local-host.mjs",
+    "theme:host:check": "node theme/tests/check-host-revision.mjs && node theme/tests/check-local-host.mjs && node --experimental-strip-types theme/tests/check-theme-mode.mjs",
     "theme:routes:check": "node --experimental-strip-types theme/tests/check-application-routes.mjs",
     "pages:routes": "node --experimental-strip-types theme/src/build/prepare-application-pages.mjs",
     "principles:bundle:generate": "node theme/src/build/prepare-principles-bundle.mjs",

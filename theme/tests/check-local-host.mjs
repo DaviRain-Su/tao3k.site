@@ -3,8 +3,63 @@ import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
+import vm from "node:vm";
 import { prepareLocalHost } from "../src/build/prepare-local-host.mjs";
-import { siteHrefForBase, withStartupCanvas } from "../src/build/prepare-host-shell.mjs";
+import {
+  siteHrefForBase,
+  startupStyleSource,
+  themeBootstrapSource,
+  withStartupCanvas,
+} from "../src/build/prepare-host-shell.mjs";
+import { hostThemeVariantKey, legacyThemeVariantKey } from "../src/theme-variant.mjs";
+
+const bootTheme = ({ host, legacy, light }) => {
+  const store = new Map();
+  if (host !== undefined) store.set(hostThemeVariantKey, host);
+  if (legacy !== undefined) store.set(legacyThemeVariantKey, legacy);
+  const root = { dataset: {}, style: {} };
+  vm.runInNewContext(themeBootstrapSource, {
+    localStorage: {
+      getItem: (key) => (store.has(key) ? store.get(key) : null),
+      setItem: (key, value) => {
+        store.set(key, value);
+      },
+    },
+    window: { matchMedia: () => ({ matches: light }) },
+    document: { documentElement: root },
+  });
+  return { root, store };
+};
+
+const firstLightVisit = bootTheme({ light: true });
+assert.equal(firstLightVisit.root.dataset.themeVariant, "paper");
+assert.equal(firstLightVisit.store.get(hostThemeVariantKey), "paper");
+
+const firstDarkVisit = bootTheme({ light: false });
+assert.equal(firstDarkVisit.root.dataset.themeVariant, "night");
+assert.equal(firstDarkVisit.store.get(hostThemeVariantKey), "night");
+
+const hostPaperOnDarkSystem = bootTheme({ host: "paper", light: false });
+assert.equal(hostPaperOnDarkSystem.root.dataset.themeVariant, "paper");
+assert.equal(hostPaperOnDarkSystem.root.style.colorScheme, "light");
+
+const legacyPaperOnly = bootTheme({ legacy: "paper", light: false });
+assert.equal(legacyPaperOnly.root.dataset.themeVariant, "paper");
+assert.equal(legacyPaperOnly.store.get(hostThemeVariantKey), "paper");
+
+const invalidHostValue = bootTheme({ host: "sepia", light: true });
+assert.equal(invalidHostValue.root.dataset.themeVariant, "paper");
+assert.notEqual(invalidHostValue.root.dataset.themeVariant, "sepia");
+assert.equal(invalidHostValue.store.get(hostThemeVariantKey), "paper");
+
+const invalidOnDarkSystem = bootTheme({ host: "sepia", legacy: "lime", light: false });
+assert.equal(invalidOnDarkSystem.root.dataset.themeVariant, "night");
+
+const paperRule = startupStyleSource.match(
+  /html\[data-theme-variant="paper"\],html\[data-theme-variant="paper"\] body\{background:(#[0-9a-f]{6})/u,
+);
+assert.equal(paperRule?.[1], "#f3f1e8");
+assert.equal(paperRule?.[1] === "#080b0a", false);
 
 const root = await mkdtemp(resolve(tmpdir(), "tao3k-local-host-"));
 const source = resolve(root, "source");
@@ -35,7 +90,9 @@ assert.equal(await prepareLocalHost({ cacheRoot, packagePath, sourceRoot: source
 const preparedShell = await readFile(resolve(prepared, "index.html"), "utf8");
 assert.match(preparedShell, /data-tao3k-startup="night"/);
 assert.match(preparedShell, /data-tao3k-theme-bootstrap/);
+assert.match(preparedShell, /org-zhixing:theme-variant:tao3k-site/);
 assert.match(preparedShell, /tao3k-theme-variant/);
+assert.match(preparedShell, /dataset\.themeVariant=variant/);
 assert.match(preparedShell, /html,body\{background:#080b0a;color:#eef2ec\}/);
 assert.match(preparedShell, /html\[data-theme-variant="paper"\]/);
 assert.match(preparedShell, /background:#f3f1e8/);

@@ -4,10 +4,8 @@
   margin-inline: calc(50% - 50vw);
   padding: clamp(64px, 7vw, 112px) clamp(24px, 4.8vw, 96px) 28px;
   border-top: 1px solid rgb(126 240 191 / 18%);
-  color: #e8f0ec;
-  background:
-    linear-gradient(180deg, rgb(8 33 27 / 98%), rgb(5 25 20 / 99%)),
-    radial-gradient(circle at 8% 100%, rgb(92 224 177 / 8%), transparent 30rem);
+  color: var(--ink);
+  background: var(--canvas);
 }
 
 .tao3k-site-footer__layout {
@@ -27,7 +25,7 @@
 
 .tao3k-site-footer__directory h2 {
   margin: 0 0 1.5rem;
-  color: #8aa89d;
+  color: var(--muted);
   font:
     700 0.66rem/1.2 "IBM Plex Mono",
     monospace;
@@ -45,7 +43,7 @@
   display: inline-flex;
   align-items: baseline;
   gap: 0.38em;
-  color: #d7e5de;
+  color: var(--ink);
   font-size: clamp(0.98rem, 1.05vw, 1.12rem);
   line-height: 1.35;
   text-decoration: none;
@@ -56,7 +54,7 @@
 
 .tao3k-site-footer__directory a span,
 .tao3k-site-footer__top b {
-  color: #75e7bc;
+  color: var(--accent);
 }
 
 @media (hover: hover) {
@@ -76,7 +74,7 @@
   margin: clamp(76px, 10vw, 152px) auto 0;
   padding-top: 22px;
   border-top: 1px solid rgb(126 240 191 / 15%);
-  color: #728d82;
+  color: var(--muted);
   font:
     600 0.64rem/1.4 "IBM Plex Mono",
     monospace;
@@ -142,7 +140,7 @@
 }
 
 .tao3k-site-footer__brand .tao-logo-tao {
-  color: #eef5f2;
+  color: var(--ink);
 }
 
 .tao3k-site-footer__brand .tao-logo-three {
@@ -163,7 +161,7 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: #b8cec4;
+  color: var(--muted);
   text-decoration: none;
 }
 

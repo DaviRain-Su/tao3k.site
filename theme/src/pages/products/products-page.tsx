@@ -70,8 +70,8 @@ export function ProductsPage() {
           </h1>
           <p>
             From context and reasoning to governed action, discover the projects behind the tao3k
-            ecosystem. Maturity uses the roadmap's four evidence states. A public repository is not
-            an installable product, and a vision is not a release.
+            ecosystem. A card stays STATE PENDING until a roadmap record assigns one of the four
+            evidence states. A public repository is not an installable product.
           </p>
           <a className="product-world__link" href="#product-registry-title">
             Explore the projects <span aria-hidden="true">↘</span>

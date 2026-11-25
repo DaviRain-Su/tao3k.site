@@ -1,19 +1,9 @@
 /* Platform deployment routes: one family, three distinct authority topologies. */
 .tao3k-deployment-mode {
-  --deployment-accent: #8df0c2;
+  --deployment-accent: var(--accent);
   width: 100%;
-  color: #d8e7e1;
-  background:
-    linear-gradient(90deg, rgba(141, 240, 194, 0.045) 1px, transparent 1px) 0 0 / 25vw 100%,
-    #071812;
-}
-
-.tao3k-deployment-mode[data-mode="hybrid"] {
-  --deployment-accent: #8bb9ff;
-}
-
-.tao3k-deployment-mode[data-mode="managed-cloud"] {
-  --deployment-accent: #d0a9ff;
+  color: var(--ink);
+  background: var(--canvas);
 }
 
 .tao3k-deployment-mode__hero {
@@ -27,7 +17,7 @@
 }
 
 .tao3k-deployment-mode__hero > div > a {
-  color: #7f9a90;
+  color: var(--muted);
   font:
     600 0.72rem/1 "IBM Plex Mono",
     monospace;
@@ -42,7 +32,7 @@
 .tao3k-deployment-mode__hero h1 {
   max-width: 960px;
   margin: 30px 0 0;
-  color: #edf5f1;
+  color: var(--ink);
   font-size: clamp(4.3rem, 8vw, 9rem);
   font-weight: 480;
   line-height: 0.88;

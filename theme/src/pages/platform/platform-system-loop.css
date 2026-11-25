@@ -1,7 +1,8 @@
 .tao3k-platform-system {
   padding: clamp(100px, 11vw, 180px) clamp(24px, 5vw, 92px);
   border-bottom: 1px solid var(--platform-line);
-  background: #081b16;
+  background: var(--canvas);
+  color: var(--ink);
 }
 
 .tao3k-platform-system > header {
@@ -45,7 +46,7 @@
   right: 0;
   left: 0;
   height: 1px;
-  background: linear-gradient(90deg, #8df0c2, rgba(141, 240, 194, 0.2));
+  background: linear-gradient(90deg, var(--accent), rgba(141, 240, 194, 0.2));
   content: "";
 }
 
@@ -55,7 +56,7 @@
   padding: 30px 22px 24px 0;
   border: 0;
   border-right: 1px solid var(--platform-line);
-  color: #718b81;
+  color: var(--muted);
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -73,9 +74,10 @@
   left: 0;
   width: 11px;
   height: 11px;
-  border: 2px solid #8df0c2;
+  border: 2px solid var(--accent);
   border-radius: 50%;
-  background: #081b16;
+  background: var(--canvas);
+  color: var(--ink);
   content: "";
   transition:
     background 180ms ease,
@@ -85,19 +87,19 @@
 .tao3k-platform-system__loop button:hover,
 .tao3k-platform-system__loop button:focus-visible,
 .tao3k-platform-system__loop button.is-active {
-  color: #dff8ed;
+  color: var(--ink);
   background: linear-gradient(180deg, rgba(141, 240, 194, 0.08), transparent);
   outline: none;
 }
 
 .tao3k-platform-system__loop button.is-active::before {
-  background: #8df0c2;
+  background: var(--accent);
   box-shadow: 0 0 20px rgba(141, 240, 194, 0.62);
 }
 
 .tao3k-platform-system__loop button small,
 .tao3k-platform-system__detail small {
-  color: #698079;
+  color: var(--muted);
   font:
     650 0.62rem/1.3 "IBM Plex Mono",
     monospace;
@@ -112,7 +114,7 @@
 
 .tao3k-platform-system__loop button span {
   margin-top: auto;
-  color: #8df0c2;
+  color: var(--accent);
   font:
     550 0.72rem/1.3 "IBM Plex Mono",
     monospace;
@@ -124,7 +126,7 @@
   bottom: 0;
   left: 0;
   border-bottom: 1px solid rgba(141, 240, 194, 0.36);
-  color: #8df0c2;
+  color: var(--accent);
   font:
     650 0.62rem/2.4 "IBM Plex Mono",
     monospace;
@@ -147,13 +149,13 @@
 }
 
 .tao3k-platform-system__detail p {
-  color: #91aaa1;
+  color: var(--muted);
   line-height: 1.65;
 }
 
 .tao3k-platform-system__detail h3 {
   margin: 20px 0 0;
-  color: #e5f3ed;
+  color: var(--ink);
   font-size: clamp(1.8rem, 3vw, 3.75rem);
   font-weight: 520;
   line-height: 1.04;
@@ -173,14 +175,14 @@
   padding: 7px 10px;
   border: 1px solid var(--platform-line);
   border-radius: 999px;
-  color: #a8bdb5;
+  color: var(--muted);
   font-size: 0.72rem;
 }
 
 .tao3k-platform-system__evidence > p {
   padding-top: 20px;
   border-top: 1px solid var(--platform-line);
-  color: #8df0c2;
+  color: var(--accent);
   font:
     600 0.72rem/1.5 "IBM Plex Mono",
     monospace;

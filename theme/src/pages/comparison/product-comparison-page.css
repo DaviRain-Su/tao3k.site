@@ -1,6 +1,6 @@
 .product-comparison {
-  background: #0d111c;
-  color: #eef1f8;
+  background: var(--canvas);
+  color: var(--ink);
 }
 .product-comparison > header,
 .product-comparison__intro,
@@ -365,7 +365,7 @@
 .matrix-details summary {
   padding: 1.2rem 0;
   cursor: pointer;
-  color: #dce5f6;
+  color: var(--ink);
   list-style: none;
   font-size: 0.9rem;
 }
