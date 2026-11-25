@@ -1,6 +1,6 @@
 .tao3k-context {
-  color: #e5f0e9;
-  background: #101a28;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .tao3k-context__hero {
   display: grid;
@@ -9,7 +9,11 @@
   gap: 6vw;
   min-height: 78vh;
   padding: 100px clamp(24px, 7vw, 110px);
-  background: radial-gradient(ellipse at 75% 40%, #263d50 0%, #172737 40%, #101a28 78%);
+  background: radial-gradient(
+    ellipse at 75% 40%,
+    color-mix(in srgb, var(--accent) 16%, var(--canvas)) 0%,
+    var(--canvas) 78%
+  );
 }
 .tao3k-context__hero h1 {
   max-width: 700px;
@@ -19,12 +23,12 @@
   letter-spacing: -0.065em;
 }
 .tao3k-context__hero h1 em {
-  color: #abdcd3;
+  color: var(--accent);
   font-style: normal;
 }
 .tao3k-context__hero p:not(.tao3k-route-kicker) {
   max-width: 490px;
-  color: #b2c2d0;
+  color: var(--muted);
   font-size: 1.2rem;
   line-height: 1.6;
 }
@@ -32,16 +36,16 @@
 .tao3k-context__note a {
   display: inline-block;
   margin-top: 24px;
-  color: #b9e5d9;
+  color: var(--accent);
   text-decoration: none;
 }
 .tao3k-context__hero-file {
   width: min(100%, 450px);
   justify-self: center;
   overflow: hidden;
-  border: 1px solid #9ec3c65c;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: #142535db;
+  background: var(--canvas);
   box-shadow: 0 25px 80px #050d1780;
 }
 .tao3k-context__hero-file > div {
@@ -49,24 +53,24 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.2rem;
-  border-bottom: 1px solid #abc9ce2b;
+  border-bottom: 1px solid var(--line);
 }
 .tao3k-context__hero-file > div span,
 .tao3k-context__hero-file > small {
-  color: #91b3b8;
+  color: var(--muted);
   font:
     600 0.62rem ui-monospace,
     monospace;
   letter-spacing: 0.1em;
 }
 .tao3k-context__hero-file > div strong {
-  color: #d7e9e8;
+  color: var(--ink);
   font-size: 0.76rem;
 }
 .tao3k-context__hero-file pre {
   margin: 0;
   padding: 1.6rem 1.3rem;
-  color: #c3d9e0;
+  color: var(--ink);
   font:
     0.82rem/1.85 ui-monospace,
     monospace;
@@ -75,7 +79,7 @@
 .tao3k-context__hero-file > small {
   display: block;
   padding: 0.85rem 1.2rem;
-  border-top: 1px solid #abc9ce2b;
+  border-top: 1px solid var(--line);
 }
 .tao3k-context__orbit {
   position: relative;
@@ -103,7 +107,7 @@
   padding: 10px 14px;
   border: 1px solid #77c99a;
   border-radius: 30px;
-  background: #102f21;
+  background: var(--canvas);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
 }
@@ -120,14 +124,14 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   padding: 30px clamp(24px, 7vw, 110px) 100px;
-  background: #142231;
+  background: var(--canvas);
 }
 .tao3k-context__principles article {
   padding: 35px 30px;
-  border-top: 1px solid #63838d;
+  border-top: 1px solid var(--line);
 }
 .tao3k-context__principles small {
-  color: #a6c8c3;
+  color: var(--muted);
   letter-spacing: 0.12em;
 }
 .tao3k-context__principles h2 {
@@ -136,12 +140,12 @@
 }
 .tao3k-context__principles p,
 .tao3k-context__note p:not(.tao3k-route-kicker) {
-  color: #b4c4d1;
+  color: var(--muted);
   line-height: 1.6;
 }
 .tao3k-context__note {
   padding: 100px clamp(24px, 7vw, 110px);
-  background: #172738;
+  background: var(--canvas);
 }
 .tao3k-context__note h2 {
   max-width: 800px;
@@ -170,7 +174,7 @@
 }
 .tao3k-context__hero p.tao3k-context__trust {
   margin-top: 2rem;
-  color: #a8c8c7;
+  color: var(--muted);
   font:
     600 0.67rem/1.4 ui-monospace,
     monospace;

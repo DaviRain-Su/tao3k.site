@@ -1,12 +1,12 @@
 /* Principles / Trust Kernel sample: cyber-industrial evidence lab. */
 .tao3k-principles-page {
-  --trust-bg: #071512;
-  --trust-panel: #0b1d1a;
-  --trust-panel-strong: #102824;
+  --trust-bg: var(--canvas);
+  --trust-panel: var(--surface);
+  --trust-panel-strong: var(--surface-raised);
   --trust-line: rgb(118 198 180 / 20%);
-  --trust-ink: #e8eee8;
-  --trust-muted: #91a7a1;
-  --trust-cyan: #70e2d3;
+  --trust-ink: var(--ink);
+  --trust-muted: var(--muted);
+  --trust-cyan: var(--accent);
   --trust-amber: #e3a969;
   --trust-coral: #d46f61;
   display: block;
@@ -30,9 +30,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    linear-gradient(90deg, rgb(2 12 11 / 97%) 0%, rgb(2 12 11 / 76%) 35%, transparent 68%),
-    linear-gradient(0deg, var(--trust-bg) 0%, transparent 34%);
+  background: var(--surface);
   content: "";
 }
 
@@ -130,7 +128,7 @@
 .tao3k-trust-hero__copy > p:last-child {
   max-width: 62ch;
   margin: 0;
-  color: #bdccc7;
+  color: var(--muted);
   font-size: clamp(1rem, 1.35vw, 1.3rem);
   line-height: 1.65;
 }
@@ -152,7 +150,7 @@
 }
 
 .tao3k-trust-hero__telemetry span {
-  color: #879994;
+  color: var(--muted);
 }
 
 .tao3k-trust-hero__telemetry b {
@@ -176,14 +174,14 @@
   border-bottom: 1px solid var(--trust-line);
   background:
     linear-gradient(rgb(112 226 211 / 3%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(112 226 211 / 3%) 1px, transparent 1px), #081814;
+    linear-gradient(90deg, rgb(112 226 211 / 3%) 1px, transparent 1px), var(--canvas);
   background-size: 52px 52px;
 }
 
 .tao3k-principles-page .tao3k-values-pressure > header,
 .tao3k-principles-page .tao3k-values-pressure__choices {
   border-color: var(--trust-line);
-  background: rgb(5 19 16 / 84%);
+  background: var(--surface);
   backdrop-filter: blur(18px);
 }
 
@@ -199,7 +197,7 @@
 
 .tao3k-principles-page .tao3k-values-pressure__choice {
   border-color: var(--trust-line);
-  color: #9eb2ac;
+  color: var(--muted);
 }
 
 .tao3k-principles-page .tao3k-values-pressure__choice[data-preview-active] {
@@ -218,7 +216,7 @@
   align-items: center;
   margin-top: auto;
   padding-top: 28px;
-  color: #789088;
+  color: var(--muted);
   font-family: var(--tao-mono);
   font-size: 0.6rem;
   letter-spacing: 0.12em;
@@ -319,7 +317,8 @@
   gap: clamp(60px, 10vw, 180px);
   padding: clamp(90px, 11vw, 180px) clamp(24px, 6vw, 108px);
   border-bottom: 1px solid rgb(212 111 97 / 32%);
-  background: radial-gradient(circle at 90% 20%, rgb(212 111 97 / 12%), transparent 30%), #100f10;
+  background:
+    radial-gradient(circle at 90% 20%, rgb(212 111 97 / 12%), transparent 30%), var(--canvas);
 }
 
 .tao3k-trust-refusal > div span {
@@ -346,7 +345,7 @@
   position: relative;
   padding: 24px 48px 24px 0;
   border-bottom: 1px solid rgb(212 111 97 / 20%);
-  color: #c8c1bf;
+  color: var(--muted);
   font-size: clamp(1rem, 1.25vw, 1.25rem);
   line-height: 1.45;
 }

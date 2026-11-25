@@ -1,0 +1,148 @@
+/* Targeted pairs. Each rule sets the fill and the ink together, or only a token
+   that the component already uses for both. No descendant wipe. */
+
+html[data-theme-variant="night"],
+html[data-theme-variant="paper"] {
+  --tao-ink: var(--ink);
+  --tao-muted: var(--muted);
+  --tao-line: var(--line);
+  --tao-paper: var(--canvas);
+  --tao-panel: var(--surface-raised);
+  --tao-mint: var(--focus);
+  --tao-green: var(--accent);
+  --tao-night: var(--canvas);
+  --tao-accent: var(--accent);
+  --tao-page: var(--surface);
+  --tao3k-canvas: var(--canvas);
+  --tao3k-surface: var(--surface);
+  --tao3k-surface-raised: var(--surface-raised);
+  --tao3k-text: var(--ink);
+  --tao3k-muted: var(--muted);
+  --tao3k-line: var(--line);
+  --tao3k-accent: var(--accent);
+  --immersive-bg: var(--canvas);
+  --immersive-raised: var(--surface);
+  --immersive-text: var(--ink);
+  --immersive-muted: var(--muted);
+  --immersive-line: var(--line);
+  --platform-bg: var(--canvas);
+  --platform-panel: var(--surface);
+  --platform-line: var(--line);
+  --platform-soft: var(--muted);
+  --pw-bg: var(--canvas);
+  --pw-ink: var(--ink);
+  --pw-muted: var(--muted);
+  --pw-line: var(--line);
+  --pw-lilac: var(--accent);
+}
+
+html[data-theme-variant] .tao3k-header,
+html[data-theme-variant] .theme-surface--tao3k-site > .tao3k-header {
+  background-color: var(--canvas);
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+
+html[data-theme-variant] .tao3k-site-footer {
+  background: var(--canvas);
+  color: var(--ink);
+  border-top-color: var(--line);
+}
+
+html[data-theme-variant] .tao3k-site-footer__directory h2,
+html[data-theme-variant] .tao3k-site-footer__utility {
+  color: var(--muted);
+}
+
+html[data-theme-variant] .tao3k-site-footer__directory a {
+  color: var(--ink);
+}
+
+html[data-theme-variant] :is(.tao3k-site-footer__directory a span, .tao3k-site-footer__top b) {
+  color: var(--accent);
+}
+
+html[data-theme-variant] :is(a.tao3k-button--primary, a.tao3k-header__cta) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+html[data-theme-variant] a.tao3k-button--quiet {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+html[data-theme-variant]
+  :is(
+    .tao3k-header__nav a,
+    .tao3k-header__utility,
+    .tao3k-platform-menu__trigger,
+    .tao3k-products-menu__trigger,
+    .tao3k-products-menu__trigger span
+  ) {
+  color: var(--ink);
+}
+
+html[data-theme-variant] .tao3k-products-menu__panel :is(a, a span, small, p, strong) {
+  color: var(--ink);
+}
+
+html[data-theme-variant] :is(.tao3k-platform-menu__panel, .tao3k-products-menu__panel) {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+html[data-theme-variant]
+  :is(.tao3k-home, .tao3k-route-page, .tao3k-header)
+  :is(a, button, input, summary):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+html[data-theme-variant] .product-comparison-index thead th {
+  background: var(--surface);
+  color: var(--muted);
+}
+
+html[data-theme-variant] .matrix-details summary {
+  color: var(--ink);
+}
+
+html[data-theme-variant] .tao3k-roadmap-track__rail span {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+html[data-theme-variant] .privacy-scene__footer button {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+html[data-theme-variant] .privacy-scene__footer button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+html[data-theme-variant] :is(.privacy-layers__icon, .supply-story__icon) {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+html[data-theme-variant] .tao3k-context .tao3k-live__controls button {
+  color: var(--ink);
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tao3k-reveal > *,
+  .tao3k-system-atlas.tao3k-reveal .tao3k-system-atlas__links a {
+    opacity: 1;
+    transform: none;
+  }
+}

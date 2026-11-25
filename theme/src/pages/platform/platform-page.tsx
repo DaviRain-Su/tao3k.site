@@ -4,7 +4,10 @@ import { PlatformSystemLoop } from "./platform-system-loop";
 import "./platform-page.css";
 
 const deploymentTargets = [
-  { target: "LOCAL", detail: "Research, inspection and bounded development" },
+  {
+    target: "LOCAL",
+    detail: "Research and development trust domain. Not a desktop or phone agent.",
+  },
   {
     target: "ON-PREMISES",
     detail: "Customer-owned data, identity and hardware",
@@ -59,6 +62,38 @@ export function PlatformPage() {
             environment qualification remain inspectable boundaries.
           </p>
         </div>
+        <table className="tao3k-trust-table">
+          <caption>Where authority lives</caption>
+          <thead>
+            <tr>
+              <th>Surface</th>
+              <th>Owns</th>
+              <th>Does not mean</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Local</th>
+              <td>Research and development on a machine you control.</td>
+              <td>A desktop or phone agent product.</td>
+            </tr>
+            <tr>
+              <th>On-premises</th>
+              <td>Customer-owned data, identity, and hardware.</td>
+              <td>A vendor control plane that quietly exports operational meaning.</td>
+            </tr>
+            <tr>
+              <th>Hybrid</th>
+              <td>Local authority. Qualified work may cross a declared boundary.</td>
+              <td>An undocumented integration.</td>
+            </tr>
+            <tr>
+              <th>Managed</th>
+              <td>A tao3k-operated service whose artifact and decision identity stay visible.</td>
+              <td>Surrendering the receipt, the region, or the exit path.</td>
+            </tr>
+          </tbody>
+        </table>
         <div className="tao3k-platform-deployment__targets">
           <header>
             <span>ONE SYSTEM IDENTITY</span>
@@ -130,10 +165,10 @@ export function PlatformPage() {
       </section>
 
       <section className="tao3k-platform-next">
-        <p>Platform defines the shared system.</p>
+        <p>Platform defines the shared rules. Products name what is public, and what is not.</p>
         <div>
-          <a href="/products">Products show what can be adopted</a>
-          <a href="/solutions">Solutions show how the system is composed</a>
+          <a href="/products">Open the product map</a>
+          <a href="/solutions#reference-scenario">Read the reference scenario</a>
         </div>
       </section>
     </div>

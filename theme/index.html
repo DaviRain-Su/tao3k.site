@@ -4,6 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
+    <script data-tao3k-theme-bootstrap>
+      (function () {
+        try {
+          var hostKey = "org-zhixing:theme-variant:tao3k-site";
+          var legacyKey = "tao3k-theme-variant";
+          var hostStored = localStorage.getItem(hostKey);
+          var legacyStored = localStorage.getItem(legacyKey);
+          var systemLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+          var variant =
+            hostStored === "night" || hostStored === "paper"
+              ? hostStored
+              : legacyStored === "night" || legacyStored === "paper"
+                ? legacyStored
+                : systemLight
+                  ? "paper"
+                  : "night";
+          if (hostStored !== variant) localStorage.setItem(hostKey, variant);
+          var root = document.documentElement;
+          root.dataset.theme = "tao3k-site";
+          root.dataset.themeVariant = variant;
+          root.style.colorScheme = variant === "paper" ? "light" : "dark";
+        } catch (e) {}
+      })();
+    </script>
+    <style data-tao3k-startup="night">
+      html,
+      body {
+        background: #0b0d16;
+        color: #eff0f7;
+      }
+      html[data-theme-variant="paper"],
+      html[data-theme-variant="paper"] body {
+        background: #f3f1e8;
+        color: #1a211c;
+      }
+      html[data-theme-variant="night"],
+      html[data-theme-variant="night"] body {
+        background: #0b0d16;
+        color: #eff0f7;
+      }
+    </style>
     <title>tao3k.site · Zhixing theme provider</title>
   </head>
   <body>

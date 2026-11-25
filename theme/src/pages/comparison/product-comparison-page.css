@@ -1,20 +1,20 @@
 .product-comparison {
-  background: #0d111c;
-  color: #eef1f8;
+  background: var(--canvas);
+  color: var(--ink);
 }
 .product-comparison > header,
 .product-comparison__intro,
 .product-comparison__matrix,
 .product-comparison__next {
   padding: clamp(5rem, 8vw, 8rem) clamp(24px, 6vw, 100px);
-  border-bottom: 1px solid #bdc9e529;
+  border-bottom: 1px solid var(--line);
 }
 .product-comparison > header {
-  background: radial-gradient(ellipse at 80% 45%, #46557d36, transparent 55%);
+  background: radial-gradient(ellipse at 80% 45%, var(--line), transparent 55%);
 }
 .product-comparison > header > p,
 .product-comparison section > small {
-  color: #aebfe8;
+  color: var(--muted);
   font:
     600 0.68rem/1.4 ui-monospace,
     monospace;
@@ -35,11 +35,11 @@
 .product-comparison p,
 .product-comparison > header > span {
   max-width: 68ch;
-  color: #b7c2d2;
+  color: var(--muted);
   line-height: 1.7;
 }
 .product-comparison a {
-  color: #cad8ff;
+  color: var(--ink);
   text-decoration: none;
 }
 .product-comparison a:hover {
@@ -60,12 +60,12 @@
 }
 .product-comparison__chain span {
   padding: 0.8rem 1rem;
-  border: 1px solid #a9bbdc52;
+  border: 1px solid var(--line);
   border-radius: 0.5rem;
-  color: #d5e2f7;
+  color: var(--ink);
 }
 .product-comparison__chain i {
-  color: #a7b5db;
+  color: var(--muted);
   font-style: normal;
 }
 .product-comparison__scroll {
@@ -81,20 +81,20 @@
 .product-comparison th,
 .product-comparison td {
   padding: 1rem;
-  border-bottom: 1px solid #bdc9e529;
+  border-bottom: 1px solid var(--line);
   vertical-align: top;
   line-height: 1.55;
   font-size: 0.85rem;
 }
 .product-comparison thead th {
-  color: #aebfe8;
+  color: var(--muted);
   font:
     600 0.65rem/1.4 ui-monospace,
     monospace;
   text-transform: uppercase;
 }
 .product-comparison td {
-  color: #b9c5d6;
+  color: var(--muted);
 }
 .product-comparison tbody th a {
   display: block;
@@ -128,16 +128,16 @@
   gap: 0.7rem;
   align-items: center;
   margin-top: 2rem;
-  color: #d0dbf3;
+  color: var(--ink);
   font-size: 0.85rem;
 }
 .comparison-scenario__path span {
   padding: 0.75rem 1rem;
-  border: 1px solid #aabce34b;
+  border: 1px solid var(--line);
   border-radius: 0.45rem;
 }
 .comparison-scenario__path i {
-  color: #9dafd5;
+  color: var(--muted);
   font-style: normal;
 }
 .comparison-research > a {
@@ -147,7 +147,7 @@
 }
 .comparison-research__alternatives {
   margin-top: 3rem;
-  border-top: 1px solid #bdc9e529;
+  border-top: 1px solid var(--line);
 }
 .comparison-research__alternatives > h3 {
   margin: 2rem 0 1rem;
@@ -158,11 +158,11 @@
   grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
   gap: 2rem;
   padding: 2rem 0;
-  border-top: 1px solid #bdc9e529;
+  border-top: 1px solid var(--line);
 }
 .comparison-research__alternatives small,
 .comparison-research__boundary small {
-  color: #aebfe8;
+  color: var(--muted);
   font:
     600 0.65rem/1.4 ui-monospace,
     monospace;
@@ -181,8 +181,8 @@
 .comparison-research__boundary {
   margin-top: 2rem;
   padding: 1.3rem;
-  border-left: 2px solid #aebfe8;
-  background: #a9bcec0b;
+  border-left: 2px solid var(--line);
+  background: var(--surface);
 }
 .comparison-research__boundary p {
   margin: 0.5rem 0 0;
@@ -225,7 +225,7 @@
   }
   .comparison-research__matrix tr {
     padding: 0.8rem 0;
-    border-bottom: 1px solid #bdc9e529;
+    border-bottom: 1px solid var(--line);
   }
   .comparison-research__matrix th,
   .comparison-research__matrix td {
@@ -237,7 +237,7 @@
     content: attr(data-label);
     display: block;
     margin-bottom: 0.25rem;
-    color: #aebfe8;
+    color: var(--muted);
     font:
       600 0.62rem/1.4 ui-monospace,
       monospace;
@@ -264,9 +264,9 @@
 }
 .matrix-table-wrap {
   overflow: hidden;
-  border: 1px solid #afc0e333;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: #151c2a;
+  background: var(--canvas);
 }
 .product-comparison .comparison-matrix {
   width: 100%;
@@ -276,15 +276,15 @@
 .product-comparison .comparison-matrix th,
 .product-comparison .comparison-matrix td {
   padding: 1.3rem 1.5rem;
-  border-bottom: 1px solid #afc0e326;
+  border-bottom: 1px solid var(--line);
   font-size: 0.92rem;
   line-height: 1.5;
 }
 .product-comparison .comparison-matrix thead th {
   height: 6.4rem;
-  background: #192232;
+  background: var(--canvas);
   text-transform: none;
-  color: #e8edf8;
+  color: var(--ink);
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
@@ -292,7 +292,7 @@
 }
 .product-comparison .comparison-matrix thead th:first-child {
   width: 23%;
-  color: #aab9d6;
+  color: var(--muted);
   font:
     600 0.65rem/1.4 ui-monospace,
     monospace;
@@ -320,25 +320,25 @@
   height: 2.5rem;
   margin-right: 0.75rem;
   vertical-align: middle;
-  color: #dfd9fb;
-  background: #756aac33;
-  border: 1px solid #b6a7ed66;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 0.7rem;
   font:
     700 0.8rem/1 ui-sans-serif,
     sans-serif;
 }
 .matrix-brand--ours {
-  color: #b9e9dd;
-  background: #427d7440;
-  border-color: #8dc8b87a;
+  color: var(--ink);
+  background: var(--surface);
+  border-color: var(--muted);
 }
 .product-comparison .comparison-matrix tbody th {
-  color: #e6edf7;
+  color: var(--ink);
   font-weight: 600;
 }
 .product-comparison .comparison-matrix tbody td:nth-child(2) {
-  color: #d6e9e4;
+  color: var(--ink);
   background: #8ac7b407;
 }
 .product-comparison .comparison-matrix tbody tr:last-child > * {
@@ -360,12 +360,12 @@
 }
 .matrix-details {
   margin-top: 1.2rem;
-  border-bottom: 1px solid #afc0e333;
+  border-bottom: 1px solid var(--line);
 }
 .matrix-details summary {
   padding: 1.2rem 0;
   cursor: pointer;
-  color: #dce5f6;
+  color: var(--ink);
   list-style: none;
   font-size: 0.9rem;
 }
@@ -407,7 +407,7 @@
   .product-comparison .comparison-matrix tbody tr {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid #afc0e333;
+    border-bottom: 1px solid var(--line);
   }
   .product-comparison .comparison-matrix tbody tr:last-child {
     border-bottom: 0;
@@ -429,7 +429,7 @@
     content: attr(data-label);
     display: block;
     margin-bottom: 0.4rem;
-    color: #a9bad6;
+    color: var(--muted);
     font:
       600 0.61rem/1.35 ui-monospace,
       monospace;

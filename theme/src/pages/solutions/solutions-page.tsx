@@ -105,6 +105,63 @@ export function SolutionsPage() {
           </div>
         </div>
       </section>
+      <section
+        className="tao3k-reference"
+        id="reference-scenario"
+        aria-labelledby="reference-scenario-title"
+      >
+        <p className="solution-world__eyebrow">ONE REFERENCE SCENARIO</p>
+        <h2 id="reference-scenario-title">Qualify a change before it runs.</h2>
+        <dl className="product-card__meta">
+          <div>
+            <dt>Who</dt>
+            <dd>
+              A platform engineer who has to show why an agent was allowed to touch a repository.
+            </dd>
+          </div>
+          <div>
+            <dt>Start</dt>
+            <dd>
+              A research note in Org. Orgize can parse that file. Context System is the direction
+              for keeping the note with the task. It is not a released integration of every tool
+              named here.
+            </dd>
+          </div>
+          <div>
+            <dt>Products</dt>
+            <dd>
+              Agentic AI Lab composes the strategy and stops before execution. Marlin Agent Core is
+              the runtime substrate that handoff is aimed at. It is not a terminal-user shell.
+              Meta-Relational Reasoning is where typed admission lives. MRR Data does not replace
+              that admission.
+            </dd>
+          </div>
+          <div>
+            <dt>Evidence at the end</dt>
+            <dd>
+              The intended end is a receipt that can be inspected and challenged. The public roadmap
+              has not assigned that closed loop as delivered.
+            </dd>
+          </div>
+          <div>
+            <dt>Reproducible today</dt>
+            <dd>
+              You can open the Agentic AI Lab, Marlin Agent Core, Orgize, and MRR repositories and
+              read their own docs. You cannot install this scenario as one product, and you should
+              not treat the illustrations on this site as a live run.
+            </dd>
+          </div>
+        </dl>
+        <p>
+          <a href="/products/agentic-ai-lab">Agentic AI Lab</a>
+          {" · "}
+          <a href="/products#marlin-agent-core">Marlin Agent Core</a>
+          {" · "}
+          <a href="/products#orgize">Orgize</a>
+          {" · "}
+          <a href="/products/meta-relational-reasoning">MRR</a>
+        </p>
+      </section>
       <section className="solution-directory__list" id="solution-cases">
         <header>
           <p className="solution-world__eyebrow">FIND YOUR STARTING POINT</p>

@@ -5,13 +5,13 @@
   grid-template-columns: minmax(250px, 0.42fr) minmax(0, 1fr);
   gap: clamp(40px, 6vw, 110px);
   align-items: end;
-  background: rgba(6, 22, 18, 0.78);
+  background: var(--canvas);
 }
 
 .tao3k-technology-rail header h2 {
   max-width: 480px;
   margin: 16px 0 0;
-  color: #dcece6;
+  color: var(--ink);
   font-size: clamp(1.45rem, 2.2vw, 2.25rem);
   font-weight: 520;
   line-height: 1.08;
@@ -35,7 +35,7 @@
   grid-template-columns: 76px minmax(0, 1fr);
   gap: 15px;
   align-items: center;
-  color: #dcece6;
+  color: var(--ink);
   background: linear-gradient(145deg, rgba(141, 240, 194, 0.045), transparent 70%);
 }
 
@@ -68,7 +68,7 @@
 }
 
 .tao3k-technology-mark[data-technology="rust"] .tao3k-technology-mark__visual {
-  background: radial-gradient(circle, #edf5f1 0 26px, transparent 27px);
+  background: radial-gradient(circle, var(--surface) 0 26px, transparent 27px);
 }
 
 .tao3k-technology-mark[data-technology="rust"] .tao3k-technology-mark__visual img {
@@ -78,7 +78,7 @@
 
 .tao3k-technology-mark__lambda {
   flex: 0 0 auto;
-  color: #8df0c2;
+  color: var(--ink);
   font:
     500 2.75rem/1 Georgia,
     serif;
@@ -104,7 +104,7 @@
 }
 
 .tao3k-technology-mark__copy small {
-  color: #789087;
+  color: var(--muted);
   font:
     550 0.61rem/1.4 "IBM Plex Mono",
     monospace;

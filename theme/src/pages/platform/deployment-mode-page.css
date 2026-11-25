@@ -1,19 +1,9 @@
 /* Platform deployment routes: one family, three distinct authority topologies. */
 .tao3k-deployment-mode {
-  --deployment-accent: #8df0c2;
+  --deployment-accent: var(--accent);
   width: 100%;
-  color: #d8e7e1;
-  background:
-    linear-gradient(90deg, rgba(141, 240, 194, 0.045) 1px, transparent 1px) 0 0 / 25vw 100%,
-    #071812;
-}
-
-.tao3k-deployment-mode[data-mode="hybrid"] {
-  --deployment-accent: #8bb9ff;
-}
-
-.tao3k-deployment-mode[data-mode="managed-cloud"] {
-  --deployment-accent: #d0a9ff;
+  color: var(--ink);
+  background: var(--canvas);
 }
 
 .tao3k-deployment-mode__hero {
@@ -27,7 +17,7 @@
 }
 
 .tao3k-deployment-mode__hero > div > a {
-  color: #7f9a90;
+  color: var(--muted);
   font:
     600 0.72rem/1 "IBM Plex Mono",
     monospace;
@@ -42,7 +32,7 @@
 .tao3k-deployment-mode__hero h1 {
   max-width: 960px;
   margin: 30px 0 0;
-  color: #edf5f1;
+  color: var(--ink);
   font-size: clamp(4.3rem, 8vw, 9rem);
   font-weight: 480;
   line-height: 0.88;
@@ -65,7 +55,7 @@
 
 .tao3k-deployment-mode__hero aside > p {
   margin: 28px 0 45px;
-  color: #a2b8af;
+  color: var(--muted);
   font-size: clamp(1.08rem, 1.35vw, 1.35rem);
   line-height: 1.65;
 }
@@ -89,7 +79,7 @@
 .tao3k-deployment-mode__decision h2 {
   max-width: 1050px;
   margin: 0;
-  color: #e5efeb;
+  color: var(--ink);
   font:
     400 clamp(2.5rem, 4.7vw, 5.5rem) / 1 Georgia,
     serif;
@@ -126,7 +116,7 @@
 .tao3k-deployment-mode__decision li {
   padding: 19px 0 19px 28px;
   border-bottom: 1px solid rgba(141, 240, 194, 0.1);
-  color: #acbfb8;
+  color: var(--muted);
   line-height: 1.55;
 }
 
@@ -189,7 +179,7 @@
 }
 
 .tao3k-deployment-mode__topology li > span {
-  color: #55766a;
+  color: var(--muted);
   font:
     600 0.68rem/1 "IBM Plex Mono",
     monospace;
@@ -202,14 +192,14 @@
 
 .tao3k-deployment-mode__topology li > small {
   margin-top: 12px;
-  color: #819a90;
+  color: var(--muted);
   line-height: 1.45;
 }
 
 .tao3k-deployment-mode__stack {
   padding: clamp(100px, 11vw, 180px) clamp(24px, 6vw, 110px);
   border-top: 1px solid rgba(141, 240, 194, 0.16);
-  background: #0a1e17;
+  background: var(--canvas);
 }
 
 .tao3k-deployment-mode__stack > header {
@@ -223,7 +213,7 @@
 .tao3k-deployment-mode__adoption h2,
 .tao3k-deployment-mode__questions h2 {
   margin: 0;
-  color: #e8f1ed;
+  color: var(--ink);
   font:
     400 clamp(2.8rem, 5vw, 6rem) / 0.96 Georgia,
     serif;
@@ -232,7 +222,7 @@
 
 .tao3k-deployment-mode__stack > header > p:last-child {
   margin: 4px 0 0;
-  color: #8fa69d;
+  color: var(--muted);
   line-height: 1.7;
 }
 
@@ -262,14 +252,14 @@
 
 .tao3k-deployment-mode__stack article p {
   margin: 0;
-  color: #8fa69d;
+  color: var(--muted);
   line-height: 1.55;
 }
 
 .tao3k-deployment-mode__stack article small {
   margin-top: auto;
   padding-top: 30px;
-  color: #667f75;
+  color: var(--muted);
   font:
     600 0.68rem/1.45 "IBM Plex Mono",
     monospace;
@@ -287,7 +277,7 @@
 .tao3k-deployment-mode__qualification > div > p:last-child {
   max-width: 720px;
   margin: 42px 0 0;
-  color: #91a79e;
+  color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -302,7 +292,7 @@
 .tao3k-deployment-mode__qualification li {
   padding: 24px 0 24px 30px;
   border-bottom: 1px solid rgba(141, 240, 194, 0.13);
-  color: #b5c9c1;
+  color: var(--muted);
   line-height: 1.45;
 }
 
@@ -340,7 +330,7 @@
 .tao3k-deployment-mode__operations p {
   max-width: 350px;
   margin: 0;
-  color: #bacbc5;
+  color: var(--muted);
   font-size: 1.2rem;
   line-height: 1.4;
 }
@@ -382,7 +372,7 @@
 .tao3k-deployment-mode__adoption li p {
   max-width: 620px;
   margin: 10px 0 0;
-  color: #8fa69d;
+  color: var(--muted);
   line-height: 1.55;
 }
 
@@ -391,16 +381,16 @@
   display: grid;
   grid-template-columns: minmax(0, 0.75fr) minmax(520px, 1fr);
   gap: clamp(70px, 10vw, 180px);
-  color: #123128;
-  background: color-mix(in srgb, var(--deployment-accent) 72%, #e8efe9);
+  color: var(--ink);
+  background: var(--surface);
 }
 
 .tao3k-deployment-mode__questions h2 {
-  color: #123128;
+  color: var(--ink);
 }
 
 .tao3k-deployment-mode__questions .tao3k-route-kicker {
-  color: #25644f;
+  color: var(--ink);
 }
 
 .tao3k-deployment-mode__questions dl {
@@ -423,7 +413,7 @@
 
 .tao3k-deployment-mode__questions dd {
   margin: 0;
-  color: #315d50;
+  color: var(--ink);
   line-height: 1.55;
 }
 
@@ -437,7 +427,7 @@
 
 .tao3k-deployment-mode__siblings > span {
   margin-right: auto;
-  color: #668278;
+  color: var(--muted);
   font:
     700 0.65rem/1.4 "IBM Plex Mono",
     monospace;
@@ -448,12 +438,12 @@
   padding: 13px 18px;
   border: 1px solid rgba(141, 240, 194, 0.15);
   border-radius: 999px;
-  color: #91a99f;
+  color: var(--muted);
   text-decoration: none;
 }
 
 .tao3k-deployment-mode__siblings a[aria-current="page"] {
-  color: #071812;
+  color: var(--on-accent);
   border-color: var(--deployment-accent);
   background: var(--deployment-accent);
 }

@@ -2,7 +2,7 @@
 .tao3k-roadmap-page {
   color: var(--tao-ink);
   padding: clamp(90px, 10vw, 160px) clamp(24px, 7vw, 120px);
-  background: #e8ebe2;
+  background: var(--surface);
 }
 .tao3k-roadmap-hero {
   display: grid;
@@ -54,7 +54,7 @@
 }
 .tao3k-roadmap-track__state,
 .tao3k-roadmap-track__signal span {
-  color: #64736d;
+  color: var(--muted);
   font:
     700 0.62rem/1 "IBM Plex Mono",
     monospace;
@@ -123,7 +123,7 @@
 .tao3k-roadmap-lens > span,
 .tao3k-roadmap-outcome > span {
   align-self: start;
-  color: var(--tao-accent, #65c997);
+  color: var(--tao-accent, var(--muted));
   font-family: var(--tao-mono);
   font-size: 0.7rem;
   font-weight: 760;
@@ -193,7 +193,7 @@
   padding: 20px 24px;
   border: 1px solid color-mix(in srgb, #d7a757 40%, transparent);
   background: color-mix(in srgb, #d7a757 8%, transparent);
-  color: #d7a757;
+  color: var(--muted);
   font-family: var(--tao-mono);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
@@ -238,7 +238,8 @@
   place-items: center;
   border: 1px solid var(--tao-line);
   border-radius: 50%;
-  background: var(--tao-page, #1d1c2d);
+  background: var(--surface);
+  color: var(--ink);
   font-size: 0.72rem;
 }
 
@@ -257,7 +258,7 @@
 }
 
 .tao3k-roadmap-track__state {
-  color: #d7a757;
+  color: var(--muted);
   font-family: var(--tao-mono);
   font-size: 0.7rem;
   font-weight: 760;
@@ -349,11 +350,11 @@
 
 .tao3k-roadmap-lens + .tao3k-roadmap-lens {
   border-left: 1px solid var(--tao-line);
-  background: color-mix(in srgb, #a98bd8 7%, transparent);
+  background: color-mix(in srgb, var(--line) 7%, transparent);
 }
 
 .tao3k-roadmap-lens--capital > span {
-  color: #a98bd8;
+  color: var(--muted);
 }
 
 .tao3k-roadmap-lens h2 {

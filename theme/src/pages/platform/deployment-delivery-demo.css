@@ -2,7 +2,7 @@
   overflow: hidden;
   border: 1px solid var(--tao3k-rule);
   border-radius: 30px;
-  background: color-mix(in srgb, var(--tao3k-panel) 96%, #00120e);
+  background: color-mix(in srgb, var(--tao3k-panel) 96%, var(--canvas));
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
 }
 

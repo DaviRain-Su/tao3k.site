@@ -1,15 +1,18 @@
 import "@fontsource-variable/geist";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { applyThemeVariant, resolveThemeVariant, type ThemeVariant } from "./theme-mode";
 import { EvidenceField } from "./EvidenceField";
 import nixosMark from "./pages/platform/assets/technology/nixos.svg";
 import { platformNavigation } from "./site-routes";
 import { comparisonTopics } from "./pages/comparison/comparison-catalog";
+import "./tokens.css";
 import "./site-home.css";
 import "./site-mobile-fixes.css";
 import "./site-polish.css";
 import "./site-refinement.css";
 import "./immersive.css";
 import "./site-atmosphere.css";
+import "./theme-surfaces.css";
 
 type NavigationItem = {
   readonly label: string;
@@ -110,35 +113,26 @@ function BrandMark() {
   );
 }
 
-type ColorMode = "night" | "paper";
-
 function ThemeModeToggle() {
-  const [mode, setMode] = useState<ColorMode>("night");
+  const [mode, setMode] = useState<ThemeVariant>(() =>
+    typeof document === "undefined" ? "night" : resolveThemeVariant(),
+  );
 
   useEffect(() => {
-    const navigation = document.querySelector<HTMLElement>(".theme-variant-navigation");
-    if (!navigation) return;
-
+    const root = document.documentElement;
     const synchronize = () => {
-      const active = navigation.querySelector<HTMLElement>(
-        "[data-theme-variant-option][aria-pressed='true']",
-      );
-      const value = active?.dataset.themeVariantOption;
+      const value = root.dataset.themeVariant;
       if (value === "night" || value === "paper") setMode(value);
     };
-
     synchronize();
     const observer = new MutationObserver(synchronize);
-    observer.observe(navigation, {
-      attributes: true,
-      subtree: true,
-      attributeFilter: ["aria-pressed"],
-    });
+    observer.observe(root, { attributes: true, attributeFilter: ["data-theme-variant"] });
     return () => observer.disconnect();
   }, []);
 
   const toggle = () => {
-    const next: ColorMode = mode === "night" ? "paper" : "night";
+    const next: ThemeVariant = mode === "night" ? "paper" : "night";
+    applyThemeVariant(next, true);
     document.querySelector<HTMLButtonElement>(`[data-theme-variant-option='${next}']`)?.click();
     setMode(next);
   };
@@ -170,7 +164,12 @@ const productGroups: readonly MenuGroup[] = [
       {
         href: "/products/context-system",
         name: "Context System",
-        detail: "Source-connected knowledge",
+        detail: "Direction, not a released integration",
+      },
+      {
+        href: "/products#orgize",
+        name: "Orgize",
+        detail: "Org parser with a public README",
       },
       {
         href: "/products/lambda-episteme",
@@ -208,7 +207,12 @@ const productGroups: readonly MenuGroup[] = [
       {
         href: "/products/agentic-ai-lab",
         name: "Agentic AI Lab",
-        detail: "Composable agent control plane",
+        detail: "Strategy control plane, not the runtime",
+      },
+      {
+        href: "/products#marlin-agent-core",
+        name: "Marlin Agent Core",
+        detail: "Runtime substrate, not a user shell",
       },
       { href: "/products/weaver", name: "Weaver", detail: "Policy-governed gateway" },
       {
@@ -871,6 +875,11 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
             Open source first. Comprehensive solutions for reliable AI infrastructure and operating
             systems.
           </p>
+          <p className="tao3k-home-hero__human">
+            For research groups, platform engineers, and teams that need an audit trail from a
+            question to an action. The break is that the record, the decision, and proof of what ran
+            are still three separate stories.
+          </p>
           <div className="tao3k-home-hero__actions">
             <a className="tao3k-button tao3k-button--primary" href="/platform">
               Explore the system <span aria-hidden="true">→</span>
@@ -885,9 +894,13 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
 
       <section className="tao3k-system-atlas" aria-labelledby="atlas-title">
         <header>
-          <p className="tao3k-section-index">ONE CONNECTED FOUNDATION</p>
+          <p className="tao3k-section-index">ONE LOOP</p>
           <h2 id="atlas-title">From context to action.</h2>
-          <p>AI-native foundations, designed around your work and your data.</p>
+          <p>
+            Research leaves a record. A strategy plane says what may run. A runtime substrate
+            carries admitted work. Evidence and admission come back to the next question. That is
+            one lap, not three products pretending to be one installer.
+          </p>
         </header>
         <div className="tao3k-system-atlas__field">
           <div className="tao3k-system-atlas__orbit" aria-hidden="true">
@@ -899,20 +912,20 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
           <div className="tao3k-system-atlas__links">
             <a href="/products/context-system">
               <span>01</span>
-              <strong>Context</strong>
-              <small>Find what matters</small>
+              <strong>Research</strong>
+              <small>Context System direction. Orgize parses the file.</small>
               <i aria-hidden="true">↗</i>
             </a>
-            <a href="/platform">
+            <a href="/products/agentic-ai-lab">
               <span>02</span>
-              <strong>Infrastructure</strong>
-              <small>Declare, model, build</small>
+              <strong>Strategy</strong>
+              <small>Agentic AI Lab composes policy. It does not execute.</small>
               <i aria-hidden="true">↗</i>
             </a>
-            <a href="/roadmap">
+            <a href="/products#marlin-agent-core">
               <span>03</span>
-              <strong>Operating systems</strong>
-              <small>Performance that scales</small>
+              <strong>Run and return</strong>
+              <small>Marlin is the substrate. MRR owns admission.</small>
               <i aria-hidden="true">↗</i>
             </a>
           </div>
@@ -1011,6 +1024,43 @@ export function Tao3kSiteHome(_props: { readonly title?: string } = {}) {
             <FoundationVisual kind="infra" />
           </article>
         </div>
+      </section>
+
+      <section className="tao3k-reference" aria-labelledby="home-scenario-title">
+        <p className="tao3k-section-index">ONE REFERENCE PATH</p>
+        <h2 id="home-scenario-title">Read one path before you imagine a fleet.</h2>
+        <p>
+          A platform engineer starts from a research note, composes a strategy, and stops at the
+          runtime boundary. Solutions records who is involved, which repositories exist, what the
+          evidence would be, and which step you can actually reproduce today.
+        </p>
+        <a href="/solutions#reference-scenario">Follow the reference scenario</a>
+      </section>
+
+      <section className="tao3k-start" aria-labelledby="home-start-title">
+        <p className="tao3k-section-index">WHAT YOU CAN DO TODAY</p>
+        <h2 id="home-start-title">Start from a page or a repository.</h2>
+        <ul>
+          <li>
+            <a href="/platform">Read how deployment ownership is split</a>
+          </li>
+          <li>
+            <a href="/products">Open the product map and its four evidence states</a>
+          </li>
+          <li>
+            <a href="/roadmap">Read the roadmap, including what is still unassigned</a>
+          </li>
+          <li>
+            <a href="https://github.com/tao3k/orgize" rel="noreferrer" target="_blank">
+              Read Orgize, a public parser with a README
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/tao3k/tao3k.site" rel="noreferrer" target="_blank">
+              Read this site's source
+            </a>
+          </li>
+        </ul>
       </section>
 
       <section className="tao3k-home-exit">

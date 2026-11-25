@@ -1,16 +1,3 @@
-:root {
-  --tao-ink: #10241f;
-  --tao-muted: #62716c;
-  --tao-line: rgba(24, 53, 46, 0.14);
-  --tao-paper: #f1f0e8;
-  --tao-panel: #e7e8de;
-  --tao-mint: #92f1c3;
-  --tao-green: #0a7659;
-  --tao-violet: #7358d9;
-  --tao-coral: #e86c55;
-  --tao-night: #10201c;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -105,7 +92,7 @@ a {
 .tao3k-header__nav a,
 .tao3k-header__utility {
   position: relative;
-  color: #4b5d57;
+  color: var(--ink);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 580;
@@ -198,7 +185,7 @@ a {
 .tao3k-home-hero__lede {
   max-width: 670px;
   margin: 38px 0 0;
-  color: #465953;
+  color: var(--ink);
   font-size: clamp(1.08rem, 1.35vw, 1.35rem);
   line-height: 1.65;
 }
@@ -206,7 +193,7 @@ a {
 .tao3k-home-hero__human {
   max-width: 630px;
   margin: 16px 0 0;
-  color: #61736d;
+  color: var(--muted);
   font-size: clamp(0.96rem, 1.1vw, 1.08rem);
   line-height: 1.65;
 }
@@ -241,7 +228,7 @@ a {
   }
 }
 .tao3k-button--primary {
-  color: #f7fff9;
+  color: var(--ink);
   background: var(--tao-night);
   border-color: var(--tao-night);
 }
@@ -259,8 +246,8 @@ a {
   display: grid;
   grid-template-columns: minmax(280px, 0.8fr) minmax(450px, 1.2fr);
   gap: 74px clamp(50px, 10vw, 170px);
-  color: #e7f2ec;
-  background: #10241f;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .tao3k-home-system-boundary header h2 {
   max-width: 620px;
@@ -274,11 +261,11 @@ a {
 .tao3k-home-system-boundary header > p:last-child {
   max-width: 560px;
   margin: 28px 0 0;
-  color: #a6bbb1;
+  color: var(--muted);
   line-height: 1.68;
 }
 .tao3k-home-system-boundary .tao3k-section-index {
-  color: var(--tao-mint);
+  color: var(--accent);
 }
 .tao3k-home-system-boundary ol {
   margin: 0;
@@ -297,7 +284,7 @@ a {
 }
 .tao3k-home-system-boundary li > span,
 .tao3k-home-system-boundary li > strong {
-  color: #91a89d;
+  color: var(--muted);
   font:
     700 0.62rem/1.5 "IBM Plex Mono",
     "SFMono-Regular",
@@ -306,23 +293,23 @@ a {
 }
 .tao3k-home-system-boundary li > p {
   margin: 0;
-  color: #aebfb7;
+  color: var(--muted);
   line-height: 1.55;
 }
 .tao3k-home-system-boundary li.is-tao3k > span,
 .tao3k-home-system-boundary li.is-tao3k > strong {
-  color: var(--tao-mint);
+  color: var(--accent);
 }
 .tao3k-home-system-boundary li.is-tao3k > p {
-  color: #e8f5ee;
+  color: var(--ink);
 }
 .tao3k-home-system-boundary aside {
   grid-column: 2;
   padding-top: 29px;
-  border-top: 2px solid var(--tao-mint);
+  border-top: 2px solid var(--accent);
 }
 .tao3k-home-system-boundary aside strong {
-  color: var(--tao-mint);
+  color: var(--accent);
   font:
     500 1.25rem/1.25 Georgia,
     "Times New Roman",
@@ -331,7 +318,7 @@ a {
 .tao3k-home-system-boundary aside p {
   max-width: 760px;
   margin: 14px 0 0;
-  color: #a6bbb1;
+  color: var(--muted);
   line-height: 1.65;
 }
 
@@ -383,7 +370,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #eafff2;
+  color: var(--ink);
   background: var(--tao-night);
   box-shadow:
     0 28px 60px rgba(16, 32, 28, 0.25),
@@ -407,7 +394,7 @@ a {
     serif;
 }
 .tao3k-stage__core > span:not(.tao3k-stage__core-orbit) {
-  color: #aabbb5;
+  color: var(--muted);
   font-size: 0.7rem;
 }
 .tao3k-stage__core-orbit {
@@ -429,8 +416,8 @@ a {
   display: flex;
   align-items: center;
   gap: 9px;
-  background: rgba(241, 240, 232, 0.82);
-  color: #324a43;
+  background: var(--surface);
+  color: var(--ink);
   font-size: 0.78rem;
   backdrop-filter: blur(10px);
 }
@@ -466,8 +453,8 @@ a {
   padding: 16px 20px;
   border-left: 3px solid var(--tao-coral);
   display: grid;
-  color: #f3f7f3;
-  background: #24342f;
+  color: var(--ink);
+  background: var(--canvas);
   transform: translateX(50%);
   box-shadow: 0 20px 44px rgba(16, 36, 31, 0.22);
 }
@@ -479,7 +466,7 @@ a {
     serif;
 }
 .tao3k-stage__output small {
-  color: #9aaba5;
+  color: var(--muted);
 }
 
 .tao3k-home-thesis,
@@ -493,10 +480,10 @@ a {
   min-height: 920px;
   padding: 90px clamp(24px, 5vw, 84px) 110px;
   overflow: hidden;
-  color: #e9f2ee;
+  color: var(--ink);
   background:
     radial-gradient(circle at 78% 25%, rgba(115, 88, 217, 0.16), transparent 30%),
-    linear-gradient(145deg, #0b1916, #10251f 58%, #0b1715);
+    linear-gradient(145deg, var(--canvas), var(--canvas) 58%, var(--canvas));
 }
 
 .tao3k-live__heading {
@@ -526,12 +513,12 @@ a {
   display: flex;
   align-items: center;
   gap: 7px;
-  background: rgba(5, 14, 12, 0.5);
+  background: var(--canvas);
   backdrop-filter: blur(14px);
 }
 .tao3k-live__controls > span {
   padding: 0 16px 0 10px;
-  color: #8da099;
+  color: var(--muted);
   font:
     700 0.58rem/1 "IBM Plex Mono",
     monospace;
@@ -543,7 +530,7 @@ a {
   height: 7px;
   margin-right: 6px;
   border-radius: 50%;
-  background: #6c7b76;
+  background: var(--surface);
 }
 .tao3k-live__controls > span i.is-running {
   background: var(--tao-mint);
@@ -553,7 +540,7 @@ a {
   min-height: 38px;
   padding: 0 15px;
   border: 1px solid rgba(146, 241, 195, 0.18);
-  color: #d4e0db;
+  color: var(--ink);
   background: rgba(255, 255, 255, 0.035);
   font:
     650 0.72rem/1 "IBM Plex Sans",
@@ -566,7 +553,7 @@ a {
 }
 @media (hover: hover) {
   .tao3k-live__controls button:not(:disabled):hover {
-    color: #0b1916;
+    color: var(--ink);
     background: var(--tao-mint);
   }
 }
@@ -595,7 +582,7 @@ a {
     stroke-width 220ms ease;
 }
 .tao3k-live__surface .react-flow__edge.is-complete .react-flow__edge-path {
-  stroke: rgba(146, 241, 195, 0.58);
+  stroke: var(--ink);
 }
 .tao3k-live__surface .react-flow__edge.is-active .react-flow__edge-path {
   stroke: var(--tao-mint);
@@ -614,8 +601,8 @@ a {
   display: grid;
   grid-template-columns: 34px 1fr;
   gap: 12px;
-  color: #73857f;
-  background: linear-gradient(145deg, rgba(26, 48, 42, 0.97), rgba(14, 31, 27, 0.97));
+  color: var(--muted);
+  background: linear-gradient(145deg, var(--canvas), var(--canvas));
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
   transition:
     border 220ms ease,
@@ -624,7 +611,7 @@ a {
 }
 .tao3k-live-node.is-active {
   border-color: var(--tao-mint);
-  color: #eafff3;
+  color: var(--ink);
   transform: translateY(-5px);
   box-shadow:
     0 0 0 1px rgba(146, 241, 195, 0.18),
@@ -634,7 +621,7 @@ a {
 }
 .tao3k-live-node.is-complete {
   border-color: rgba(146, 241, 195, 0.38);
-  color: #b8cdc5;
+  color: var(--muted);
 }
 .tao3k-live-node__index {
   padding-top: 4px;
@@ -661,13 +648,13 @@ a {
 }
 .tao3k-live-node p {
   margin: 0;
-  color: #71837c;
+  color: var(--muted);
   font:
     600 0.62rem/1.3 "IBM Plex Mono",
     monospace;
 }
 .tao3k-live-node.is-active p {
-  color: #9fb4ac;
+  color: var(--muted);
 }
 .tao3k-live-node > i {
   position: absolute;
@@ -676,7 +663,7 @@ a {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #44534e;
+  background: var(--canvas);
 }
 .tao3k-live-node.is-active > i {
   background: var(--tao-mint);
@@ -686,7 +673,7 @@ a {
   width: 8px;
   height: 8px;
   border: 1px solid #0e1e1a;
-  background: #739087;
+  background: var(--surface);
 }
 .tao3k-live-node.is-active .react-flow__handle {
   background: var(--tao-mint);
@@ -700,8 +687,8 @@ a {
   width: min(690px, 55vw);
   min-height: 225px;
   border: 1px solid rgba(146, 241, 195, 0.25);
-  color: #9fb7ae;
-  background: rgba(3, 10, 8, 0.92);
+  color: var(--muted);
+  background: var(--canvas);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(18px);
 }
@@ -727,7 +714,7 @@ a {
 }
 .tao3k-live-terminal__bar strong {
   margin-left: 8px;
-  color: #6c8179;
+  color: var(--muted);
   font:
     600 0.56rem/1 "IBM Plex Mono",
     monospace;
@@ -745,7 +732,7 @@ a {
   margin: 0;
   padding: 24px 25px 8px;
   overflow: hidden;
-  color: #8da49b;
+  color: var(--muted);
   white-space: pre-wrap;
   font:
     500 0.72rem/1.75 "IBM Plex Mono",
@@ -777,7 +764,7 @@ a {
   grid-template-columns: 0.34fr 1fr 0.55fr;
   gap: clamp(36px, 6vw, 100px);
   align-items: start;
-  color: #e9f0ec;
+  color: var(--ink);
   background: var(--tao-night);
 }
 
@@ -794,7 +781,7 @@ a {
 .tao3k-home-thesis p:not(.tao3k-section-index) {
   max-width: 760px;
   margin: 30px 0 0;
-  color: #9dafaa;
+  color: var(--muted);
   font-size: 1.12rem;
   line-height: 1.72;
 }
@@ -810,7 +797,7 @@ a {
   place-content: center;
   gap: 14px;
   background: radial-gradient(circle, rgba(146, 241, 195, 0.1), transparent 65%);
-  color: #789089;
+  color: var(--muted);
   font:
     700 0.65rem/1 "IBM Plex Mono",
     monospace;
@@ -824,7 +811,7 @@ a {
 }
 
 .tao3k-home-proof {
-  background: #e8e9df;
+  background: var(--surface);
 }
 .tao3k-home-proof__heading {
   display: grid;
@@ -1075,9 +1062,34 @@ a {
 .tao3k-home-system-boundary aside a {
   display: inline-block;
   margin-top: 1rem;
-  color: #bfcdf4;
+  color: var(--muted);
   font-size: 0.85rem;
   text-decoration: none;
+}
+.tao3k-reference,
+.tao3k-start {
+  padding: clamp(72px, 9vw, 120px) clamp(24px, 4.4vw, 76px);
+  border-top: 1px solid var(--line);
+}
+.tao3k-reference h2,
+.tao3k-start h2 {
+  max-width: 22em;
+  margin: 0 0 1rem;
+}
+.tao3k-reference p,
+.tao3k-start p {
+  max-width: 62ch;
+}
+.tao3k-start ul {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tao3k-start a,
+.tao3k-reference > a {
+  color: inherit;
 }
 .tao3k-home-system-boundary aside a:hover {
   text-decoration: underline;

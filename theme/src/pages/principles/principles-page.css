@@ -1,7 +1,7 @@
 /* Principles: manifesto typography and a numbered charter. */
 .tao3k-principles-page {
-  color: #f0eee7;
-  background: #211f2d;
+  color: var(--ink);
+  background: var(--canvas);
 }
 .tao3k-principles-hero {
   min-height: 760px;
@@ -12,7 +12,7 @@
   background: radial-gradient(circle at 86% 15%, rgba(115, 88, 217, 0.25), transparent 30%);
 }
 .tao3k-principles-hero .tao3k-route-kicker {
-  color: #bbaaff;
+  color: var(--muted);
 }
 .tao3k-principles-hero blockquote {
   max-width: 1250px;
@@ -25,7 +25,7 @@
 .tao3k-principles-hero > p:not(.tao3k-route-kicker) {
   max-width: 720px;
   margin: 50px 0 0 auto;
-  color: #aaa7b8;
+  color: var(--muted);
   font-size: 1.15rem;
   line-height: 1.7;
 }
@@ -36,7 +36,7 @@
   grid-template-columns: 1fr 0.7fr;
   gap: 100px;
   color: var(--tao-ink);
-  background: #c9ffdf;
+  background: var(--surface);
 }
 .tao3k-principles-risk span {
   font:
@@ -81,7 +81,7 @@
 .tao3k-values-refusals > div span {
   display: block;
   margin-bottom: 22px;
-  color: var(--tao-accent, #65c997);
+  color: var(--tao-accent, var(--muted));
   font-family: var(--tao-mono);
   font-size: 0.72rem;
   font-weight: 760;
@@ -152,7 +152,7 @@
 .tao3k-values-enterprise::before {
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, #a98bd8 13%, transparent),
+    color-mix(in srgb, var(--accent) 13%, transparent),
     transparent 54%
   );
 }
@@ -163,7 +163,7 @@
 }
 
 .tao3k-values-enterprise .tao3k-values-audience {
-  color: #a98bd8;
+  color: var(--muted);
 }
 
 .tao3k-values-partner header {
@@ -297,7 +297,7 @@
 
 .tao3k-values-mutual-choice > span {
   align-self: start;
-  color: var(--tao-accent, #65c997);
+  color: var(--tao-accent, var(--muted));
   font-family: var(--tao-mono);
   font-size: 0.7rem;
   font-weight: 760;
@@ -350,7 +350,7 @@
 
 .tao3k-values-pressure > header > span,
 .tao3k-values-pressure__reading-content > span {
-  color: var(--tao-accent, #65c997);
+  color: var(--tao-accent, var(--muted));
   font-family: var(--tao-mono);
   font-size: 0.7rem;
   font-weight: 760;
@@ -429,7 +429,7 @@
 }
 
 .tao3k-values-pressure__choice[data-preview-active] {
-  color: var(--tao-accent, #65c997);
+  color: var(--tao-accent, var(--muted));
 }
 
 .tao3k-values-pressure__choice[data-preview-active]::before,
@@ -535,11 +535,11 @@
   grid-template-columns: 1fr 1fr;
   gap: clamp(50px, 9vw, 170px);
   padding: clamp(78px, 10vw, 150px) clamp(24px, 6vw, 104px);
-  background: color-mix(in srgb, #c46f66 7%, transparent);
+  background: color-mix(in srgb, var(--surface) 7%, transparent);
 }
 
 .tao3k-values-refusals > div span {
-  color: #c98279;
+  color: var(--muted);
 }
 
 .tao3k-values-refusals ul {
