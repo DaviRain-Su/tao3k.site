@@ -14,9 +14,11 @@ import { Tao3kSiteHeader as Tao3kThemeHeader, Tao3kSiteHome as Tao3kThemeHero } 
 import { resolveSiteRoute } from "./site-routes";
 
 import "./theme.css";
+import "./tokens.css";
 import "./workbench.css";
 import "./site-home.css";
 import "./site-pages.css";
+import "./theme-surfaces.css";
 
 export { Tao3kThemeHeader, Tao3kThemeHero };
 
@@ -120,7 +122,7 @@ const variants = [
     id: "paper",
     label: "Paper",
     tokens: {
-      color: { canvas: "#f1f0e9", surface: "#ffffff", text: "#20251f", accent: "#176b45" },
+      color: { canvas: "#f3f1e8", surface: "#fffdf8", text: "#1a211c", accent: "#0e5c3c" },
       typography: {
         body: "Inter, ui-sans-serif, system-ui, sans-serif",
         heading: "Inter, ui-sans-serif, system-ui, sans-serif",

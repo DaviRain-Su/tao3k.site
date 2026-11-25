@@ -1,0 +1,243 @@
+/* Last in the cascade. Hardcoded navy and forest fills yield to the active variant. */
+
+html[data-theme-variant="night"],
+html[data-theme-variant="paper"] {
+  background: var(--canvas) !important;
+  color: var(--ink) !important;
+  --tao-ink: var(--ink) !important;
+  --tao-muted: var(--muted) !important;
+  --tao-line: var(--line) !important;
+  --tao-paper: var(--canvas) !important;
+  --tao-panel: var(--surface-raised) !important;
+  --tao-mint: var(--focus) !important;
+  --tao-green: var(--accent) !important;
+  --tao-night: var(--accent) !important;
+  --tao-accent: var(--accent) !important;
+  --tao3k-canvas: var(--canvas) !important;
+  --tao3k-surface: var(--surface) !important;
+  --tao3k-surface-raised: var(--surface-raised) !important;
+  --tao3k-text: var(--ink) !important;
+  --tao3k-muted: var(--muted) !important;
+  --tao3k-line: var(--line) !important;
+  --tao3k-accent: var(--accent) !important;
+  --immersive-bg: var(--canvas) !important;
+  --immersive-raised: var(--surface) !important;
+  --immersive-text: var(--ink) !important;
+  --immersive-muted: var(--muted) !important;
+  --immersive-line: var(--line) !important;
+  --platform-bg: var(--canvas) !important;
+  --platform-panel: var(--surface) !important;
+  --platform-line: var(--line) !important;
+  --platform-soft: var(--muted) !important;
+  --pw-bg: var(--canvas) !important;
+  --pw-ink: var(--ink) !important;
+  --pw-muted: var(--muted) !important;
+  --pw-line: var(--line) !important;
+  --pw-lilac: var(--accent) !important;
+}
+
+html[data-theme-variant] :is(.tao3k-home, .tao3k-route-page, .tao3k-site-footer) {
+  background-color: var(--canvas) !important;
+  background-image: radial-gradient(
+    ellipse at 84% 0%,
+    color-mix(in srgb, var(--accent) 14%, transparent),
+    transparent 34rem
+  ) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme-variant]
+  :is(.tao3k-home, .tao3k-route-page, .tao3k-site-footer)
+  :is(
+    section,
+    article,
+    header,
+    footer,
+    aside,
+    div,
+    li,
+    ul,
+    ol,
+    table,
+    thead,
+    tbody,
+    tr,
+    td,
+    th,
+    figure,
+    nav,
+    dl
+  ) {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--ink);
+}
+
+html[data-theme-variant] .tao3k-header,
+html[data-theme-variant] .theme-surface--tao3k-site > .tao3k-header,
+html[data-theme-variant] .tao3k-header__nav {
+  background-color: var(--canvas) !important;
+  background-image: none !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+html[data-theme-variant] :is(.tao3k-platform-menu__panel, .tao3k-products-menu__panel) {
+  background-color: var(--surface) !important;
+  background-image: none !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+html[data-theme-variant]
+  :is(.tao3k-home, .tao3k-route-page, .tao3k-header, .tao3k-site-footer)
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li,
+    span,
+    strong,
+    em,
+    small,
+    a,
+    dt,
+    dd,
+    th,
+    td,
+    label,
+    figcaption,
+    blockquote,
+    button,
+    time,
+    div
+  ) {
+  color: var(--ink) !important;
+}
+
+html[data-theme-variant]
+  :is(.tao3k-home, .tao3k-route-page, .tao3k-site-footer)
+  :is(p, small, dd, figcaption, time) {
+  color: var(--muted) !important;
+}
+
+html[data-theme-variant]
+  :is(.tao3k-home, .tao3k-route-page, .tao3k-header, .tao3k-site-footer)
+  :is(h1, h2, h3, h4, strong) {
+  color: var(--ink) !important;
+}
+
+html[data-theme-variant]
+  :is(.tao3k-home, .tao3k-route-page, .tao3k-header, .tao3k-site-footer)
+  :is(
+    .tao3k-route-kicker,
+    .tao3k-section-index,
+    .tao3k-eyebrow,
+    .product-world__eyebrow,
+    .detail-kicker,
+    .solution-world__eyebrow,
+    .product-card__state
+  ) {
+  color: var(--accent) !important;
+}
+
+html[data-theme-variant] .tao3k-home-hero h1 span {
+  color: var(--accent) !important;
+}
+
+html[data-theme-variant]
+  :is(
+    .product-card,
+    .product-world__hero-art,
+    .detail-flow,
+    .detail-approach,
+    .foundation-visual__symbol,
+    .tao3k-platform-system__detail,
+    .tao3k-system-atlas__links a,
+    .solution-directory__group,
+    .tao3k-reference,
+    .tao3k-trust-table,
+    .search-illustration,
+    .flow-story__canvas,
+    .tao3k-roadmap-lens
+  ) {
+  background-color: var(--surface) !important;
+  background-image: none !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme-variant] .foundation-visual__symbol svg,
+html[data-theme-variant] .foundation-visual svg {
+  stroke: var(--ink);
+}
+
+html[data-theme-variant]
+  :is(
+    .foundation-visual__caption,
+    .foundation-visual__labels,
+    .foundation-visual__code,
+    .foundation-visual__cube,
+    .foundation-visual__code small,
+    .foundation-visual__cube small,
+    .foundation-visual__plus
+  ) {
+  color: var(--muted) !important;
+}
+
+html[data-theme-variant] :is(a.tao3k-button--primary, a.tao3k-header__cta) {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-color: var(--accent) !important;
+  color: var(--on-accent) !important;
+}
+
+html[data-theme-variant] a.tao3k-button--quiet,
+html[data-theme-variant] a.tao3k-button:not(.tao3k-button--primary) {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: var(--line-strong) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme-variant] .tao3k-header__nav a,
+html[data-theme-variant] .tao3k-header__utility,
+html[data-theme-variant] .tao3k-platform-menu__trigger {
+  color: var(--ink) !important;
+}
+
+html[data-theme-variant] :is(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 3px;
+}
+
+html[data-theme-variant] .tao3k-site-footer {
+  border-top-color: var(--line) !important;
+}
+
+html[data-theme-variant] :is(.tao3k-site-footer__directory a span, .tao3k-site-footer__top b) {
+  color: var(--accent) !important;
+}
+
+.tao3k-reveal > *,
+.tao3k-system-atlas.tao3k-reveal .tao3k-system-atlas__links a {
+  opacity: 1 !important;
+}
+
+html[data-theme-variant] :is(.shiki, .shiki span, pre, code) {
+  background-color: var(--surface) !important;
+  background-image: none !important;
+  color: var(--ink) !important;
+}
+
+@media (max-width: 1100px) {
+  html[data-theme-variant] .theme-surface--tao3k-site .tao3k-header__nav,
+  html[data-theme-variant] .tao3k-header__nav.is-open {
+    background-color: var(--surface) !important;
+    background-image: none !important;
+  }
+}

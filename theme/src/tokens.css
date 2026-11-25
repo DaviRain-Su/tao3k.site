@@ -1,0 +1,74 @@
+/* One canvas, ink, muted, line, and accent set for both variants.
+   :root matches the default variant so the first paint is night, not paper. */
+
+:root,
+html[data-theme-variant="night"] {
+  color-scheme: dark;
+  --canvas: #080b0a;
+  --surface: #111815;
+  --surface-raised: #1a2620;
+  --ink: #eef2ec;
+  --muted: #b7c4bb;
+  --line: rgb(238 242 236 / 18%);
+  --line-strong: rgb(238 242 236 / 38%);
+  --accent: #8be28b;
+  --on-accent: #082014;
+  --focus: #c8f5c6;
+}
+
+html[data-theme-variant="paper"] {
+  color-scheme: light;
+  --canvas: #f3f1e8;
+  --surface: #fffdf8;
+  --surface-raised: #e6e2d4;
+  --ink: #1a211c;
+  --muted: #3c4a43;
+  --line: rgb(26 33 28 / 18%);
+  --line-strong: rgb(26 33 28 / 36%);
+  --accent: #0e5c3c;
+  --on-accent: #f4fff8;
+  --focus: #083828;
+}
+
+:root,
+html[data-theme-variant="night"],
+html[data-theme-variant="paper"] {
+  --tao-ink: var(--ink);
+  --tao-muted: var(--muted);
+  --tao-line: var(--line);
+  --tao-paper: var(--canvas);
+  --tao-panel: var(--surface-raised);
+  --tao-mint: var(--focus);
+  --tao-green: var(--accent);
+  --tao-night: var(--accent);
+  --tao-accent: var(--accent);
+  --tao-violet: var(--accent);
+  --tao-coral: var(--accent);
+  --tao3k-canvas: var(--canvas);
+  --tao3k-surface: var(--surface);
+  --tao3k-surface-raised: var(--surface-raised);
+  --tao3k-text: var(--ink);
+  --tao3k-muted: var(--muted);
+  --tao3k-line: var(--line);
+  --tao3k-accent: var(--accent);
+  --immersive-bg: var(--canvas);
+  --immersive-raised: var(--surface);
+  --immersive-text: var(--ink);
+  --immersive-muted: var(--muted);
+  --immersive-line: var(--line);
+  --platform-bg: var(--canvas);
+  --platform-panel: var(--surface);
+  --platform-line: var(--line);
+  --platform-soft: var(--muted);
+  --pw-bg: var(--canvas);
+  --pw-ink: var(--ink);
+  --pw-muted: var(--muted);
+  --pw-line: var(--line);
+  --pw-lilac: var(--accent);
+}
+
+html,
+body {
+  background: var(--canvas);
+  color: var(--ink);
+}

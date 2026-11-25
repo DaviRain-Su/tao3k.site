@@ -1,6 +1,7 @@
 import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { startupStyleSource, themeBootstrapSource } from "./src/build/prepare-host-shell.mjs";
 
 const port = Number(process.env.ORG_ZHIXING_THEME_PORT ?? "4174");
 const origin = (
@@ -52,6 +53,22 @@ export default defineConfig({
   },
   html: {
     title: "tao3k.site theme preview",
+    tags: [
+      {
+        tag: "script",
+        attrs: { "data-tao3k-theme-bootstrap": "true" },
+        children: themeBootstrapSource,
+        head: true,
+        append: false,
+      },
+      {
+        tag: "style",
+        attrs: { "data-tao3k-startup": "night" },
+        children: startupStyleSource,
+        head: true,
+        append: false,
+      },
+    ],
   },
   output: {
     assetPrefix: `${origin}/`,

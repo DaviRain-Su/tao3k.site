@@ -4,6 +4,7 @@ import { createRoot as createReactRoot, type Root } from "react-dom/client";
 import { Tao3kThemeHeader, Tao3kThemeHero } from "./index";
 import { Tao3kApplicationDocument, Tao3kApplicationHome } from "./site-pages";
 import { resolveSiteRoute } from "./site-routes";
+import { applyThemeVariant, resolveThemeVariant, type ThemeVariant } from "./theme-mode";
 
 declare global {
   interface Window {
@@ -22,15 +23,13 @@ const shell = {
   staticSite: { sources: [{ id: "home" }, { id: "platform" }, { id: "research" }] },
 };
 
-// Match the host's initial variant before the first paint.
-document.documentElement.dataset.theme = "tao3k-site";
-document.documentElement.dataset.themeVariant = "night";
+const initialVariant = resolveThemeVariant();
+applyThemeVariant(initialVariant, false);
 
 function Preview() {
-  const [variant, setVariant] = useState<"night" | "paper">("night");
+  const [variant, setVariant] = useState<ThemeVariant>(initialVariant);
   useEffect(() => {
-    document.documentElement.dataset.theme = "tao3k-site";
-    document.documentElement.dataset.themeVariant = variant;
+    applyThemeVariant(variant, false);
   }, [variant]);
   const requestedId = window.location.pathname.replace(/^\/+|\/+$/gu, "");
   const route = requestedId ? resolveSiteRoute(requestedId) : null;
@@ -43,7 +42,10 @@ function Preview() {
             key={option}
             data-theme-variant-option={option}
             aria-pressed={variant === option}
-            onClick={() => setVariant(option)}
+            onClick={() => {
+              applyThemeVariant(option, true);
+              setVariant(option);
+            }}
             type="button"
           >
             {option}

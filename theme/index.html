@@ -4,6 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
+    <script data-tao3k-theme-bootstrap>
+      (function () {
+        try {
+          var key = "tao3k-theme-variant";
+          var stored = localStorage.getItem(key);
+          var variant =
+            stored === "paper" || stored === "night"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "paper"
+                : "night";
+          var root = document.documentElement;
+          root.dataset.theme = "tao3k-site";
+          root.dataset.themeVariant = variant;
+          root.style.colorScheme = variant === "paper" ? "light" : "dark";
+        } catch (e) {}
+      })();
+    </script>
+    <style data-tao3k-startup="night">
+      html,
+      body {
+        background: #080b0a;
+        color: #eef2ec;
+      }
+      html[data-theme-variant="paper"],
+      html[data-theme-variant="paper"] body {
+        background: #f3f1e8;
+        color: #1a211c;
+      }
+      html[data-theme-variant="night"],
+      html[data-theme-variant="night"] body {
+        background: #080b0a;
+        color: #eef2ec;
+      }
+    </style>
     <title>tao3k.site · Zhixing theme provider</title>
   </head>
   <body>

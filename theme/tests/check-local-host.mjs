@@ -34,8 +34,17 @@ assert.equal(
 assert.equal(await prepareLocalHost({ cacheRoot, packagePath, sourceRoot: source }), prepared);
 const preparedShell = await readFile(resolve(prepared, "index.html"), "utf8");
 assert.match(preparedShell, /data-tao3k-startup="night"/);
-assert.match(preparedShell, /html,body\{background:#0b0d16/);
-assert.ok(preparedShell.indexOf('data-tao3k-startup="night"') < preparedShell.indexOf("</head>"));
+assert.match(preparedShell, /data-tao3k-theme-bootstrap/);
+assert.match(preparedShell, /tao3k-theme-variant/);
+assert.match(preparedShell, /html,body\{background:#080b0a;color:#eef2ec\}/);
+assert.match(preparedShell, /html\[data-theme-variant="paper"\]/);
+assert.match(preparedShell, /background:#f3f1e8/);
+assert.doesNotMatch(preparedShell, /#0b0d16/);
+assert.ok(preparedShell.indexOf("data-tao3k-theme-bootstrap") < preparedShell.indexOf("</head>"));
+assert.ok(
+  preparedShell.indexOf("data-tao3k-theme-bootstrap") <
+    preparedShell.indexOf('data-tao3k-startup="night"'),
+);
 assert.equal(withStartupCanvas(preparedShell), preparedShell);
 assert.match(preparedShell, /data-tao3k-base-navigation/);
 for (const [href, base, expected] of [

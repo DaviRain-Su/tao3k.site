@@ -220,6 +220,17 @@
   }
 }
 
+.tao3k-site-footer__start {
+  max-width: 62rem;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.tao3k-site-footer__start a {
+  color: inherit;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tao3k-site-footer__directory a,
   .tao3k-site-footer__top b {
