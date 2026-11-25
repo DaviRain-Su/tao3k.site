@@ -14,6 +14,8 @@ import {
 assert.equal(themeVariantStorageKey, hostThemeVariantKey);
 assert.equal(resolveThemeChoice("paper", "night", false), "paper");
 assert.equal(resolveThemeChoice("night", "paper", true), "night");
+assert.equal(resolveThemeChoice("night", "paper", true), "night");
+assert.equal(resolveThemeChoice("paper", "night", false), "paper");
 assert.equal(resolveThemeChoice("sepia", "paper", false), "paper");
 assert.equal(resolveThemeChoice("sepia", "nope", true), "paper");
 assert.equal(resolveThemeChoice("sepia", "nope", false), "night");
@@ -33,8 +35,14 @@ globalThis.localStorage = {
 globalThis.document = { documentElement: root };
 globalThis.window = { matchMedia: () => ({ matches: systemLight }) };
 
+systemLight = true;
+store.set(hostThemeVariantKey, "night");
+store.set(legacyThemeVariantKey, "paper");
+assert.equal(resolveThemeVariant(), "night");
+
 systemLight = false;
 store.set(hostThemeVariantKey, "paper");
+store.set(legacyThemeVariantKey, "night");
 assert.equal(resolveThemeVariant(), "paper");
 assert.equal(readStoredThemeVariant(), "paper");
 
@@ -42,11 +50,12 @@ store.set(hostThemeVariantKey, "not-a-variant");
 store.set(legacyThemeVariantKey, "paper");
 systemLight = false;
 assert.equal(resolveThemeVariant(), "paper");
-assert.equal(readStoredThemeVariant(), null);
+assert.equal(readStoredThemeVariant(), "paper");
 
 store.clear();
 systemLight = true;
 assert.equal(resolveThemeVariant(), "paper");
+store.clear();
 systemLight = false;
 assert.equal(resolveThemeVariant(), "night");
 

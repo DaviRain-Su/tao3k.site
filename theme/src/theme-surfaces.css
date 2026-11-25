@@ -75,7 +75,17 @@ html[data-theme-variant] a.tao3k-button--quiet {
 }
 
 html[data-theme-variant]
-  :is(.tao3k-header__nav a, .tao3k-header__utility, .tao3k-platform-menu__trigger) {
+  :is(
+    .tao3k-header__nav a,
+    .tao3k-header__utility,
+    .tao3k-platform-menu__trigger,
+    .tao3k-products-menu__trigger,
+    .tao3k-products-menu__trigger span
+  ) {
+  color: var(--ink);
+}
+
+html[data-theme-variant] .tao3k-products-menu__panel :is(a, a span, small, p, strong) {
   color: var(--ink);
 }
 

@@ -1,8 +1,13 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { hostThemeVariantKey, legacyThemeVariantKey } from "../theme-variant.mjs";
+import {
+  hostThemeVariantKey,
+  legacyThemeVariantKey,
+  readBootVariant,
+  resolveThemeChoice,
+} from "../theme-variant.mjs";
 
 const marker = 'data-tao3k-startup="night"';
-export const themeBootstrapSource = `(function(){try{var hostKey=${JSON.stringify(hostThemeVariantKey)};var legacyKey=${JSON.stringify(legacyThemeVariantKey)};var hostStored=localStorage.getItem(hostKey);var legacyStored=localStorage.getItem(legacyKey);var systemLight=window.matchMedia("(prefers-color-scheme: light)").matches;var variant=(hostStored==="night"||hostStored==="paper")?hostStored:(legacyStored==="night"||legacyStored==="paper")?legacyStored:(systemLight?"paper":"night");if(hostStored!==variant)localStorage.setItem(hostKey,variant);var root=document.documentElement;root.dataset.theme="tao3k-site";root.dataset.themeVariant=variant;root.style.colorScheme=variant==="paper"?"light":"dark";}catch(e){}})();`;
+export const themeBootstrapSource = `(function(){${resolveThemeChoice.toString()}${readBootVariant.toString()}var storage=null;try{storage=localStorage;}catch(e){}var systemLight=false;try{systemLight=window.matchMedia("(prefers-color-scheme: light)").matches;}catch(e){}var variant=readBootVariant(storage,systemLight,${JSON.stringify(hostThemeVariantKey)},${JSON.stringify(legacyThemeVariantKey)});var root=document.documentElement;root.dataset.theme="tao3k-site";root.dataset.themeVariant=variant;root.style.colorScheme=variant==="paper"?"light":"dark";})();`;
 export const startupStyleSource =
   'html,body{background:#080b0a;color:#eef2ec}html[data-theme-variant="paper"],html[data-theme-variant="paper"] body{background:#f3f1e8;color:#1a211c}html[data-theme-variant="night"],html[data-theme-variant="night"] body{background:#080b0a;color:#eef2ec}html[data-theme-variant="paper"]:has([data-theme-runtime-state="pending"]),html[data-theme-variant="paper"]:has([data-theme-runtime-state="pending"]) body,html[data-theme-variant="paper"]:has([data-theme-runtime-state="loading"]),html[data-theme-variant="paper"]:has([data-theme-runtime-state="loading"]) body,html[data-theme-variant="paper"]:has([data-theme-runtime-state="mounting"]),html[data-theme-variant="paper"]:has([data-theme-runtime-state="mounting"]) body{background:#f3f1e8!important;color:#1a211c!important}html[data-theme-variant="night"]:has([data-theme-runtime-state="pending"]),html[data-theme-variant="night"]:has([data-theme-runtime-state="pending"]) body,html[data-theme-variant="night"]:has([data-theme-runtime-state="loading"]),html[data-theme-variant="night"]:has([data-theme-runtime-state="loading"]) body,html[data-theme-variant="night"]:has([data-theme-runtime-state="mounting"]),html[data-theme-variant="night"]:has([data-theme-runtime-state="mounting"]) body{background:#080b0a!important;color:#eef2ec!important}';
 const themeBootstrap = `<script data-tao3k-theme-bootstrap>${themeBootstrapSource}</script>`;

@@ -87,7 +87,7 @@
 
 .tao3k-platform-deployment__targets > header p {
   margin: 12px 0 0;
-  color: #d3e4dd;
+  color: var(--ink);
   font-size: 1.1rem;
 }
 
@@ -112,7 +112,7 @@
 
 .tao3k-platform-deployment__targets p {
   margin: 0;
-  color: #a0b5ad;
+  color: var(--muted);
   line-height: 1.5;
 }
 
@@ -129,7 +129,7 @@
   .tao3k-platform-deployment__targets > a:hover {
     padding-right: 10px;
     padding-left: 10px;
-    color: #c8f5df;
+    color: var(--ink);
   }
 
   .tao3k-platform-deployment__targets > a:hover i {
@@ -162,7 +162,7 @@
 }
 
 .tao3k-platform-deployment__disciplines header strong {
-  color: #dff8ed;
+  color: var(--ink);
   font-size: clamp(1.65rem, 2.4vw, 2.7rem);
   letter-spacing: -0.045em;
 }
@@ -170,7 +170,7 @@
 .tao3k-platform-deployment__disciplines h3 {
   max-width: 520px;
   margin: 48px 0 18px;
-  color: #dcece6;
+  color: var(--ink);
   font-size: clamp(1.45rem, 2vw, 2.15rem);
   font-weight: 520;
   line-height: 1.08;
@@ -180,7 +180,7 @@
 .tao3k-platform-deployment__disciplines article > p {
   max-width: 540px;
   margin: 0;
-  color: #8fa69d;
+  color: var(--muted);
   line-height: 1.65;
 }
 
@@ -196,7 +196,7 @@
   position: relative;
   padding: 20px 16px 0 0;
   border-top: 1px solid rgba(141, 240, 194, 0.38);
-  color: #adc1b9;
+  color: var(--muted);
   font:
     550 0.68rem/1.45 "IBM Plex Mono",
     monospace;
@@ -228,14 +228,14 @@
 }
 
 .tao3k-platform-deployment__boundary strong {
-  color: #dcece6;
+  color: var(--ink);
   font-size: 1.08rem;
   line-height: 1.4;
 }
 
 .tao3k-platform-deployment__boundary p {
   margin: 0;
-  color: #7f978e;
+  color: var(--muted);
   font-size: 0.85rem;
   line-height: 1.65;
 }
@@ -269,7 +269,7 @@
 }
 
 .tao3k-platform-boundaries p {
-  color: #899d96;
+  color: var(--muted);
   line-height: 1.68;
 }
 
@@ -298,7 +298,7 @@
   min-height: 115px;
   padding: 28px;
   border: 1px solid var(--platform-line);
-  color: #cfe0da;
+  color: var(--ink);
   display: flex;
   align-items: flex-end;
   text-decoration: none;
@@ -309,7 +309,7 @@
 
 .tao3k-platform-next a:hover,
 .tao3k-platform-next a:focus-visible {
-  color: #081b16;
+  color: var(--ink);
   background: var(--accent);
   outline: none;
 }

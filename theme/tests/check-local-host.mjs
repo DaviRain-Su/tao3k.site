@@ -55,6 +55,32 @@ assert.equal(invalidHostValue.store.get(hostThemeVariantKey), "paper");
 const invalidOnDarkSystem = bootTheme({ host: "sepia", legacy: "lime", light: false });
 assert.equal(invalidOnDarkSystem.root.dataset.themeVariant, "night");
 
+const hostWinsOverLegacy = bootTheme({ host: "night", legacy: "paper", light: true });
+assert.equal(hostWinsOverLegacy.root.dataset.themeVariant, "night");
+assert.equal(hostWinsOverLegacy.store.get(hostThemeVariantKey), "night");
+
+const legacyDoesNotOverrideHost = bootTheme({ host: "paper", legacy: "night", light: false });
+assert.equal(legacyDoesNotOverrideHost.root.dataset.themeVariant, "paper");
+
+const throwingStorage = (() => {
+  const rootNode = { dataset: {}, style: {} };
+  vm.runInNewContext(themeBootstrapSource, {
+    localStorage: {
+      getItem: () => {
+        throw new Error("denied");
+      },
+      setItem: () => {
+        throw new Error("denied");
+      },
+    },
+    window: { matchMedia: () => ({ matches: true }) },
+    document: { documentElement: rootNode },
+  });
+  return rootNode;
+})();
+assert.equal(throwingStorage.dataset.themeVariant, "paper");
+assert.equal(throwingStorage.style.colorScheme, "light");
+
 const paperRule = startupStyleSource.match(
   /html\[data-theme-variant="paper"\],html\[data-theme-variant="paper"\] body\{background:(#[0-9a-f]{6})/u,
 );

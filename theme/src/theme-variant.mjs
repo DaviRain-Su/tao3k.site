@@ -9,12 +9,38 @@ export function isThemeVariant(value) {
 }
 
 /**
- * A valid host choice wins. A valid legacy choice is migrated.
- * Any other stored value is ignored and the system preference is used.
- * Light preference is paper. Anything else, including no preference, is night.
+ * A valid host choice wins, even when the legacy key disagrees.
+ * Any other stored value is ignored. Light preference is paper.
  */
 export function resolveThemeChoice(hostStored, legacyStored, systemLight) {
-  if (isThemeVariant(hostStored)) return hostStored;
-  if (isThemeVariant(legacyStored)) return legacyStored;
+  if (hostStored === "night" || hostStored === "paper") return hostStored;
+  if (legacyStored === "night" || legacyStored === "paper") return legacyStored;
   return systemLight ? "paper" : "night";
+}
+
+/** Storage failures fall through to the system preference. The choice is still returned. */
+export function readBootVariant(storage, systemLight, hostKey, legacyKey) {
+  let hostStored = null;
+  let legacyStored = null;
+  if (storage) {
+    try {
+      hostStored = storage.getItem(hostKey);
+    } catch {
+      hostStored = null;
+    }
+    try {
+      legacyStored = storage.getItem(legacyKey);
+    } catch {
+      legacyStored = null;
+    }
+  }
+  const variant = resolveThemeChoice(hostStored, legacyStored, systemLight);
+  if (storage) {
+    try {
+      if (hostStored !== variant) storage.setItem(hostKey, variant);
+    } catch {
+      /* The document attribute is still set by the caller. */
+    }
+  }
+  return variant;
 }

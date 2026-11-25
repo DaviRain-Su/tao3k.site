@@ -18,7 +18,7 @@
 }
 .special-title small,
 .agent-composition small {
-  color: #aebfe8;
+  color: var(--muted);
   font:
     600 0.68rem/1.4 ui-monospace,
     monospace;
@@ -31,17 +31,17 @@
   gap: 1rem;
   padding: 1.6rem;
   margin-bottom: 2rem;
-  border: 1px solid #8da7c43d;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: radial-gradient(ellipse at center, #76a3b923, transparent 68%), #111b2a;
+  background: radial-gradient(ellipse at center, var(--line), transparent 68%), var(--canvas);
 }
 .gateway-path span {
   font-size: 0.85rem;
-  color: #c5d3e4;
+  color: var(--ink);
 }
 .gateway-path i,
 .composition-chain i {
-  color: #8abbbd;
+  color: var(--muted);
   font-style: normal;
   font-size: 1.25rem;
 }
@@ -51,22 +51,22 @@
   gap: 0.35rem;
   text-align: center;
   padding: 1rem 1.7rem;
-  border: 1px solid #9bc7c462;
+  border: 1px solid var(--line);
   border-radius: 0.75rem;
-  background: #a4d7cf13;
-  color: #edf9f6 !important;
+  background: var(--surface);
+  color: var(--ink) !important;
 }
 .gateway-path__hub b {
-  color: #9abeba;
+  color: var(--muted);
   font:
     500 0.65rem/1.3 ui-monospace,
     monospace;
 }
 .special-grid-wrap {
-  border: 1px solid #aebfe333;
+  border: 1px solid var(--line);
   border-radius: 1rem;
   overflow: hidden;
-  background: #151c2a;
+  background: var(--canvas);
 }
 .product-comparison .special-grid {
   width: 100%;
@@ -78,10 +78,10 @@
   padding: 1.2rem 1.25rem;
   font-size: 0.9rem;
   line-height: 1.5;
-  border-bottom: 1px solid #bdc9e526;
+  border-bottom: 1px solid var(--line);
 }
 .product-comparison .special-grid thead th {
-  background: #1a2434;
+  background: var(--canvas);
   vertical-align: middle;
   text-transform: none;
   font-family: inherit;
@@ -92,7 +92,7 @@
     600 0.65rem/1.4 ui-monospace,
     monospace;
   letter-spacing: 0.08em;
-  color: #9eafcc;
+  color: var(--muted);
 }
 .special-brand {
   display: flex;
@@ -109,13 +109,13 @@
 }
 .special-brand strong {
   display: block;
-  color: #f0f3fb;
+  color: var(--ink);
   font-size: 0.95rem;
 }
 .special-brand small {
   display: block;
   margin-top: 0.2rem;
-  color: #a5b4ca;
+  color: var(--muted);
   font:
     500 0.65rem/1.3 ui-monospace,
     monospace;
@@ -128,11 +128,11 @@
     monospace;
 }
 .product-comparison .special-grid tbody th {
-  color: #e4eaf5;
+  color: var(--ink);
   font-weight: 600;
 }
 .product-comparison .special-grid tbody td:first-of-type {
-  color: #d8ede8;
+  color: var(--ink);
   background: #a5d8c908;
 }
 .product-comparison .special-grid tbody tr:last-child > * {
@@ -150,14 +150,14 @@
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   overflow: hidden;
-  border: 1px solid #aebfe333;
+  border: 1px solid var(--line);
   border-radius: 1rem;
   margin-bottom: 2rem;
-  background: #aebfe333;
+  background: var(--surface);
 }
 .agent-composition > div {
   padding: 1.5rem;
-  background: #141e2c;
+  background: var(--canvas);
 }
 .composition-chain {
   display: flex;
@@ -170,7 +170,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #e5edf7;
+  color: var(--ink);
   font-size: 0.82rem;
 }
 .composition-chain img {
@@ -182,14 +182,14 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   margin-bottom: 2rem;
-  border: 1px solid #93abc844;
+  border: 1px solid var(--line);
   border-radius: 1rem;
   overflow: hidden;
-  background: linear-gradient(110deg, #1a2839, #161c2d);
+  background: linear-gradient(110deg, var(--canvas), var(--canvas));
 }
 .infra-path > div {
   padding: 1.5rem 1rem;
-  border-right: 1px solid #aebfe32b;
+  border-right: 1px solid var(--line);
 }
 .infra-path > div:last-child {
   border: 0;
@@ -197,17 +197,17 @@
 .infra-path span {
   display: block;
   margin-bottom: 0.5rem;
-  color: #80c4bc;
+  color: var(--muted);
   font:
     600 0.7rem/1 ui-monospace,
     monospace;
 }
 .infra-path strong {
-  color: #e9f0f8;
+  color: var(--ink);
   font-size: 0.95rem;
 }
 .infra-landscape {
-  border: 1px solid #aebfe333;
+  border: 1px solid var(--line);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -220,28 +220,28 @@
   padding: 1rem 1.4rem;
 }
 .infra-landscape__head {
-  background: #1b2637;
-  color: #a8b7d0;
+  background: var(--canvas);
+  color: var(--muted);
   font:
     600 0.65rem/1.4 ui-monospace,
     monospace;
   letter-spacing: 0.07em;
 }
 .infra-row {
-  border-top: 1px solid #bdc9e526;
-  color: #bdc9d9 !important;
+  border-top: 1px solid var(--line);
+  color: var(--muted) !important;
   text-decoration: none !important;
   font-size: 0.88rem;
   transition: background 0.2s;
 }
 .infra-row:hover {
-  background: #a1c7da10;
+  background: var(--surface);
 }
 .infra-name {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: #edf1f8;
+  color: var(--ink);
 }
 .infra-name img {
   width: 1.5rem;
@@ -252,8 +252,8 @@
   display: inline-block;
   padding: 0.3rem 0.55rem;
   border-radius: 2rem;
-  background: #8eb9b522;
-  color: #acd8d0;
+  background: var(--surface);
+  color: var(--ink);
   font:
     600 0.68rem/1.2 ui-monospace,
     monospace;
@@ -268,8 +268,8 @@
   align-items: flex-start;
   padding: 1.4rem;
   margin-top: 1.4rem;
-  background: #91b3de0c;
-  border-left: 2px solid #88a8df;
+  background: var(--surface);
+  border-left: 2px solid var(--line);
 }
 .infra-note img {
   width: 2.4rem;
@@ -328,7 +328,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.5rem 0.8rem;
-    border-bottom: 1px solid #bdc9e526;
+    border-bottom: 1px solid var(--line);
   }
   .product-comparison .special-grid tbody tr:last-child {
     border: 0;
@@ -349,7 +349,7 @@
     content: attr(data-label);
     display: block;
     margin-bottom: 0.3rem;
-    color: #a9bdd6;
+    color: var(--muted);
     font:
       600 0.62rem/1.3 ui-monospace,
       monospace;
@@ -415,9 +415,9 @@
     flex: 1 1 9rem;
     min-width: 0;
     padding: 0.65rem;
-    border: 1px solid #aebfe333;
+    border: 1px solid var(--line);
     border-radius: 0.6rem;
-    background: #182231;
+    background: var(--canvas);
     font-size: 0.76rem;
     font-weight: 600;
   }
@@ -433,6 +433,6 @@
     font:
       500 0.59rem/1.3 ui-monospace,
       monospace;
-    color: #aebfe8;
+    color: var(--muted);
   }
 }

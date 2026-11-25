@@ -60,7 +60,7 @@
 @media (hover: hover) {
   .tao3k-site-footer__directory a:hover,
   .tao3k-site-footer__directory a:focus-visible {
-    color: #7df0c5;
+    color: var(--ink);
     transform: translateX(3px);
   }
 }
@@ -85,7 +85,7 @@
   display: inline-flex;
   width: fit-content;
   align-items: center;
-  color: #74e6bb;
+  color: var(--ink);
   text-decoration: none;
 }
 
@@ -110,7 +110,7 @@
 
 .tao3k-site-footer__brand .tao-logo-symbol-aura {
   fill: none;
-  stroke: #ef7f73;
+  stroke: var(--muted);
   stroke-linecap: round;
   stroke-width: 2;
   opacity: 0.48;
@@ -125,11 +125,11 @@
 }
 
 .tao3k-site-footer__brand .tao-logo-three-mark {
-  stroke: #65d6a5;
+  stroke: var(--muted);
 }
 
 .tao3k-site-footer__brand .tao-logo-k-mark {
-  stroke: #a98bd8;
+  stroke: var(--muted);
 }
 
 .tao3k-site-footer__brand .tao-logo-wordline {
@@ -144,11 +144,11 @@
 }
 
 .tao3k-site-footer__brand .tao-logo-three {
-  color: #ef7f73;
+  color: var(--muted);
 }
 
 .tao3k-site-footer__brand .tao-logo-k {
-  color: #a98bd8;
+  color: var(--muted);
 }
 
 .tao3k-site-footer__copyright {

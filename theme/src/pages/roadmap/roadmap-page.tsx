@@ -6,12 +6,12 @@ const roadmap = [
     systems: "Orgize · ASP · Xiuxian workshop",
     purpose: "Make records, contracts, source identity and projections durable and portable.",
     evidence:
-      "The learning-data record assigns Org-first records and the evidence-to-action architecture as an available foundation. Evidence passports and lifecycle receipts are under active construction. Measuring learning value, keeping negative results, and returning attribution across institutions are research frontiers. An open evidence economy is a long-term horizon. This front itself has no single assigned state.",
+      "60.01 places Org-first records with the evidence-to-action architecture under its available-foundation heading, evidence passports and lifecycle receipts under active construction, learning value and attribution under research frontiers, and an open evidence economy under the long-term horizon. This front itself has no single assigned state.",
     gap: "Rights and quality signals must remain portable across every projection boundary.",
     signal:
       "Evidence survives theme, runtime and organizational handoffs without losing provenance.",
     docs: "Orgize and ASP repositories. Org Zhixing and Wendao are not separate product pages.",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
   {
     state: "STATE PENDING",
@@ -23,7 +23,7 @@ const roadmap = [
     gap: "Semantic relations and scientific claims still need shared qualification boundaries.",
     signal: "Knowledge, code and scientific models can be queried through one inspectable graph.",
     docs: "See MRR on the product map",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
   {
     state: "STATE PENDING",
@@ -31,11 +31,11 @@ const roadmap = [
     systems: "Lean · Julia · ScienceResearch · Agentic AI Lab",
     purpose: "Qualify claims and authority without hiding judgment behind automation.",
     evidence:
-      "The direction is Lean obligations, contracts, and a separation between qualification, authorization, and verification. No front-level state is assigned. LeanPoo and Cedar POO Spec are public construction projects, not this front delivered.",
+      "60.01 describes Lean obligations, contracts, and a separation between qualification, authorization, and verification. It does not assign this front a state. LeanPoo and Cedar POO Spec are public repositories; their cards stay STATE PENDING.",
     gap: "Formal checks must preserve human judgment and operational context.",
     signal: "Authority becomes machine-checkable without becoming opaque or absolute.",
     docs: "See LeanPoo and Cedar POO Spec",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
   {
     state: "Long-term Horizon",
@@ -44,11 +44,11 @@ const roadmap = [
     purpose:
       "Join typed composition with governed execution while preserving evidence and authority.",
     evidence:
-      "The ecosystem roadmap names a governed next-generation agent core as a long-term horizon, not a delivery. Agentic AI Lab and Marlin Agent Core are public repositories in Active Construction. The lab does not execute. Marlin is a substrate, not a terminal-user product. Their cards do not promote this front.",
+      "60.01 names a governed next-generation agent core as a long-term horizon, not a delivery. Agentic AI Lab and Marlin Agent Core are public repositories. The lab does not execute. Marlin is a substrate, not a terminal-user product. Their cards stay STATE PENDING.",
     gap: "Composition, compression, execution and receipts need one governed operational boundary.",
     signal: "A composed case executes through Marlin while preserving evidence and authority.",
     docs: "See Agentic AI Lab and Marlin Agent Core",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
   {
     state: "Long-term Horizon",
@@ -61,7 +61,7 @@ const roadmap = [
     signal:
       "A research result can enter governed operation and return outcome evidence to research.",
     docs: "No project documentation destination is assigned",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
   {
     state: "Long-term Horizon",
@@ -75,7 +75,7 @@ const roadmap = [
     signal:
       "New participants can inspect, learn, contribute and deploy without surrendering agency.",
     docs: "No project documentation destination is assigned",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
   {
     state: "Long-term Horizon",
@@ -87,7 +87,7 @@ const roadmap = [
     gap: "The preceding fronts must interoperate before the lifecycle can close at ecosystem scale.",
     signal: "Every action returns searchable, contestable and improvable evidence.",
     docs: "No project documentation destination is assigned",
-    reviewed: "2026-07-21",
+    reviewed: "2026-07-18",
   },
 ] as const;
 
@@ -211,7 +211,7 @@ export function RoadmapPage() {
               <p>{item.signal}</p>
               <footer>
                 <span>{item.docs}</span>
-                <time dateTime={item.reviewed}>Source dated {item.reviewed}</time>
+                <time dateTime={item.reviewed}>60.01 dated {item.reviewed}</time>
               </footer>
             </div>
           </article>

@@ -6,7 +6,11 @@
   overflow: hidden;
   background:
     radial-gradient(circle at 56% 48%, rgb(35 151 126 / 9%), transparent 32%),
-    linear-gradient(145deg, color-mix(in srgb, var(--tao3k-panel) 96%, #001913), #00130f);
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--tao3k-panel) 96%, var(--canvas)),
+      var(--canvas)
+    );
 }
 
 .tao3k-deployment-topology::before {
@@ -88,7 +92,7 @@
 .tao3k-deployment-topology__source {
   padding: 22px;
   border-left: 2px solid var(--tao3k-accent);
-  background: rgb(1 19 15 / 68%);
+  background: var(--surface);
 }
 
 .tao3k-deployment-topology__source > span,
@@ -167,7 +171,7 @@
   display: grid;
   place-items: center;
   color: var(--tao3k-ink);
-  background: radial-gradient(circle, rgb(91 238 195 / 13%), rgb(0 18 14 / 80%));
+  background: var(--surface);
   box-shadow: 0 0 34px rgb(91 238 195 / 8%);
   font: 700 0.66rem/1.55 var(--tao3k-mono);
   letter-spacing: 0.08em;
@@ -211,7 +215,7 @@
   align-content: start;
   color: inherit;
   text-align: left;
-  background: color-mix(in srgb, var(--tao3k-panel) 96%, #00120f);
+  background: color-mix(in srgb, var(--tao3k-panel) 96%, var(--canvas));
   cursor: pointer;
   transition:
     border-color 180ms ease,

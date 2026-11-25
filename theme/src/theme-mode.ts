@@ -2,7 +2,7 @@ import {
   hostThemeVariantKey,
   isThemeVariant,
   legacyThemeVariantKey,
-  resolveThemeChoice,
+  readBootVariant,
   type ThemeVariant,
 } from "./theme-variant.mjs";
 
@@ -25,11 +25,19 @@ export function readStoredThemeVariant(): ThemeVariant | null {
 
 /** Host storage wins. Otherwise a legacy choice, then the system preference. */
 export function resolveThemeVariant(): ThemeVariant {
-  return resolveThemeChoice(
-    readKey(hostThemeVariantKey),
-    readKey(legacyThemeVariantKey),
-    window.matchMedia("(prefers-color-scheme: light)").matches,
-  );
+  let systemLight = false;
+  try {
+    systemLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  } catch {
+    systemLight = false;
+  }
+  let storage: Pick<Storage, "getItem" | "setItem"> | null = null;
+  try {
+    storage = localStorage;
+  } catch {
+    storage = null;
+  }
+  return readBootVariant(storage, systemLight, hostThemeVariantKey, legacyThemeVariantKey);
 }
 
 export function applyThemeVariant(variant: ThemeVariant, persist: boolean): void {

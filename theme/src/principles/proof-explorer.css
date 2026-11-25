@@ -12,17 +12,7 @@
   overflow: hidden;
   border-block: 1px solid color-mix(in srgb, var(--tao3k-line) 76%, transparent);
   padding: clamp(5rem, 9vw, 8rem) clamp(1.25rem, 4vw, 5rem);
-  background:
-    radial-gradient(
-      circle at 12% 18%,
-      color-mix(in srgb, var(--tao3k-cyan) 15%, transparent),
-      transparent 28rem
-    ),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--tao3k-ink) 82%, var(--tao3k-green)),
-      color-mix(in srgb, var(--tao3k-ink) 76%, var(--tao3k-cyan))
-    );
+  background: var(--surface);
 }
 
 .proof-explorer::before {
@@ -57,7 +47,7 @@
 .proof-explorer__header h2 {
   max-width: 14ch;
   margin: 0;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font-size: clamp(3.25rem, 8.4vw, 8.5rem);
   line-height: 0.9;
   letter-spacing: -0.075em;
@@ -66,7 +56,7 @@
 .proof-explorer__header > p:not(.proof-explorer__eyebrow) {
   max-width: 58rem;
   margin: 2rem 0 0;
-  color: color-mix(in srgb, var(--tao3k-paper) 74%, transparent);
+  color: color-mix(in srgb, var(--ink) 74%, transparent);
   font-size: clamp(1.05rem, 1.55vw, 1.45rem);
   line-height: 1.65;
 }
@@ -79,14 +69,8 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-green) 38%, var(--tao3k-line));
   border-radius: 24px;
   padding: 0.55rem;
-  color: color-mix(in srgb, var(--tao3k-paper) 62%, transparent);
-  background:
-    linear-gradient(
-      120deg,
-      color-mix(in srgb, var(--tao3k-green) 18%, var(--tao3k-ink)),
-      transparent
-    ),
-    color-mix(in srgb, var(--tao3k-ink) 80%, var(--tao3k-cyan));
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+  background: var(--surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 14%, transparent),
     0 16px 44px color-mix(in srgb, black 22%, transparent);
@@ -104,7 +88,7 @@
 }
 
 .proof-explorer__runtime-telemetry strong {
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font-size: 0.86rem;
 }
 
@@ -152,7 +136,7 @@
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 0.68rem 1rem;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font: 900 0.7rem/1 var(--tao3k-mono);
   letter-spacing: 0.055em;
   transition:
@@ -181,8 +165,8 @@
 }
 
 .proof-explorer__runtime-action--reset {
-  border-color: color-mix(in srgb, var(--tao3k-paper) 26%, var(--tao3k-line));
-  color: color-mix(in srgb, var(--tao3k-paper) 86%, var(--tao3k-cyan));
+  border-color: color-mix(in srgb, var(--ink) 26%, var(--tao3k-line));
+  color: color-mix(in srgb, var(--ink) 86%, var(--tao3k-cyan));
   background: color-mix(in srgb, var(--tao3k-paper) 7%, transparent);
 }
 
@@ -193,7 +177,7 @@
 
 .proof-explorer__runtime-action:disabled {
   border-color: transparent;
-  color: color-mix(in srgb, var(--tao3k-paper) 40%, transparent);
+  color: color-mix(in srgb, var(--ink) 40%, transparent);
   background: color-mix(in srgb, var(--tao3k-paper) 6%, transparent);
   box-shadow: none;
   cursor: not-allowed;
@@ -219,9 +203,7 @@
 .proof-explorer__receipt {
   border: 1px solid color-mix(in srgb, var(--tao3k-cyan) 22%, var(--tao3k-line));
   border-radius: 28px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, white 7%, transparent), transparent),
-    color-mix(in srgb, var(--tao3k-ink) 86%, black);
+  background: var(--surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 13%, transparent),
     0 30px 90px color-mix(in srgb, black 44%, transparent);
@@ -242,17 +224,7 @@
   margin: clamp(2.5rem, 5vw, 4.5rem) auto 0;
   border: 1px solid color-mix(in srgb, var(--tao3k-green) 26%, var(--tao3k-line));
   border-radius: 34px;
-  background:
-    radial-gradient(
-      circle at 48% 42%,
-      color-mix(in srgb, var(--tao3k-green) 14%, transparent),
-      transparent 38rem
-    ),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--tao3k-ink) 82%, var(--tao3k-green)),
-      color-mix(in srgb, var(--tao3k-ink) 76%, var(--tao3k-cyan))
-    );
+  background: var(--surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 14%, transparent),
     0 36px 110px color-mix(in srgb, black 42%, transparent);
@@ -293,10 +265,8 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-cyan) 24%, var(--tao3k-line));
   border-radius: 24px;
   padding: 1.05rem;
-  color: var(--tao3k-paper);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, white 7%, transparent), transparent),
-    color-mix(in srgb, var(--tao3k-ink) 84%, black);
+  color: var(--ink);
+  background: var(--surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 13%, transparent),
     0 20px 60px color-mix(in srgb, black 34%, transparent);
@@ -371,7 +341,7 @@
 
 .proof-flow-card strong {
   overflow: hidden;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font-size: 1.05rem;
   line-height: 1.18;
   text-overflow: ellipsis;
@@ -395,7 +365,7 @@
 .proof-flow-card small {
   margin-top: 0.38rem;
   overflow: hidden;
-  color: color-mix(in srgb, var(--tao3k-paper) 54%, transparent);
+  color: color-mix(in srgb, var(--ink) 54%, transparent);
   font: 700 0.68rem/1.2 var(--tao3k-mono);
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -457,14 +427,14 @@
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--tao3k-green) 24%, var(--tao3k-line));
   border-radius: 16px;
-  background: color-mix(in srgb, var(--tao3k-ink) 82%, black);
+  background: var(--surface);
   box-shadow: 0 18px 50px color-mix(in srgb, black 36%, transparent);
 }
 
 .proof-flow-shell .react-flow__controls-button {
   border: 0;
   border-bottom: 1px solid color-mix(in srgb, var(--tao3k-line) 58%, transparent);
-  color: var(--tao3k-paper);
+  color: var(--ink);
   background: transparent;
 }
 
@@ -480,7 +450,7 @@
   gap: 0.62rem;
   max-width: min(92rem, 100%);
   margin: 1rem auto 1.2rem;
-  color: color-mix(in srgb, var(--tao3k-paper) 56%, transparent);
+  color: color-mix(in srgb, var(--ink) 56%, transparent);
   font: 900 0.68rem/1 var(--tao3k-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -528,13 +498,7 @@
 .proof-review-panel {
   border: 1px solid color-mix(in srgb, var(--tao3k-green) 26%, var(--tao3k-line));
   border-radius: 28px;
-  background:
-    radial-gradient(
-      circle at 12% 0%,
-      color-mix(in srgb, var(--tao3k-green) 14%, transparent),
-      transparent 70%
-    ),
-    color-mix(in srgb, var(--tao3k-ink) 78%, var(--tao3k-green));
+  background: var(--surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 12%, transparent),
     0 24px 76px color-mix(in srgb, black 36%, transparent);
@@ -591,7 +555,7 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-green) 25%, transparent);
   border-radius: 18px;
   padding: 1rem;
-  color: color-mix(in srgb, var(--tao3k-paper) 90%, white);
+  color: color-mix(in srgb, var(--ink) 90%, white);
   background: color-mix(in srgb, black 35%, var(--tao3k-ink));
 }
 
@@ -609,7 +573,7 @@
 .proof-math-board__selected p:not(.proof-explorer__eyebrow) {
   max-width: 62rem;
   margin: 1rem 0 0;
-  color: color-mix(in srgb, var(--tao3k-paper) 72%, transparent);
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
   font-size: 1.02rem;
   line-height: 1.68;
 }
@@ -673,7 +637,7 @@
 
 .proof-wave-stack p {
   margin: 0.45rem 0 0;
-  color: color-mix(in srgb, var(--tao3k-paper) 74%, transparent);
+  color: color-mix(in srgb, var(--ink) 74%, transparent);
   font-size: 0.96rem;
   line-height: 1.5;
 }
@@ -688,7 +652,7 @@
 
 .proof-review-panel h3 {
   margin: 0;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font-size: clamp(1.8rem, 3.2vw, 3.4rem);
   line-height: 0.96;
   letter-spacing: -0.06em;
@@ -696,7 +660,7 @@
 
 .proof-review-panel p {
   margin: 0;
-  color: color-mix(in srgb, var(--tao3k-paper) 72%, transparent);
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -726,7 +690,7 @@
 }
 
 .proof-review-panel li span {
-  color: color-mix(in srgb, var(--tao3k-paper) 72%, transparent);
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
   line-height: 1.48;
 }
 
@@ -741,7 +705,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.65rem 0.7rem 1rem;
-  color: color-mix(in srgb, var(--tao3k-paper) 62%, transparent);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
   font: 700 0.76rem/1.2 var(--tao3k-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -773,7 +737,7 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-line) 72%, transparent);
   border-radius: 20px;
   padding: 0.95rem;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   background: color-mix(in srgb, white 4%, transparent);
   text-align: left;
 }
@@ -853,7 +817,7 @@
 .proof-obligation small {
   margin-top: 0.3rem;
   overflow: hidden;
-  color: color-mix(in srgb, var(--tao3k-paper) 48%, transparent);
+  color: color-mix(in srgb, var(--ink) 48%, transparent);
   font: 600 0.7rem/1.2 var(--tao3k-mono);
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -881,17 +845,7 @@
 
 .proof-explorer__detail[data-state="active"] {
   border-color: color-mix(in srgb, var(--tao3k-green) 70%, white);
-  background:
-    radial-gradient(
-      circle at 15% 0%,
-      color-mix(in srgb, var(--tao3k-green) 30%, transparent),
-      transparent 48%
-    ),
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--tao3k-green) 16%, var(--tao3k-ink)),
-      color-mix(in srgb, var(--tao3k-ink) 88%, black)
-    );
+  background: var(--surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 18%, transparent),
     0 0 52px color-mix(in srgb, var(--tao3k-green) 28%, transparent),
@@ -901,7 +855,7 @@
 .proof-explorer__detail h3,
 .proof-explorer__receipt h3 {
   margin: 0 0 1.25rem;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font-size: clamp(1.65rem, 3vw, 3rem);
   line-height: 0.95;
   letter-spacing: -0.055em;
@@ -935,7 +889,7 @@
   min-width: 0;
   overflow-wrap: anywhere;
   margin: 0;
-  color: color-mix(in srgb, var(--tao3k-paper) 78%, transparent);
+  color: color-mix(in srgb, var(--ink) 78%, transparent);
   line-height: 1.55;
 }
 
@@ -954,7 +908,7 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-cyan) 22%, var(--tao3k-line));
   border-radius: 18px;
   padding: 1rem;
-  color: color-mix(in srgb, var(--tao3k-paper) 84%, white);
+  color: color-mix(in srgb, var(--ink) 84%, white);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--tao3k-cyan) 7%, transparent), transparent),
     color-mix(in srgb, black 38%, var(--tao3k-ink));
@@ -985,7 +939,7 @@
 
 .proof-explorer__detail > p:last-child {
   margin: 1.4rem 0 0;
-  color: color-mix(in srgb, var(--tao3k-paper) 70%, transparent);
+  color: color-mix(in srgb, var(--ink) 70%, transparent);
   font-size: 1.02rem;
   line-height: 1.72;
 }
@@ -1008,7 +962,7 @@
 
 .proof-explorer__evidence-map h3 {
   margin: 0 0 1rem;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font-size: clamp(1.35rem, 2.1vw, 2rem);
   line-height: 0.98;
   letter-spacing: -0.045em;
@@ -1027,7 +981,7 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-line) 76%, transparent);
   border-radius: 16px;
   padding: 0.75rem;
-  color: var(--tao3k-paper);
+  color: var(--ink);
   background: color-mix(in srgb, white 4%, transparent);
   text-align: left;
 }
@@ -1068,7 +1022,7 @@
 }
 
 .proof-evidence-map__items small {
-  color: color-mix(in srgb, var(--tao3k-paper) 50%, transparent);
+  color: color-mix(in srgb, var(--ink) 50%, transparent);
   font: 700 0.66rem/1.2 var(--tao3k-mono);
 }
 
@@ -1084,13 +1038,13 @@
   border: 1px solid color-mix(in srgb, var(--tao3k-line) 72%, transparent);
   border-radius: 18px;
   padding: 0.85rem;
-  color: color-mix(in srgb, var(--tao3k-paper) 62%, transparent);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
   font: 700 0.68rem/1.2 var(--tao3k-mono);
   text-transform: uppercase;
 }
 
 .proof-receipt-metrics strong {
-  color: var(--tao3k-paper);
+  color: var(--ink);
   font: 800 1.45rem/1 var(--tao3k-sans);
 }
 

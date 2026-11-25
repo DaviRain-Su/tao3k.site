@@ -1,10 +1,10 @@
 /* Night is one continuous visual environment across the federated site. */
 html[data-theme-variant="night"] .tao3k-home,
 html[data-theme-variant="night"] .tao3k-route-page {
-  --immersive-bg: #091712;
-  --immersive-raised: #10241c;
-  --immersive-text: #e7f3eb;
-  --immersive-muted: #a9beb2;
+  --immersive-bg: var(--canvas);
+  --immersive-raised: var(--surface);
+  --immersive-text: var(--ink);
+  --immersive-muted: var(--muted);
   --immersive-line: rgba(182, 225, 197, 0.16);
   color: var(--immersive-text);
   background: var(--immersive-bg);
@@ -13,7 +13,7 @@ html[data-theme-variant="night"] .tao3k-route-page {
 html[data-theme-variant="night"] .tao3k-home-proof,
 html[data-theme-variant="night"] .tao3k-home-exit {
   color: var(--immersive-text);
-  background: #0d2018;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-home-proof__statements,
 html[data-theme-variant="night"] .tao3k-home-proof__statements article,
@@ -26,13 +26,13 @@ html[data-theme-variant="night"] .tao3k-home-proof__statements p {
 html[data-theme-variant="night"] .tao3k-home-proof__statements span,
 html[data-theme-variant="night"] .tao3k-home-proof .tao3k-section-index,
 html[data-theme-variant="night"] .tao3k-home-exit .tao3k-section-index {
-  color: #94dcb3;
+  color: var(--muted);
 }
 
 html[data-theme-variant="night"] .tao3k-products-page,
 html[data-theme-variant="night"] .tao3k-roadmap-page {
   color: var(--immersive-text);
-  background: #0b1b15;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-products-hero,
 html[data-theme-variant="night"] .tao3k-roadmap-hero {
@@ -43,7 +43,7 @@ html[data-theme-variant="night"] .tao3k-roadmap-hero h1 {
   color: var(--immersive-text);
 }
 html[data-theme-variant="night"] .tao3k-products-hero h1 em {
-  color: #a8dfbe;
+  color: var(--ink);
 }
 html[data-theme-variant="night"] .tao3k-products-hero__copy,
 html[data-theme-variant="night"] .tao3k-products-audiences,
@@ -63,12 +63,12 @@ html[data-theme-variant="night"] .tao3k-products-page .tao3k-route-kicker,
 html[data-theme-variant="night"] .tao3k-products-audiences span,
 html[data-theme-variant="night"] .tao3k-product-unit small,
 html[data-theme-variant="night"] .tao3k-roadmap-page .tao3k-route-kicker {
-  color: #8dd6ac;
+  color: var(--muted);
 }
 html[data-theme-variant="night"] .tao3k-product-unit {
   color: var(--immersive-text);
   border-color: var(--immersive-line);
-  background: linear-gradient(145deg, rgba(116, 180, 145, 0.08), rgba(13, 33, 24, 0.8));
+  background: linear-gradient(145deg, rgba(116, 180, 145, 0.08), var(--canvas));
 }
 html[data-theme-variant="night"] .tao3k-product-axis {
   background: var(--immersive-line);
@@ -79,22 +79,22 @@ html[data-theme-variant="night"] .tao3k-product-axis i {
 }
 html[data-theme-variant="night"] .tao3k-roadmap-page {
   --tao-line: rgba(182, 225, 197, 0.16);
-  --tao-page: #10241c;
+  --tao-page: var(--surface);
 }
 
 html[data-theme-variant="night"] .tao3k-issue-ledger,
 html[data-theme-variant="night"] .tao3k-comparison-matrix,
 html[data-theme-variant="night"] .tao3k-comparison-verdict {
   color: var(--immersive-text);
-  background: #102119;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-issue-response {
-  background: #14291f;
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-comparison-page .tao3k-route-kicker,
 html[data-theme-variant="night"] .tao3k-issue-ledger__source strong,
 html[data-theme-variant="night"] .tao3k-issue-ledger__consequence a {
-  color: #91dcb0;
+  color: var(--muted);
 }
 html[data-theme-variant="night"] .tao3k-issue-ledger > header > p:last-child,
 html[data-theme-variant="night"] .tao3k-comparison-matrix > header > p:last-child,
@@ -110,21 +110,21 @@ html[data-theme-variant="night"] .tao3k-issue-ledger__source small {
   border-color: var(--immersive-line);
 }
 html[data-theme-variant="night"] .tao3k-issue-ledger__source small {
-  color: #aec3b7;
+  color: var(--muted);
 }
 html[data-theme-variant="night"] .tao3k-issue-ledger__consequence > span {
-  color: #c1aceb;
+  color: var(--muted);
 }
 html[data-theme-variant="night"] .tao3k-comparison-table {
-  color: #dbece1;
-  background: #13281e;
+  color: var(--ink);
+  background: var(--canvas);
 }
 html[data-theme-variant="night"] .tao3k-comparison-table th,
 html[data-theme-variant="night"] .tao3k-comparison-table td {
   border-color: var(--immersive-line);
 }
 html[data-theme-variant="night"] .tao3k-comparison-table th {
-  color: #a7bfb0;
+  color: var(--muted);
 }
 
 /* Headings and long-form text share the same typographic voice. */

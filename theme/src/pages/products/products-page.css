@@ -84,7 +84,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  color: #9da9c7;
+  color: var(--muted);
   font:
     600 0.57rem/1.3 ui-monospace,
     monospace;
@@ -109,7 +109,7 @@
   right: 12%;
   top: 50%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #a9b7e5 15%, #c2adcf 72%, transparent);
+  background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 72%, transparent);
 }
 .product-path__line i {
   position: absolute;
@@ -118,8 +118,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #e2dcf8;
-  box-shadow: 0 0 15px 4px #a7b1df;
+  background: var(--surface);
+  box-shadow: 0 0 15px 4px var(--line);
   animation: product-drift 8s ease-in-out infinite;
 }
 .product-path__item {
@@ -131,11 +131,11 @@
   padding: clamp(0.7rem, 1.2vw, 1.2rem);
   border: 1px solid rgba(188, 197, 229, 0.23);
   border-radius: 0.8rem;
-  background: #171d2c;
+  background: var(--canvas);
   box-shadow: 0 12px 35px #070a1280;
 }
 .product-path__item span {
-  color: #909fbe;
+  color: var(--muted);
   font:
     600 0.6rem/1 ui-monospace,
     monospace;
@@ -235,17 +235,22 @@
   padding: 2rem clamp(1rem, 3vw, 3rem);
   border: 1px solid rgba(188, 197, 229, 0.13);
   border-radius: 1rem;
-  background: radial-gradient(ellipse at 55% 45%, #303650 0%, #171c2c 54%, #121723 100%);
+  background: radial-gradient(
+    ellipse at 55% 45%,
+    var(--canvas) 0%,
+    var(--canvas) 54%,
+    var(--canvas) 100%
+  );
 }
 .product-story:nth-child(2) .product-story__visual {
-  background: radial-gradient(ellipse at 40% 45%, #343044, #1c1b2a 56%, #121723);
+  background: radial-gradient(ellipse at 40% 45%, var(--canvas), var(--canvas) 56%, var(--canvas));
 }
 .product-story:nth-child(3) .product-story__visual {
-  background: radial-gradient(ellipse at 65% 45%, #253c40, #18272b 55%, #121a20);
+  background: radial-gradient(ellipse at 65% 45%, var(--canvas), var(--canvas) 55%, var(--canvas));
 }
 .product-story__visual-note {
   display: block;
-  color: #8994aa;
+  color: var(--muted);
   font:
     600 0.57rem/1.2 ui-monospace,
     monospace;
@@ -287,7 +292,7 @@
 }
 .product-index__number,
 .product-index__row small {
-  color: #939fbc;
+  color: var(--muted);
   font:
     600 0.62rem/1.3 ui-monospace,
     monospace;
@@ -307,7 +312,7 @@
 .product-index__detail p {
   max-width: 28rem;
   margin: 0.4rem 0 0;
-  color: #9ea8bc;
+  color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.55;
 }
@@ -319,7 +324,7 @@
 .product-index__note {
   max-width: 52rem;
   margin: 2rem 0 0;
-  color: #96a0b4;
+  color: var(--muted);
   font-size: 0.8rem;
   line-height: 1.65;
 }
@@ -383,7 +388,7 @@
 }
 .product-world__next {
   padding: clamp(5rem, 8vw, 9rem) clamp(24px, 6vw, 104px);
-  background: radial-gradient(ellipse at 80% 50%, #283047, #0d121e 65%);
+  background: radial-gradient(ellipse at 80% 50%, var(--canvas), var(--canvas) 65%);
 }
 .product-world__next h2 {
   margin: 1.5rem 0 2rem;
@@ -477,7 +482,7 @@
   grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
   gap: clamp(2rem, 6vw, 6rem);
   padding: clamp(4rem, 7vw, 7rem) clamp(24px, 6vw, 104px);
-  border-top: 1px solid #b8c8db29;
+  border-top: 1px solid var(--line);
 }
 .product-comparison-index h2 {
   font-size: clamp(2.2rem, 3.5vw, 3.8rem);
@@ -490,7 +495,7 @@
 .product-comparison-index__scroll {
   overflow: auto;
   max-height: 24rem;
-  border-top: 1px solid #b8c8db35;
+  border-top: 1px solid var(--line);
 }
 .product-comparison-index table {
   width: 100%;
@@ -501,7 +506,7 @@
 .product-comparison-index th,
 .product-comparison-index td {
   padding: 0.8rem 0.55rem;
-  border-bottom: 1px solid #b8c8db25;
+  border-bottom: 1px solid var(--line);
   font-size: 0.8rem;
 }
 .product-comparison-index thead th {
