@@ -65,6 +65,10 @@ html[data-theme-variant="paper"] {
   --pw-muted: var(--muted);
   --pw-line: var(--line);
   --pw-lilac: var(--accent);
+  /* Proof-explorer panels were mixed from the old dark --tao-ink (#10241f).
+     That name is the text color now, so the dark fill has its own token. */
+  --stage: #10241f;
+  --on-stage: #f1f0e8;
 }
 
 html,

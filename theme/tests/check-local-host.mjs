@@ -78,8 +78,22 @@ const throwingStorage = (() => {
   });
   return rootNode;
 })();
-assert.equal(throwingStorage.dataset.themeVariant, "paper");
-assert.equal(throwingStorage.style.colorScheme, "light");
+assert.equal(throwingStorage.dataset.themeVariant, "night");
+assert.equal(throwingStorage.style.colorScheme, "dark");
+
+const throwingGetter = (() => {
+  const rootNode = { dataset: {}, style: {} };
+  vm.runInNewContext(themeBootstrapSource, {
+    get localStorage() {
+      throw new Error("denied");
+    },
+    window: { matchMedia: () => ({ matches: true }) },
+    document: { documentElement: rootNode },
+  });
+  return rootNode;
+})();
+assert.equal(throwingGetter.dataset.themeVariant, "night");
+assert.equal(throwingGetter.style.colorScheme, "dark");
 
 const paperRule = startupStyleSource.match(
   /html\[data-theme-variant="paper"\],html\[data-theme-variant="paper"\] body\{background:(#[0-9a-f]{6})/u,

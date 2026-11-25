@@ -86,6 +86,7 @@
     "lightningcss": "1.33.0",
     "oxfmt": "0.60.0",
     "oxlint": "1.75.0",
+    "puppeteer-core": "24.43.1",
     "smol-toml": "^1.7.0",
     "typescript": "^7.0.2"
   },

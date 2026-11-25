@@ -59,6 +59,24 @@ store.clear();
 systemLight = false;
 assert.equal(resolveThemeVariant(), "night");
 
+const throwingStore = {
+  getItem: () => {
+    throw new Error("denied");
+  },
+  setItem: () => {
+    throw new Error("denied");
+  },
+};
+globalThis.localStorage = throwingStore;
+systemLight = true;
+assert.equal(resolveThemeVariant(), "night");
+globalThis.localStorage = {
+  getItem: (key) => (store.has(key) ? store.get(key) : null),
+  setItem: (key, value) => {
+    store.set(key, value);
+  },
+};
+
 applyThemeVariant("paper", true);
 assert.equal(root.dataset.themeVariant, "paper");
 assert.equal(root.dataset.theme, "tao3k-site");

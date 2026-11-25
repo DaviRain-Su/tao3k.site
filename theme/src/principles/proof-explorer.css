@@ -95,8 +95,8 @@
 .proof-explorer__runtime-telemetry em {
   border-radius: 999px;
   padding: 0.42rem 0.62rem;
-  color: var(--tao3k-ink);
-  background: var(--tao3k-cyan);
+  color: var(--on-accent);
+  background: var(--accent);
   font-style: normal;
 }
 
@@ -115,7 +115,7 @@
       color-mix(in srgb, var(--tao3k-green) 28%, transparent),
       transparent 68%
     ),
-    color-mix(in srgb, var(--tao3k-green) 24%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 24%, var(--stage));
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 14%, transparent),
     0 0 38px color-mix(in srgb, var(--tao3k-green) 24%, transparent);
@@ -152,7 +152,7 @@
 
 .proof-explorer__runtime-action--primary {
   border-color: color-mix(in srgb, var(--tao3k-green) 76%, white);
-  color: color-mix(in srgb, var(--tao3k-ink) 84%, black);
+  color: var(--on-accent);
   background: linear-gradient(135deg, var(--tao3k-green), var(--tao3k-cyan));
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 46%, transparent),
@@ -298,7 +298,7 @@
       color-mix(in srgb, var(--tao3k-green) 38%, transparent),
       transparent 70%
     ),
-    color-mix(in srgb, var(--tao3k-green) 22%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 22%, var(--stage));
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 18%, transparent),
     0 0 44px color-mix(in srgb, var(--tao3k-green) 34%, transparent),
@@ -533,7 +533,7 @@
       color-mix(in srgb, var(--tao3k-green) 30%, transparent),
       transparent 68%
     ),
-    color-mix(in srgb, var(--tao3k-green) 16%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 16%, var(--stage));
 }
 
 .proof-math-board__selected[data-state="active"]::after {
@@ -556,7 +556,7 @@
   border-radius: 18px;
   padding: 1rem;
   color: color-mix(in srgb, var(--ink) 90%, white);
-  background: color-mix(in srgb, black 35%, var(--tao3k-ink));
+  background: color-mix(in srgb, black 35%, var(--stage));
 }
 
 .proof-math-board__selected code,
@@ -609,7 +609,7 @@
       color-mix(in srgb, var(--tao3k-green) 18%, transparent),
       color-mix(in srgb, var(--tao3k-cyan) 6%, transparent)
     ),
-    color-mix(in srgb, var(--tao3k-green) 8%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 8%, var(--stage));
   box-shadow: 0 0 30px color-mix(in srgb, var(--tao3k-green) 20%, transparent);
 }
 
@@ -766,7 +766,7 @@
       color-mix(in srgb, var(--tao3k-green) 24%, transparent),
       color-mix(in srgb, var(--tao3k-cyan) 10%, transparent)
     ),
-    color-mix(in srgb, var(--tao3k-green) 12%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 12%, var(--stage));
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 18%, transparent),
     0 0 34px color-mix(in srgb, var(--tao3k-green) 30%, transparent);
@@ -780,7 +780,7 @@
       color-mix(in srgb, var(--tao3k-green) 44%, transparent),
       transparent 72%
     ),
-    color-mix(in srgb, var(--tao3k-green) 20%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 20%, var(--stage));
 }
 
 .proof-obligation__status {
@@ -911,7 +911,7 @@
   color: color-mix(in srgb, var(--ink) 84%, white);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--tao3k-cyan) 7%, transparent), transparent),
-    color-mix(in srgb, black 38%, var(--tao3k-ink));
+    color-mix(in srgb, black 38%, var(--stage));
   box-shadow: inset 0 1px 0 color-mix(in srgb, white 9%, transparent);
 }
 
@@ -999,7 +999,7 @@
       color-mix(in srgb, var(--tao3k-green) 20%, transparent),
       color-mix(in srgb, var(--tao3k-cyan) 8%, transparent)
     ),
-    color-mix(in srgb, var(--tao3k-green) 10%, var(--tao3k-ink));
+    color-mix(in srgb, var(--tao3k-green) 10%, var(--stage));
   box-shadow: 0 0 24px color-mix(in srgb, var(--tao3k-green) 20%, transparent);
 }
 
@@ -1085,4 +1085,39 @@
   .proof-wave-bridge .proof-explorer__runtime {
     justify-self: stretch;
   }
+}
+
+/* Interactive fills are the dark stage in both themes. Type on them stays light. */
+.proof-explorer__runtime[data-running="true"],
+.proof-explorer__runtime[data-running="true"] :is(span, strong),
+.proof-flow-card[data-state="active"],
+.proof-math-board__selected[data-state="active"],
+.proof-wave-stack article[data-active="true"],
+.proof-obligation[data-state="active"],
+.proof-evidence-map__items button[data-state="active"],
+.proof-formula-source,
+.proof-lean-source,
+.proof-math-board__selected pre,
+:is(
+    .proof-flow-card[data-state="active"],
+    .proof-math-board__selected[data-state="active"],
+    .proof-wave-stack article[data-active="true"],
+    .proof-obligation[data-state="active"],
+    .proof-evidence-map__items button[data-state="active"],
+    .proof-formula-source,
+    .proof-lean-source,
+    .proof-math-board__selected pre
+  )
+  :is(p, h2, h3, span, strong, small, dt, dd, li, code, pre, em, b, button) {
+  color: var(--on-stage);
+}
+
+.proof-explorer__runtime[data-running="true"] .proof-explorer__runtime-action--secondary,
+.proof-explorer__runtime[data-running="true"] .proof-explorer__runtime-action--reset {
+  color: var(--on-stage);
+}
+
+.proof-explorer__runtime[data-running="true"] .proof-explorer__runtime-action--primary,
+.proof-explorer__runtime-telemetry em {
+  color: var(--on-accent);
 }

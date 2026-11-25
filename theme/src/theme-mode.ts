@@ -37,7 +37,7 @@ export function resolveThemeVariant(): ThemeVariant {
   } catch {
     storage = null;
   }
-  return readBootVariant(storage, systemLight, hostThemeVariantKey, legacyThemeVariantKey);
+  return readBootVariant(storage, systemLight, hostThemeVariantKey, legacyThemeVariantKey, "night");
 }
 
 export function applyThemeVariant(variant: ThemeVariant, persist: boolean): void {

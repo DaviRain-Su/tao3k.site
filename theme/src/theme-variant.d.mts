@@ -12,8 +12,12 @@ export function resolveThemeChoice(
 ): ThemeVariant;
 
 export function readBootVariant(
-  storage: { getItem(key: string): string | null; setItem(key: string, value: string): void } | null,
+  storage: {
+    getItem(key: string): string | null;
+    setItem(key: string, value: string): void;
+  } | null,
   systemLight: boolean,
   hostKey: string,
   legacyKey: string,
+  hostFallback?: ThemeVariant,
 ): ThemeVariant;

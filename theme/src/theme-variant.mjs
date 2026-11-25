@@ -18,29 +18,35 @@ export function resolveThemeChoice(hostStored, legacyStored, systemLight) {
   return systemLight ? "paper" : "night";
 }
 
-/** Storage failures fall through to the system preference. The choice is still returned. */
-export function readBootVariant(storage, systemLight, hostKey, legacyKey) {
+/**
+ * A storage read failure uses the host fallback. ThemeRootLayout does the
+ * same: its catch returns the configured default, which is night, and then
+ * overwrites the document. Matching that fallback is what keeps the first
+ * paint from flipping. A working store still prefers the system light choice.
+ */
+export function readBootVariant(storage, systemLight, hostKey, legacyKey, hostFallback) {
+  const fallback = hostFallback === "paper" ? "paper" : "night";
   let hostStored = null;
   let legacyStored = null;
+  let failed = storage == null;
   if (storage) {
     try {
       hostStored = storage.getItem(hostKey);
     } catch {
-      hostStored = null;
+      failed = true;
     }
     try {
       legacyStored = storage.getItem(legacyKey);
     } catch {
-      legacyStored = null;
+      failed = true;
     }
   }
+  if (failed) return fallback;
   const variant = resolveThemeChoice(hostStored, legacyStored, systemLight);
-  if (storage) {
-    try {
-      if (hostStored !== variant) storage.setItem(hostKey, variant);
-    } catch {
-      /* The document attribute is still set by the caller. */
-    }
+  try {
+    if (hostStored !== variant) storage.setItem(hostKey, variant);
+  } catch {
+    /* The read succeeded, so the host will apply this choice. */
   }
   return variant;
 }
